@@ -1,0 +1,2 @@
+# huskey
+Java製のCUIパスワードマネージャー
