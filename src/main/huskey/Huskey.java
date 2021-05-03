@@ -1,5 +1,4 @@
-import util.*;
-import cmd.*;
+import utility.*;
 
 public class Huskey {
     public static void main(String[] args) {

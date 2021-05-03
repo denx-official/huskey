@@ -1,4 +1,4 @@
-package util;
+package utility;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Nested;
