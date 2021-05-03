@@ -9,14 +9,10 @@ public class Huskey {
 
         SeparateArgs separateArgs = new SeparateArgs(args);
 
-        String command;
-        String[] values;
-        String[] options;
-
         try {
-            command = separateArgs.getCommand();
-            values = separateArgs.getValues();
-            options = separateArgs.getOptions();
+            String command = separateArgs.getCommand();
+            String[] values = separateArgs.getValues();
+            String[] options = separateArgs.getOptions();
 
             run(command, values, options);
         }
