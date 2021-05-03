@@ -9,11 +9,21 @@ public class Huskey {
 
         SeparateArgs separateArgs = new SeparateArgs(args);
 
-        String command = separateArgs.getCommand();
-        String[] values = separateArgs.getValues();
-        String[] options = separateArgs.getOptions();
+        String command;
+        String[] values;
+        String[] options;
 
-        run(command, values, options);
+        try {
+            command = separateArgs.getCommand();
+            values = separateArgs.getValues();
+            options = separateArgs.getOptions();
+
+            run(command, values, options);
+        }
+        catch (IllegalArgumentException e) {
+            System.out.println("適切なコマンドを指定してください。");
+            System.exit(0);
+        }
     }
 
     private static void run(String command, String[] values, String[] options) {

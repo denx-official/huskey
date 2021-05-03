@@ -13,7 +13,7 @@ public class SeparateArgs {
             return this.args[0];
         }
         else {
-            throw new IllegalArgumentException("適切なコマンドを指定してください。");
+            throw new IllegalArgumentException();
         }
     }
 
