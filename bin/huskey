@@ -1,2 +1,2 @@
 #!/bin/sh
-java Huskey $@
+java java -classpath $bin_dir Huskey $@
