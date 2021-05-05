@@ -1,6 +1,6 @@
 package cmd;
 
-import utility.HuskeyArgs;
+import types.HuskeyArgs;
 
 public class RemoveCmd extends Cmd {
     public RemoveCmd(HuskeyArgs hkArgs) {

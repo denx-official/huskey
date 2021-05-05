@@ -1,6 +1,6 @@
 package cmd;
 
-import utility.HuskeyArgs;
+import types.HuskeyArgs;
 
 public class HelpCmd extends Cmd {
     public HelpCmd(HuskeyArgs hkArgs) {

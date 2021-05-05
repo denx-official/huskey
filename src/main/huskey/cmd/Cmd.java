@@ -1,6 +1,6 @@
 package cmd;
 
-import utility.HuskeyArgs;
+import types.HuskeyArgs;
 
 abstract class Cmd {
     protected HuskeyArgs hkArgs;

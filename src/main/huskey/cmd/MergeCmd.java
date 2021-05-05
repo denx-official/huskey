@@ -1,6 +1,6 @@
 package cmd;
 
-import utility.HuskeyArgs;
+import types.HuskeyArgs;
 
 public class MergeCmd extends Cmd {
     public MergeCmd(HuskeyArgs hkArgs) {

@@ -1,6 +1,6 @@
 package cmd;
 
-import utility.HuskeyArgs;
+import types.HuskeyArgs;
 
 public class InitCmd extends Cmd {
     public InitCmd(HuskeyArgs hkArgs) {

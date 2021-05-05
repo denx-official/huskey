@@ -1,6 +1,6 @@
 package cmd;
 
-import utility.HuskeyArgs;
+import types.HuskeyArgs;
 
 public class DatabaseCmd extends Cmd {
     public DatabaseCmd(HuskeyArgs hkArgs) {
