@@ -120,12 +120,12 @@ public class SeparateArgs {
      * <p>optionsが存在しない場合、すなわち頭文字に "-" を持つ引数が存在しない場合、
      * "" のみを要素に持つ配列を返す。
      *
-     * @param cutPoint optionsが始まるポイント
      * @param argsLen コマンドライン引数の長さ（optionsが閉じるポイント）
+     * @param cutPoint optionsが始まるポイント
      * @return options
      * @author いっぺー
      */
-    private String[] cutoutOptions(int cutPoint, int argsLen) {
+    private String[] cutoutOptions(int argsLen, int cutPoint) {
         String[] options;
 
         options = new String[argsLen - cutPoint];
