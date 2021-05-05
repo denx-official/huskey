@@ -1,4 +1,4 @@
-package utility;
+package types;
 
 public class HuskeyArgs {
     private String command;
