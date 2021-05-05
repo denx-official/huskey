@@ -3,6 +3,13 @@ package utility;
 import cmd.*;
 import types.HuskeyArgs;
 
+/**
+ * コマンドルーティング
+ *
+ * <p>与えられたcommandから条件分岐によって実行するコマンドを決定するルーティングシステム。
+ *
+ * @author いっぺー
+ */
 public class CommandRouting {
     private HuskeyArgs hkArgs;
 
@@ -10,6 +17,16 @@ public class CommandRouting {
         this.hkArgs= hkArgs;
     }
 
+    /**
+     * 実行するコマンドの決定
+     *
+     * <p>HuskeyArgs型からcommandを取得し、
+     * その値によって実行するコマンドをswitch-case文によって決定する。
+     *
+     * <p>該当するコマンドが存在しない場合、IllegalArgumentException（引数エラー）を発生させる。
+     *
+     * @author いっぺー
+     */
     public void run() throws IllegalArgumentException {
         String command = this.hkArgs.getCommand();
 

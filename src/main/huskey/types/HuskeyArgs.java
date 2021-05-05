@@ -1,5 +1,14 @@
 package types;
 
+/**
+ * HuskeyArgs型
+ *
+ * <p>command, values, optionsをひとまとめとした独自型。
+ *
+ * <p>値の参照のみを許可するため、getterメソッドを導入している。
+ *
+ * @author  いっぺー
+ */
 public class HuskeyArgs {
     private String command;
     private String[] values;

@@ -1,6 +1,18 @@
 import utility.*;
 import types.HuskeyArgs;
 
+/**
+ * コマンドライン引数を分解・再構築 -> コマンドルーティングへ渡し、実行
+ *
+ * <p>コマンドライン引数をcommand, values, optionsに分解し、
+ * HuskeyArgs型にまとめた後、コマンドルーティングへ渡し、コマンドを実行する。
+ *
+ * <p>コマンドライン引数が与えられなかった場合は、"huskey help" が与えられたものと見なす。
+ * 
+ * <p>（cr.run()のエラーハンドリングをmain関数で行っているが、これは仕様変更する可能性有）
+ *
+ * @author いっぺー
+ */
 public class Huskey {
     public static void main(String[] _args) {
         String[] args;
