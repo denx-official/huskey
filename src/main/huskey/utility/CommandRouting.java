@@ -9,7 +9,7 @@ public class CommandRouting {
         this.hkArgs= hkArgs;
     }
 
-    public void run() {
+    public void run() throws IllegalArgumentException {
         String command = this.hkArgs.getCommand();
 
         switch (command) {
@@ -77,6 +77,9 @@ public class CommandRouting {
                 RemoveCmd removeCmd = new RemoveCmd(this.hkArgs);
                 removeCmd.run();
                 break;
+
+            default:
+                throw new IllegalArgumentException();
         }
     }
 }
