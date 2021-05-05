@@ -79,6 +79,7 @@ public class CommandRouting {
                 break;
 
             default:
+                System.out.println("huskey: コマンド '" + command + "' は存在しません。コマンドの一覧は、'huskey help' によって確認できます。");
                 throw new IllegalArgumentException();
         }
     }
