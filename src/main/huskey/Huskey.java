@@ -1,3 +1,4 @@
+import cmd.*;
 import utility.*;
 
 public class Huskey {
@@ -24,52 +25,69 @@ public class Huskey {
 
     private static void run(String command, String[] values, String[] options) {
         switch (command) {
+            case "help":
+                Help help = new Help(values, options);
+                help.run();
+                break;
+
             case "init":
-                System.out.println("run init");
+                Init init = new Init(values, options);
+                init.run();
                 break;
 
             case "change":
-                System.out.println("run change");
+                Change change = new Change(values, options);
+                change.run();
                 break;
 
             case "database":
-                System.out.println("run database");
+                Database database = new Database(values, options);
+                database.run();
                 break;
 
             case "switch":
-                System.out.println("run switch");
+                Switch switch_ = new Switch(values, options);
+                switch_.run();
                 break;
 
             case "merge":
-                System.out.println("run merge");
+                Merge merge = new Merge(values, options);
+                merge.run();
                 break;
 
             case "export":
-                System.out.println("run export");
+                Export export = new Export(values, options);
+                export.run();
                 break;
 
             case "import":
-                System.out.println("run import");
+                Import import_ = new Import(values, options);
+                import_.run();
                 break;
 
             case "list":
-                System.out.println("run list");
+                List list = new List(values, options);
+                list.run();
                 break;
 
             case "search":
-                System.out.println("run search");
+                Search search = new Search(values, options);
+                search.run();
                 break;
 
             case "get":
-                System.out.println("run get");
+                Get get = new Get(values, options);
+                get.run();
                 break;
 
             case "set":
-                System.out.println("run set");
+                Set set = new Set(values, options);
+                set.run();
                 break;
 
             case "remove":
-                System.out.println("run remove");
+                Remove remove = new Remove(values, options);
+                remove.run();
                 break;
         }
     }
