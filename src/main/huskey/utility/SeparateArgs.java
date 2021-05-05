@@ -7,15 +7,6 @@ public class SeparateArgs {
         this.args = args;
     }
 
-    public HuskeyArgs getHuskeyArgs() {
-        String command = getCommand();
-        String[] values = getValues();
-        String[] options = getOptions();
-
-        HuskeyArgs args = new HuskeyArgs(command, values, options);
-        return args;
-    }
-
     public String getCommand() {
         return this.args[0];
     }

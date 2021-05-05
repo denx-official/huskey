@@ -13,7 +13,11 @@ public class Huskey {
         }
 
         SeparateArgs sepArgs = new SeparateArgs(args);
-        HuskeyArgs huskeyArgs = sepArgs.getHuskeyArgs();
+        HuskeyArgs huskeyArgs = new HuskeyArgs(
+            sepArgs.getCommand(),
+            sepArgs.getValues(),
+            sepArgs.getOptions()
+        );
         CommandRouting cr = new CommandRouting(huskeyArgs);
 
         try {
