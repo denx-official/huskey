@@ -16,14 +16,8 @@ public class SeparateArgs {
         return args;
     }
 
-    private String getCommand() throws IllegalArgumentException {
-        CommandsList cl = new CommandsList();
-        if (cl.checkCommands(this.args[0])) {
-            return this.args[0];
-        }
-        else {
-            throw new IllegalArgumentException();
-        }
+    private String getCommand() {
+        return this.args[0];
     }
 
     private String[] getValues() {

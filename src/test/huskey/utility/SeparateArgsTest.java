@@ -18,14 +18,6 @@ class SeparateArgsTest {
 
             assertEquals("get", hkArgs.getCommand());
         }
-
-        @Test
-        void 第1引数に適切なcommandが与えられなかった場合() {
-            String[] args = {"-s", "get", "sample", "database"};
-
-            sepArgs = new SeparateArgs(args);
-            assertThrows(IllegalArgumentException.class, sepArgs::getHuskeyArgs);
-        }
     }
 
     @Nested
