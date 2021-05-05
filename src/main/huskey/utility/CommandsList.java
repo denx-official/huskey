@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 public class CommandsList {
     private String[] commandsList = {
+        "help",
         "init",
         "change",
         "database",
