@@ -5,25 +5,26 @@ import org.junit.jupiter.api.Nested;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SeparateArgsTest {
-    private SeparateArgs separateArgs;
+    private SeparateArgs sepArgs;
 
     @Nested
     class GetCommand {
         @Test
         void commandを取得() {
             String[] args = {"get", "sample", "database", "-s"};
-            separateArgs = new SeparateArgs(args);
 
-            String command = separateArgs.getCommand();
-            assertEquals("get", command);
+            sepArgs = new SeparateArgs(args);
+            HuskeyArgs hkArgs = sepArgs.getHuskeyArgs();
+
+            assertEquals("get", hkArgs.getCommand());
         }
 
         @Test
         void 第1引数に適切なcommandが与えられなかった場合() {
             String[] args = {"-s", "get", "sample", "database"};
-            separateArgs = new SeparateArgs(args);
 
-            assertThrows(IllegalArgumentException.class, separateArgs::getCommand);
+            sepArgs = new SeparateArgs(args);
+            assertThrows(IllegalArgumentException.class, sepArgs::getHuskeyArgs);
         }
     }
 
@@ -32,40 +33,48 @@ class SeparateArgsTest {
         @Test
         void valuesを取得_valuesあり_optionsあり() {
             String[] args = {"get", "sample", "database", "-s"};
-            separateArgs = new SeparateArgs(args);
+
+            sepArgs = new SeparateArgs(args);
+            HuskeyArgs hkArgs = sepArgs.getHuskeyArgs();
 
             String[] expected = {"sample", "database"};
-            String[] result = separateArgs.getValues();
+            String[] result = hkArgs.getValues();
             assertArrayEquals(expected, result);
         }
 
         @Test
         void valuesを取得_valuesあり_optionsなし() {
             String[] args = {"get", "sample", "database"};
-            separateArgs = new SeparateArgs(args);
+
+            sepArgs = new SeparateArgs(args);
+            HuskeyArgs hkArgs = sepArgs.getHuskeyArgs();
 
             String[] expected = {"sample", "database"};
-            String[] result = separateArgs.getValues();
+            String[] result = hkArgs.getValues();
             assertArrayEquals(expected, result);
         }
 
         @Test
         void valuesを取得_valuesなし_optionsあり() {
             String[] args = {"database", "--delete", "hoge"};
-            separateArgs = new SeparateArgs(args);
+
+            sepArgs = new SeparateArgs(args);
+            HuskeyArgs hkArgs = sepArgs.getHuskeyArgs();
 
             String[] expected = {""};
-            String[] result = separateArgs.getValues();
+            String[] result = hkArgs.getValues();
             assertArrayEquals(expected, result);
         }
 
         @Test
         void valuesを取得_valuesなし_optionsなし() {
             String[] args = {"help"};
-            separateArgs = new SeparateArgs(args);
+
+            sepArgs = new SeparateArgs(args);
+            HuskeyArgs hkArgs = sepArgs.getHuskeyArgs();
 
             String[] expected = {""};
-            String[] result = separateArgs.getValues();
+            String[] result = hkArgs.getValues();
             assertArrayEquals(expected, result);
         }
     }
@@ -75,20 +84,24 @@ class SeparateArgsTest {
         @Test
         void optionsを取得_optionsあり() {
             String[] args = {"list", "-t", "--descend"};
-            separateArgs = new SeparateArgs(args);
+
+            sepArgs = new SeparateArgs(args);
+            HuskeyArgs hkArgs = sepArgs.getHuskeyArgs();
 
             String[] expected = {"-t", "--descend"};
-            String[] result = separateArgs.getOptions();
+            String[] result = hkArgs.getOptions();
             assertArrayEquals(expected, result);
         }
 
         @Test
         void optionsを取得_optionsなし() {
             String[] args = {"list"};
-            separateArgs = new SeparateArgs(args);
+
+            sepArgs = new SeparateArgs(args);
+            HuskeyArgs hkArgs = sepArgs.getHuskeyArgs();
 
             String[] expected = {""};
-            String[] result = separateArgs.getOptions();
+            String[] result = hkArgs.getOptions();
             assertArrayEquals(expected, result);
         }
     }
