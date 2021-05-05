@@ -1,12 +1,12 @@
 package cmd;
 
-abstract class Cmd {
-    protected String[] values;
-    protected String[] options;
+import utility.HuskeyArgs;
 
-    public Cmd(String[] values, String[] options) {
-        this.values = values;
-        this.options = options;
+abstract class Cmd {
+    protected HuskeyArgs hkArgs;
+
+    public Cmd(HuskeyArgs hkArgs) {
+        this.hkArgs = hkArgs;
     }
 
     abstract void run();

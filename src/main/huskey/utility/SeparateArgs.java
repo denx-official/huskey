@@ -7,7 +7,16 @@ public class SeparateArgs {
         this.args = args;
     }
 
-    public String getCommand() throws IllegalArgumentException {
+    public HuskeyArgs getHuskeyArgs() {
+        String command = getCommand();
+        String[] values = getValues();
+        String[] options = getOptions();
+
+        HuskeyArgs args = new HuskeyArgs(command, values, options);
+        return args;
+    }
+
+    private String getCommand() throws IllegalArgumentException {
         CommandsList cl = new CommandsList();
         if (cl.checkCommands(this.args[0])) {
             return this.args[0];
@@ -17,7 +26,7 @@ public class SeparateArgs {
         }
     }
 
-    public String[] getValues() {
+    private String[] getValues() {
         String[] values;
 
         int argsLen = this.args.length;
@@ -33,7 +42,7 @@ public class SeparateArgs {
         return values;
     }
 
-    public String[] getOptions() {
+    private String[] getOptions() {
         String[] options;
 
         int argsLen = this.args.length;

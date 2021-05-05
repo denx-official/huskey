@@ -8,13 +8,11 @@ public class Huskey {
         }
 
         try {
-            SeparateArgs separateArgs = new SeparateArgs(args);
+            SeparateArgs sepArgs = new SeparateArgs(args);
 
-            String command = separateArgs.getCommand();
-            String[] values = separateArgs.getValues();
-            String[] options = separateArgs.getOptions();
+            HuskeyArgs huskeyArgs = sepArgs.getHuskeyArgs();
 
-            CommandRouting cr = new CommandRouting(command, values, options);
+            CommandRouting cr = new CommandRouting(huskeyArgs);
             cr.run();
         }
         catch (IllegalArgumentException e) {

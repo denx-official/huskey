@@ -3,80 +3,78 @@ package utility;
 import cmd.*;
 
 public class CommandRouting {
-    private String command;
-    private String[] values;
-    private String[] options;
+    private HuskeyArgs hkArgs;
 
-    public CommandRouting(String command, String[] values, String[] options) {
-        this.command = command;
-        this.values = values;
-        this.options = options;
+    public CommandRouting(HuskeyArgs hkArgs) {
+        this.hkArgs= hkArgs;
     }
 
     public void run() {
+        String command = this.hkArgs.getCommand();
+
         switch (command) {
             case "help":
-                HelpCmd helpCmd = new HelpCmd(this.values, this.options);
+                HelpCmd helpCmd = new HelpCmd(this.hkArgs);
                 helpCmd.run();
                 break;
 
             case "init":
-                InitCmd initCmd = new InitCmd(this.values, this.options);
+                InitCmd initCmd = new InitCmd(this.hkArgs);
                 initCmd.run();
                 break;
 
             case "change":
-                ChangeCmd changeCmd = new ChangeCmd(this.values, this.options);
+                ChangeCmd changeCmd = new ChangeCmd(this.hkArgs);
                 changeCmd.run();
                 break;
 
             case "database":
-                DatabaseCmd databaseCmd = new DatabaseCmd(this.values, this.options);
+                DatabaseCmd databaseCmd = new DatabaseCmd(this.hkArgs);
                 databaseCmd.run();
                 break;
 
             case "switch":
-                SwitchCmd switchCmd = new SwitchCmd(this.values, this.options);
+                SwitchCmd switchCmd = new SwitchCmd(this.hkArgs);
                 switchCmd.run();
                 break;
 
             case "merge":
-                MergeCmd mergeCmd = new MergeCmd(this.values, this.options);
+                MergeCmd mergeCmd = new MergeCmd(this.hkArgs);
                 mergeCmd.run();
                 break;
 
             case "export":
-                ExportCmd exportCmd = new ExportCmd(this.values, this.options);
+                ExportCmd exportCmd = new ExportCmd(this.hkArgs);
                 exportCmd.run();
                 break;
 
             case "import":
-                ImportCmd importCmd = new ImportCmd(this.values, this.options);
+                ImportCmd importCmd = new ImportCmd(this.hkArgs);
                 importCmd.run();
                 break;
 
             case "list":
-                ListCmd listCmd = new ListCmd(this.values, this.options);
+                ListCmd listCmd = new ListCmd(this.hkArgs);
                 listCmd.run();
                 break;
 
             case "search":
-                SearchCmd searchCmd = new SearchCmd(this.values, this.options);
+                SearchCmd searchCmd = new SearchCmd(this.hkArgs);
                 searchCmd.run();
                 break;
 
             case "get":
-                GetCmd getCmd = new GetCmd(this.values, this.options);
+                GetCmd getCmd = new GetCmd(this.hkArgs);
                 getCmd.run();
                 break;
 
             case "set":
-                SetCmd setCmd = new SetCmd(this.values, this.options);
+                SetCmd setCmd = new SetCmd(this.hkArgs);
                 setCmd.run();
                 break;
 
             case "remove":
-                RemoveCmd removeCmd = new RemoveCmd(this.values, this.options);
+                RemoveCmd removeCmd = new RemoveCmd(this.hkArgs);
                 removeCmd.run();
                 break;
         }
