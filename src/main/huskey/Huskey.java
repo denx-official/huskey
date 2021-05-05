@@ -26,68 +26,68 @@ public class Huskey {
     private static void run(String command, String[] values, String[] options) {
         switch (command) {
             case "help":
-                Help help = new Help(values, options);
-                help.run();
+                HelpCmd helpCmd = new HelpCmd(values, options);
+                helpCmd.run();
                 break;
 
             case "init":
-                Init init = new Init(values, options);
-                init.run();
+                InitCmd initCmd = new InitCmd(values, options);
+                initCmd.run();
                 break;
 
             case "change":
-                Change change = new Change(values, options);
-                change.run();
+                ChangeCmd changeCmd = new ChangeCmd(values, options);
+                changeCmd.run();
                 break;
 
             case "database":
-                Database database = new Database(values, options);
-                database.run();
+                DatabaseCmd databaseCmd = new DatabaseCmd(values, options);
+                databaseCmd.run();
                 break;
 
             case "switch":
-                Switch switch_ = new Switch(values, options);
-                switch_.run();
+                SwitchCmd switchCmd = new SwitchCmd(values, options);
+                switchCmd.run();
                 break;
 
             case "merge":
-                Merge merge = new Merge(values, options);
-                merge.run();
+                MergeCmd mergeCmd = new MergeCmd(values, options);
+                mergeCmd.run();
                 break;
 
             case "export":
-                Export export = new Export(values, options);
-                export.run();
+                ExportCmd exportCmd = new ExportCmd(values, options);
+                exportCmd.run();
                 break;
 
             case "import":
-                Import import_ = new Import(values, options);
-                import_.run();
+                ImportCmd importCmd = new ImportCmd(values, options);
+                importCmd.run();
                 break;
 
             case "list":
-                List list = new List(values, options);
-                list.run();
+                ListCmd listCmd = new ListCmd(values, options);
+                listCmd.run();
                 break;
 
             case "search":
-                Search search = new Search(values, options);
-                search.run();
+                SearchCmd searchCmd = new SearchCmd(values, options);
+                searchCmd.run();
                 break;
 
             case "get":
-                Get get = new Get(values, options);
-                get.run();
+                GetCmd getCmd = new GetCmd(values, options);
+                getCmd.run();
                 break;
 
             case "set":
-                Set set = new Set(values, options);
-                set.run();
+                SetCmd setCmd = new SetCmd(values, options);
+                setCmd.run();
                 break;
 
             case "remove":
-                Remove remove = new Remove(values, options);
-                remove.run();
+                RemoveCmd removeCmd = new RemoveCmd(values, options);
+                removeCmd.run();
                 break;
         }
     }

@@ -1,7 +1,7 @@
 package cmd;
 
-public class Set extends Cmd {
-    public Set(String[] values, String[] options) {
+public class SetCmd extends Cmd {
+    public SetCmd(String[] values, String[] options) {
         super(values, options);
     }
 

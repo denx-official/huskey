@@ -1,7 +1,7 @@
 package cmd;
 
-public class Database extends Cmd {
-    public Database(String[] values, String[] options) {
+public class DatabaseCmd extends Cmd {
+    public DatabaseCmd(String[] values, String[] options) {
         super(values, options);
     }
 

@@ -1,7 +1,7 @@
 package cmd;
 
-public class Remove extends Cmd {
-    public Remove(String[] values, String[] options) {
+public class RemoveCmd extends Cmd {
+    public RemoveCmd(String[] values, String[] options) {
         super(values, options);
     }
 

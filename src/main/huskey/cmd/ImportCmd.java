@@ -1,7 +1,7 @@
 package cmd;
 
-public class Import extends Cmd {
-    public Import(String[] values, String[] options) {
+public class ImportCmd extends Cmd {
+    public ImportCmd(String[] values, String[] options) {
         super(values, options);
     }
 

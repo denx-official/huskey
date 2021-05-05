@@ -1,7 +1,7 @@
 package cmd;
 
-public class Search extends Cmd {
-    public Search(String[] values, String[] options) {
+public class SearchCmd extends Cmd {
+    public SearchCmd(String[] values, String[] options) {
         super(values, options);
     }
 

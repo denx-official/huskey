@@ -1,7 +1,7 @@
 package cmd;
 
-public class Help extends Cmd {
-    public Help(String[] values, String[] options) {
+public class HelpCmd extends Cmd {
+    public HelpCmd(String[] values, String[] options) {
         super(values, options);
     }
 

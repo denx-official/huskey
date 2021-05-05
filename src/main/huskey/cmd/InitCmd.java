@@ -1,7 +1,7 @@
 package cmd;
 
-public class Init extends Cmd {
-    public Init(String[] values, String[] options) {
+public class InitCmd extends Cmd {
+    public InitCmd(String[] values, String[] options) {
         super(values, options);
     }
 

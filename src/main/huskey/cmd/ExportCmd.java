@@ -1,7 +1,7 @@
 package cmd;
 
-public class Export extends Cmd {
-    public Export(String[] values, String[] options) {
+public class ExportCmd extends Cmd {
+    public ExportCmd(String[] values, String[] options) {
         super(values, options);
     }
 

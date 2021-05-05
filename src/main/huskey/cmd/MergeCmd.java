@@ -1,7 +1,7 @@
 package cmd;
 
-public class Merge extends Cmd {
-    public Merge(String[] values, String[] options) {
+public class MergeCmd extends Cmd {
+    public MergeCmd(String[] values, String[] options) {
         super(values, options);
     }
 

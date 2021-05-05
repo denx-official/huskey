@@ -1,7 +1,7 @@
 package cmd;
 
-public class List extends Cmd {
-    public List(String[] values, String[] options) {
+public class ListCmd extends Cmd {
+    public ListCmd(String[] values, String[] options) {
         super(values, options);
     }
 

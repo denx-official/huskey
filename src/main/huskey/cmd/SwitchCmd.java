@@ -1,7 +1,7 @@
 package cmd;
 
-public class Switch extends Cmd {
-    public Switch(String[] values, String[] options) {
+public class SwitchCmd extends Cmd {
+    public SwitchCmd(String[] values, String[] options) {
         super(values, options);
     }
 
