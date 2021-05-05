@@ -14,9 +14,8 @@ class SeparateArgsTest {
             String[] args = {"get", "sample", "database", "-s"};
 
             sepArgs = new SeparateArgs(args);
-            HuskeyArgs hkArgs = sepArgs.getHuskeyArgs();
 
-            assertEquals("get", hkArgs.getCommand());
+            assertEquals("get", sepArgs.getCommand());
         }
     }
 
@@ -27,11 +26,9 @@ class SeparateArgsTest {
             String[] args = {"get", "sample", "database", "-s"};
 
             sepArgs = new SeparateArgs(args);
-            HuskeyArgs hkArgs = sepArgs.getHuskeyArgs();
 
             String[] expected = {"sample", "database"};
-            String[] result = hkArgs.getValues();
-            assertArrayEquals(expected, result);
+            assertArrayEquals(expected, sepArgs.getValues());
         }
 
         @Test
@@ -39,11 +36,9 @@ class SeparateArgsTest {
             String[] args = {"get", "sample", "database"};
 
             sepArgs = new SeparateArgs(args);
-            HuskeyArgs hkArgs = sepArgs.getHuskeyArgs();
 
             String[] expected = {"sample", "database"};
-            String[] result = hkArgs.getValues();
-            assertArrayEquals(expected, result);
+            assertArrayEquals(expected, sepArgs.getValues());
         }
 
         @Test
@@ -51,11 +46,9 @@ class SeparateArgsTest {
             String[] args = {"database", "--delete", "hoge"};
 
             sepArgs = new SeparateArgs(args);
-            HuskeyArgs hkArgs = sepArgs.getHuskeyArgs();
 
             String[] expected = {""};
-            String[] result = hkArgs.getValues();
-            assertArrayEquals(expected, result);
+            assertArrayEquals(expected, sepArgs.getValues());
         }
 
         @Test
@@ -63,11 +56,9 @@ class SeparateArgsTest {
             String[] args = {"help"};
 
             sepArgs = new SeparateArgs(args);
-            HuskeyArgs hkArgs = sepArgs.getHuskeyArgs();
 
             String[] expected = {""};
-            String[] result = hkArgs.getValues();
-            assertArrayEquals(expected, result);
+            assertArrayEquals(expected, sepArgs.getValues());
         }
     }
 
@@ -78,11 +69,9 @@ class SeparateArgsTest {
             String[] args = {"list", "-t", "--descend"};
 
             sepArgs = new SeparateArgs(args);
-            HuskeyArgs hkArgs = sepArgs.getHuskeyArgs();
 
             String[] expected = {"-t", "--descend"};
-            String[] result = hkArgs.getOptions();
-            assertArrayEquals(expected, result);
+            assertArrayEquals(expected, sepArgs.getOptions());
         }
 
         @Test
@@ -90,11 +79,9 @@ class SeparateArgsTest {
             String[] args = {"list"};
 
             sepArgs = new SeparateArgs(args);
-            HuskeyArgs hkArgs = sepArgs.getHuskeyArgs();
 
             String[] expected = {""};
-            String[] result = hkArgs.getOptions();
-            assertArrayEquals(expected, result);
+            assertArrayEquals(expected, sepArgs.getOptions());
         }
     }
 }

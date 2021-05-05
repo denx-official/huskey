@@ -16,11 +16,11 @@ public class SeparateArgs {
         return args;
     }
 
-    private String getCommand() {
+    public String getCommand() {
         return this.args[0];
     }
 
-    private String[] getValues() {
+    public String[] getValues() {
         String[] values;
 
         int argsLen = this.args.length;
@@ -36,7 +36,7 @@ public class SeparateArgs {
         return values;
     }
 
-    private String[] getOptions() {
+    public String[] getOptions() {
         String[] options;
 
         int argsLen = this.args.length;
