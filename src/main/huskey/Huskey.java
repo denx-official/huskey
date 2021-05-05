@@ -1,10 +1,15 @@
 import utility.*;
 
 public class Huskey {
-    public static void main(String[] args) {
-        if (args.length == 0) {
-            System.out.println("huskey: コマンドを入力してください。");
-            System.exit(0);
+    public static void main(String[] _args) {
+        String[] args;
+
+        if (_args.length == 0) {
+            // コマンドライン引数が空の場合、"huskey help" と同等のものとみなす
+            args = new String[] {"help"};
+        }
+        else {
+            args = _args;
         }
 
         try {
