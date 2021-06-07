@@ -1,6 +1,18 @@
 package utility;
 
-import cmd.*;
+import cmd.changeCmd.ChangeCmd;
+import cmd.databaseCmd.DatabaseCmd;
+import cmd.exportCmd.ExportCmd;
+import cmd.getCmd.GetCmd;
+import cmd.helpCmd.HelpCmd;
+import cmd.importCmd.ImportCmd;
+import cmd.initCmd.InitCmd;
+import cmd.listCmd.ListCmd;
+import cmd.mergeCmd.MergeCmd;
+import cmd.removeCmd.RemoveCmd;
+import cmd.searchCmd.SearchCmd;
+import cmd.setCmd.SetCmd;
+import cmd.switchCmd.SwitchCmd;
 import types.HuskeyArgs;
 
 /**

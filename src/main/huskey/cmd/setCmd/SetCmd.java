@@ -1,5 +1,6 @@
-package cmd;
+package cmd.setCmd;
 
+import cmd.Cmd;
 import types.HuskeyArgs;
 
 public class SetCmd extends Cmd {

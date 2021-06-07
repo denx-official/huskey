@@ -1,9 +1,10 @@
-package cmd;
+package cmd.helpCmd;
 
+import cmd.Cmd;
 import types.HuskeyArgs;
 
-public class DatabaseCmd extends Cmd {
-    public DatabaseCmd(HuskeyArgs hkArgs) {
+public class HelpCmd extends Cmd {
+    public HelpCmd(HuskeyArgs hkArgs) {
         super(hkArgs);
     }
 
@@ -14,7 +15,7 @@ public class DatabaseCmd extends Cmd {
         String values_str = String.join(", ", values);
         String options_str = String.join(", ", options);
 
-        System.out.println("run database");
+        System.out.println("run help");
         System.out.println("values: " + values_str);
         System.out.println("options: " + options_str);
     }

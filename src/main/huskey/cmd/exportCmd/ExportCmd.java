@@ -1,9 +1,10 @@
-package cmd;
+package cmd.exportCmd;
 
+import cmd.Cmd;
 import types.HuskeyArgs;
 
-public class InitCmd extends Cmd {
-    public InitCmd(HuskeyArgs hkArgs) {
+public class ExportCmd extends Cmd {
+    public ExportCmd(HuskeyArgs hkArgs) {
         super(hkArgs);
     }
 
@@ -13,8 +14,8 @@ public class InitCmd extends Cmd {
         String[] options = this.hkArgs.getOptions();
         String values_str = String.join(", ", values);
         String options_str = String.join(", ", options);
-        
-        System.out.println("run init");
+
+        System.out.println("run export");
         System.out.println("values: " + values_str);
         System.out.println("options: " + options_str);
     }

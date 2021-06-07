@@ -1,9 +1,10 @@
-package cmd;
+package cmd.listCmd;
 
+import cmd.Cmd;
 import types.HuskeyArgs;
 
-public class ImportCmd extends Cmd {
-    public ImportCmd(HuskeyArgs hkArgs) {
+public class ListCmd extends Cmd {
+    public ListCmd(HuskeyArgs hkArgs) {
         super(hkArgs);
     }
 
@@ -14,7 +15,7 @@ public class ImportCmd extends Cmd {
         String values_str = String.join(", ", values);
         String options_str = String.join(", ", options);
         
-        System.out.println("run import");
+        System.out.println("run list");
         System.out.println("values: " + values_str);
         System.out.println("options: " + options_str);
     }

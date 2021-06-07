@@ -12,12 +12,12 @@ import types.HuskeyArgs;
  *
  * @author いっぺー
  */
-abstract class Cmd {
+public abstract class Cmd {
     protected HuskeyArgs hkArgs;
 
     public Cmd(HuskeyArgs hkArgs) {
         this.hkArgs = hkArgs;
     }
 
-    abstract void run();
+    abstract public void run();
 }

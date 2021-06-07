@@ -1,9 +1,10 @@
-package cmd;
+package cmd.removeCmd;
 
+import cmd.Cmd;
 import types.HuskeyArgs;
 
-public class GetCmd extends Cmd {
-    public GetCmd(HuskeyArgs hkArgs) {
+public class RemoveCmd extends Cmd {
+    public RemoveCmd(HuskeyArgs hkArgs) {
         super(hkArgs);
     }
 
@@ -13,8 +14,8 @@ public class GetCmd extends Cmd {
         String[] options = this.hkArgs.getOptions();
         String values_str = String.join(", ", values);
         String options_str = String.join(", ", options);
-
-        System.out.println("run get");
+        
+        System.out.println("run remove");
         System.out.println("values: " + values_str);
         System.out.println("options: " + options_str);
     }
