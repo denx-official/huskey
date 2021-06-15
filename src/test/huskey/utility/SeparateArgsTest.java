@@ -1,5 +1,6 @@
 package utility;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Nested;
@@ -7,7 +8,12 @@ import org.junit.jupiter.api.Nested;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SeparateArgsTest {
-    private SeparateArgs sepArgs;
+    private SeparateArgs sepArgs = null;
+
+    @AfterEach
+    void cleanUpEach() {
+        sepArgs = null;
+    }
 
     @Nested
     class GetCommand {
@@ -89,11 +95,11 @@ class SeparateArgsTest {
 
     @Nested
     class 引数が空の時 {
-        String[] args = {""};
+        String[] emptyArray = {""};
 
         @BeforeEach
         void init() {
-            sepArgs = new SeparateArgs(args);
+            sepArgs = new SeparateArgs(emptyArray);
         }
 
         @Test
@@ -103,14 +109,12 @@ class SeparateArgsTest {
 
         @Test
         void valuesを取得() {
-            String[] expected = {""};
-            assertArrayEquals(expected, sepArgs.getValues());
+            assertArrayEquals(emptyArray, sepArgs.getValues());
         }
 
         @Test
         void optionsを取得() {
-            String[] expected = {""};
-            assertArrayEquals(expected, sepArgs.getOptions());
+            assertArrayEquals(emptyArray, sepArgs.getOptions());
         }
     }
 }
