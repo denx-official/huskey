@@ -21,7 +21,7 @@ public class SeparateArgs {
      *
      * <p>コマンドライン第一引数を返す（空の場合は "help" を返す）。
      *
-     * @return values
+     * @return String
      * @author いっぺー
      */
     public String getCommand() {
@@ -36,7 +36,7 @@ public class SeparateArgs {
      *
      * <p>コマンドライン引数からvaluesを取得する。
      *
-     * @return command
+     * @return String[]
      * @author いっぺー
      */
     public String[] getValues() {
@@ -54,7 +54,7 @@ public class SeparateArgs {
      *
      * <p>コマンドライン引数からoptionsを取得する。
      *
-     * @return options
+     * @return String[]
      * @author いっぺー
      */
     public String[] getOptions() {
