@@ -17,12 +17,15 @@ public class SeparateArgs {
     /**
      * commandの取得
      *
-     * <p>コマンドライン第一引数を返す。
+     * <p>コマンドライン第一引数を返す（空の場合は "help" を返す）。
      *
      * @return values
      * @author いっぺー
      */
     public String getCommand() {
+        if (this.args[0].equals("")) {
+            return "help";
+        }
         return this.args[0];
     }
 
