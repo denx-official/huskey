@@ -10,9 +10,9 @@ package types;
  * @author  いっぺー
  */
 public class HuskeyArgs {
-    private String command;
-    private String[] values;
-    private String[] options;
+    private final String command;
+    private final String[] values;
+    private final String[] options;
 
     public HuskeyArgs(String command, String[] values, String[] options) {
         this.command = command;

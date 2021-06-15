@@ -23,7 +23,7 @@ import types.HuskeyArgs;
  * @author いっぺー
  */
 public class CommandRouting {
-    private HuskeyArgs hkArgs;
+    private final HuskeyArgs hkArgs;
 
     public CommandRouting(HuskeyArgs hkArgs) {
         this.hkArgs= hkArgs;

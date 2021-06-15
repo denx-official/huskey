@@ -8,7 +8,7 @@ package utility;
  * @author いっぺー
  */
 public class SeparateArgs {
-    private String[] args;
+    private final String[] args;
 
     public SeparateArgs(String[] args) {
         this.args = args;
