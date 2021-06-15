@@ -9,9 +9,11 @@ package utility;
  */
 public class SeparateArgs {
     private final String[] args;
+    private final int argsLen;
 
     public SeparateArgs(String[] args) {
         this.args = args;
+        this.argsLen = args.length;
     }
 
     /**
@@ -32,110 +34,104 @@ public class SeparateArgs {
     /**
      * valuesの取得
      *
-     * <p>コマンドライン引数からvaluesを取得する（取得法は <pre>cutoutValues</pre> を参照）。
+     * <p>コマンドライン引数からvaluesを取得する。
      *
      * @return command
      * @author いっぺー
      */
     public String[] getValues() {
-        String[] values;
+        int cutPoint = this.getCutPoint();
 
-        int argsLen = this.args.length;
-        for (int i = 0; i < argsLen; i++) {
-            // オプションを含むかを判定
-            if (this.args[i].startsWith("-")) {
-                values = cutoutValues(i);
-                return values;
-            }
+        if (cutPoint == -1) {
+            return this.cutout(Target.VALUES, this.argsLen);
         }
 
-        values = cutoutValues(argsLen);
-        return values;
+        return this.cutout(Target.VALUES, cutPoint);
     }
 
     /**
      * optionsの取得
      *
-     * <p>コマンドライン引数からoptionsを取得する（取得法は <pre>cutoutOptions</pre> を参照）。
+     * <p>コマンドライン引数からoptionsを取得する。
      *
      * @return options
      * @author いっぺー
      */
     public String[] getOptions() {
-        String[] options;
+        int cutPoint = this.getCutPoint();
 
-        int argsLen = this.args.length;
-        for (int i = 0; i < argsLen; i++) {
+        if (cutPoint == -1) {
+            return new String[] {""};
+        }
+
+        return this.cutout(Target.OPTIONS, cutPoint);
+    }
+
+    /**
+     * cutoutメソッドによって取得する引数の種類
+     *
+     * @author いっぺー
+     */
+    private enum Target {
+        VALUES,
+        OPTIONS
+    }
+
+    /**
+     * cutPoint（optionsが始まるインデックス）を基準にvalues/optionsを取得する
+     *
+     * <p>Target.VALUESの場合、コマンドライン引数の第二引数からcutPointまでの配列を返す。
+     * valuesが存在しない（cutPointが1以下）場合、"" のみを要素に持つ配列を返す。
+     *
+     * <p>Target.OPTIONSの場合、コマンドライン引数のcutPointから最後までの配列を返す。
+     *
+     * @param target 取得する引数の種類（Target.VALUES or Target.OPTIONS）
+     * @param cutPoint optionsが始まるインデックス
+     * @return String[]
+     * @author いっぺー
+     */
+    private String[] cutout(Target target, int cutPoint) throws IllegalArgumentException {
+        if (target == Target.VALUES && cutPoint - 1 <= 0) {
+            return new String[] {""};
+        }
+
+        String[] result;
+        int srcPos;
+
+        switch (target) {
+            case VALUES:
+                result = new String[cutPoint - 1];
+                srcPos = 1;
+                break;
+            case OPTIONS:
+                result = new String[this.argsLen - cutPoint];
+                srcPos = cutPoint;
+                break;
+            default:
+                throw new IllegalArgumentException("引数targetの値が不正です。");
+        }
+
+        System.arraycopy(this.args, srcPos, result, 0, result.length);
+
+        return result;
+    }
+
+    /**
+     * cutPoint（optionsが始まるインデックス）を取得する
+     *
+     * <p>コマンドライン引数に "-" を含むポイントをoptionsが始まるインデックスとし、その値を返す。
+     * ポイントが存在しなかった場合、-1を返す。
+     *
+     * @return int
+     * @author いっぺー
+     */
+    private int getCutPoint() {
+        for (int i = 0; i < this.argsLen; i++) {
             // オプションを含むかを判定
             if (this.args[i].startsWith("-")) {
-                options = cutoutOptions(argsLen, i);
-                return options;
+                return i;
             }
         }
-
-        options = new String[1];
-        options[0] = "";
-
-        return options;
-    }
-
-    /**
-     * コマンドライン引数からvaluesを切り抜く
-     *
-     * <p>コマンドライン引数の二番目からvaluesが始まるため、そのポイントから
-     * valuesが閉じるポイント（optionsが始まるポイント）までを切り抜くことでvaluesを取得する。
-     *
-     * <p>optionsが始まるポイントは、頭文字が "-" から始まる引数のインデックスとしている。
-     *
-     * <p>"-" から始まる引数が存在しない場合、それは与えられたコマンドライン引数に
-     * optionsが存在しないことを意味するため、cutPointは引数の最後尾ということになる。
-     *
-     * <p>valuesが存在しない場合、すなわちvaluesの閉じるポイントと引数の二番目が同じだった場合、
-     * "" のみを要素に持つ配列を返す。
-     *
-     * @param cutPoint valuesが閉じるポイント（optionsが始まるポイント）
-     * @return values
-     * @author いっぺー
-     */
-    private String[] cutoutValues(int cutPoint) {
-        String[] values;
-
-        if (cutPoint - 1 > 0) { // -1 はコマンド分の長さを引いている
-            values = new String[cutPoint - 1];
-            for (int i = 0; i < values.length; i++) {
-                values[i] = this.args[i+1];
-            }
-        }
-        else {
-            values = new String[1];
-            values[0] = "";
-        }
-
-        return values;
-    }
-
-    /**
-     * コマンドライン引数からoptionsを切り抜く
-     *
-     * <p>optionsが始まるポイントを頭文字に "-" を持つ引数のインデックスとし、そこから
-     * 引数の最後までを切り抜くことでoptionsを取得する。
-     *
-     * <p>optionsが存在しない場合、すなわち頭文字に "-" を持つ引数が存在しない場合、
-     * "" のみを要素に持つ配列を返す。
-     *
-     * @param argsLen コマンドライン引数の長さ（optionsが閉じるポイント）
-     * @param cutPoint optionsが始まるポイント
-     * @return options
-     * @author いっぺー
-     */
-    private String[] cutoutOptions(int argsLen, int cutPoint) {
-        String[] options;
-
-        options = new String[argsLen - cutPoint];
-        for (int i = 0; i < options.length; i++) {
-            options[i] = this.args[i + cutPoint];
-        }
-
-        return options;
+        return -1;
     }
 }
