@@ -14,7 +14,7 @@ class EncryptTest {
     byte[] plainText = "Hello, world!".getBytes(StandardCharsets.UTF_8);
 
     @AfterEach
-    void init() {
+    void cleanUpEach() {
         encrypt = null;
     }
 

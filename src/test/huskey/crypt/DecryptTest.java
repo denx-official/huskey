@@ -14,7 +14,7 @@ class DecryptTest {
     byte[] cipherText = "'Hello, world!' の暗号文".getBytes(StandardCharsets.UTF_8);
 
     @AfterEach
-    void init() {
+    void cleanUpEach() {
         decrypt = null;
     }
 
