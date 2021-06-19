@@ -1,5 +1,6 @@
 package utility;
 
+import cmd.Cmd;
 import cmd.changeCmd.ChangeCmd;
 import cmd.databaseCmd.DatabaseCmd;
 import cmd.exportCmd.ExportCmd;
@@ -40,76 +41,66 @@ public class CommandRouting {
      * @author いっぺー
      */
     public void run() throws IllegalArgumentException {
-        String command = this.hkArgs.getCommand();
+        String commandName = this.hkArgs.getCommand();
+        Cmd cmd;
 
-        switch (command) {
+        switch (commandName) {
             case "help":
-                HelpCmd helpCmd = new HelpCmd(this.hkArgs);
-                helpCmd.run();
+                cmd = new HelpCmd(this.hkArgs);
                 break;
 
             case "init":
-                InitCmd initCmd = new InitCmd(this.hkArgs);
-                initCmd.run();
+                cmd = new InitCmd(this.hkArgs);
                 break;
 
             case "change":
-                ChangeCmd changeCmd = new ChangeCmd(this.hkArgs);
-                changeCmd.run();
+                cmd = new ChangeCmd(this.hkArgs);
                 break;
 
             case "database":
-                DatabaseCmd databaseCmd = new DatabaseCmd(this.hkArgs);
-                databaseCmd.run();
+                cmd = new DatabaseCmd(this.hkArgs);
                 break;
 
             case "switch":
-                SwitchCmd switchCmd = new SwitchCmd(this.hkArgs);
-                switchCmd.run();
+                cmd = new SwitchCmd(this.hkArgs);
                 break;
 
             case "merge":
-                MergeCmd mergeCmd = new MergeCmd(this.hkArgs);
-                mergeCmd.run();
+                cmd = new MergeCmd(this.hkArgs);
                 break;
 
             case "export":
-                ExportCmd exportCmd = new ExportCmd(this.hkArgs);
-                exportCmd.run();
+                cmd = new ExportCmd(this.hkArgs);
                 break;
 
             case "import":
-                ImportCmd importCmd = new ImportCmd(this.hkArgs);
-                importCmd.run();
+                cmd = new ImportCmd(this.hkArgs);
                 break;
 
             case "list":
-                ListCmd listCmd = new ListCmd(this.hkArgs);
-                listCmd.run();
+                cmd = new ListCmd(this.hkArgs);
                 break;
 
             case "search":
-                SearchCmd searchCmd = new SearchCmd(this.hkArgs);
-                searchCmd.run();
+                cmd = new SearchCmd(this.hkArgs);
                 break;
 
             case "get":
-                GetCmd getCmd = new GetCmd(this.hkArgs);
-                getCmd.run();
+                cmd = new GetCmd(this.hkArgs);
                 break;
 
             case "set":
-                SetCmd setCmd = new SetCmd(this.hkArgs);
-                setCmd.run();
+                cmd = new SetCmd(this.hkArgs);
                 break;
 
             case "remove":
-                RemoveCmd removeCmd = new RemoveCmd(this.hkArgs);
-                removeCmd.run();
+                cmd = new RemoveCmd(this.hkArgs);
                 break;
 
             default:
-                throw new IllegalArgumentException("huskey: コマンド '" + command + "' は存在しません。コマンドの一覧は、'huskey help' によって確認できます。");
+                throw new IllegalArgumentException("huskey: コマンド '" + commandName + "' は存在しません。コマンドの一覧は、'huskey help' によって確認できます。");
         }
+
+        cmd.run();
     }
 }
