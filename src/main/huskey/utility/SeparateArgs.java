@@ -90,7 +90,7 @@ public class SeparateArgs {
      * @return String[]
      * @author いっぺー
      */
-    private String[] cutout(Target target, int cutPoint) throws IllegalArgumentException {
+    private String[] cutout(Target target, int cutPoint) {
         if (target == Target.VALUES && cutPoint - 1 <= 0) {
             return new String[] {""};
         }
@@ -98,17 +98,12 @@ public class SeparateArgs {
         String[] result;
         int srcPos;
 
-        switch (target) {
-            case VALUES:
-                result = new String[cutPoint - 1];
-                srcPos = 1;
-                break;
-            case OPTIONS:
-                result = new String[this.argsLen - cutPoint];
-                srcPos = cutPoint;
-                break;
-            default:
-                throw new IllegalArgumentException("引数targetの値が不正です。");
+        if (target == Target.VALUES) {
+            result = new String[cutPoint - 1];
+            srcPos = 1;
+        } else {
+            result = new String[this.argsLen - cutPoint];
+            srcPos = cutPoint;
         }
 
         System.arraycopy(this.args, srcPos, result, 0, result.length);
