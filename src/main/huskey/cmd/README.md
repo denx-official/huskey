@@ -8,7 +8,16 @@
 
 ## CommandRouting
 
-コマンドライン引数から実行するコマンドを決めるクラス。
+コマンドライン引数からコマンドを決定・実行するクラス。
+
+```java
+String command = "help";
+String[] values = {""};
+String[] options = {""};
+
+CommandRouting cr = new CommandRouting(command, values, options);
+cr.run();
+```
 
 ## コマンド一覧
 
