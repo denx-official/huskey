@@ -9,11 +9,9 @@ package utility;
  */
 public class SeparateArgs {
     private final String[] args;
-    private final int argsLen;
 
     public SeparateArgs(String[] args) {
         this.args = args;
-        this.argsLen = args.length;
     }
 
     /**
@@ -43,7 +41,7 @@ public class SeparateArgs {
         int cutPoint = this.getCutPoint();
 
         if (cutPoint == -1) {
-            return this.cutout(Target.VALUES, this.argsLen);
+            return this.cutout(Target.VALUES, this.args.length);
         }
 
         return this.cutout(Target.VALUES, cutPoint);
@@ -102,7 +100,7 @@ public class SeparateArgs {
             result = new String[cutPoint - 1];
             srcPos = 1;
         } else {
-            result = new String[this.argsLen - cutPoint];
+            result = new String[this.args.length - cutPoint];
             srcPos = cutPoint;
         }
 
@@ -121,7 +119,7 @@ public class SeparateArgs {
      * @author いっぺー
      */
     private int getCutPoint() {
-        for (int i = 0; i < this.argsLen; i++) {
+        for (int i = 0; i < this.args.length; i++) {
             // オプションを含むかを判定
             if (this.args[i].startsWith("-")) {
                 return i;
