@@ -17,7 +17,7 @@ import cmd.switchCmd.SwitchCmd;
 /**
  * コマンドルーティング
  *
- * <p>与えられたcommandから条件分岐によって実行するコマンドを決定するルーティングシステム。
+ * <p>与えられた引数から条件分岐によってコマンドを決定し実行するルーティングシステム。
  *
  * @author いっぺー
  */
@@ -29,10 +29,9 @@ public class CommandRouting extends Cmd {
     /**
      * 実行するコマンドの決定
      *
-     * <p>commandの値によって実行するコマンドをswitch-case文によって決定する。
+     * <p>commandの値によってコマンドを決定・実行する。
      *
-     * <p>該当するコマンドが存在しない場合、IllegalArgumentException（引数エラー）を発生させる。
-     *
+     * @exception IllegalArgumentException 該当するコマンドが存在しない場合
      * @author いっぺー
      */
     public void run() throws IllegalArgumentException {
