@@ -27,18 +27,22 @@ class DatabaseTest {
 
     @Nested
     class isKeyMatched {
+        @Nested
         class 正常系 {
+            @Test
             void masterKeyの照合_true() {
                 db = new Database("sample", "sample");
                 assertTrue(db.isKeyMatched);
             }
 
+            @Test
             void masterKeyの照合_false() {
                 db = new Database("sample", "sanple");
                 assertFalse(db.isKeyMatched);
             }
         }
 
+        @Nested
         class 異常系 {
             @BeforeEach
             void setupEach() {
