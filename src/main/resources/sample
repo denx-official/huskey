@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><database>
+  <name>Sample</name>
+  <config/>
+  <dataset>
+    <data title="sample">
+      <userName>sample@sample.com</userName>
+      <password>something</password>
+      <message>something</message>
+      <created>
+        <year>2021</year>
+        <month>1</month>
+        <date>1</date>
+        <hours>0</hours>
+        <minutes>0</minutes>
+        <seconds>0</seconds>
+      </created>
+    </data>
+  </dataset>
+</database>
