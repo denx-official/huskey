@@ -20,15 +20,15 @@ class DatabaseTest {
     @Nested
     class isKeyMatched {
         @Test
-        void masterKeyの照合_true() {
+        void masterKeyの照合_true() throws FileNotFoundException {
             db = new Database("sample", "sample");
-            assertTrue(db.isKeyMatched);
+            assertTrue(db.isKeyMatched());
         }
 
         @Test
-        void masterKeyの照合_false() {
+        void masterKeyの照合_false() throws FileNotFoundException {
             db = new Database("sample", "sanple");
-            assertFalse(db.isKeyMatched);
+            assertFalse(db.isKeyMatched());
         }
     }
 
