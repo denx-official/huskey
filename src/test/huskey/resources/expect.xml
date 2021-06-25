@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE database [
+  <!ELEMENT database (name, config, dataset)>
+  <!ELEMENT name (#PCDATA)>
+  <!ELEMENT config (#PCDATA)>
+  <!ELEMENT dataset (data+)>
+  <!ELEMENT data (userName, password, message, created)>
+  <!ATTLIST data title ID #REQUIRED>
+  <!ELEMENT userName (#PCDATA)>
+  <!ELEMENT password (#PCDATA)>
+  <!ELEMENT message (#PCDATA)>
+  <!ELEMENT created (year, month, date, hours, minutes, seconds)>
+  <!ELEMENT year (#PCDATA)>
+  <!ELEMENT month (#PCDATA)>
+  <!ELEMENT date (#PCDATA)>
+  <!ELEMENT hours (#PCDATA)>
+  <!ELEMENT minutes (#PCDATA)>
+  <!ELEMENT seconds (#PCDATA)>
+]>
+
+<database>
+  <name>Sample</name>
+  <config/>
+  <dataset>
+    <data title="sample">
+      <userName>sample@sample.com</userName>
+      <password>something</password>
+      <message>something</message>
+      <created>
+        <year>2021</year>
+        <month>1</month>
+        <date>1</date>
+        <hours>0</hours>
+        <minutes>0</minutes>
+        <seconds>0</seconds>
+      </created>
+    </data>
+  </dataset>
+</database>
