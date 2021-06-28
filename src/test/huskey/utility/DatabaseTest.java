@@ -45,25 +45,25 @@ class DatabaseTest {
     @Nested
     class getDataset {
         @Test
-        void データセットの取得() throws Exception {
+        void データセットの取得() {
             db = new Database(dbName, masterKey, dbDir);
-            String result = xmlToString(db.getDataset());
-            String expect = xmlToString(createExpectDoc());
-            assertEquals(expect, result);
+            try {
+                String result = xmlToString(db.getDataset());
+                String expect = xmlToString(createExpectDoc());
+                assertEquals(expect, result);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
 
         Document createExpectDoc() throws Exception {
-            try {
-                String path = Database.class.getClassLoader()
-                    .getResources("expect.xml")
-                    .nextElement()
-                    .toString();
-                DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-                DocumentBuilder builder = factory.newDocumentBuilder();
-                return builder.parse(Paths.get(path.replace("file:/", "")).toFile());
-            } catch (Exception e) {
-                throw new Exception(e.getMessage());
-            }
+            String path = Database.class.getClassLoader()
+                .getResources("expect.xml")
+                .nextElement()
+                .toString();
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            return builder.parse(Paths.get(path.replace("file:/", "")).toFile());
         }
 
         String xmlToString(Document doc) throws TransformerException {
