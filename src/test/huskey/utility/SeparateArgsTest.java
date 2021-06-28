@@ -16,7 +16,7 @@ class SeparateArgsTest {
     }
 
     @Nested
-    class GetCommand {
+    class getCommand {
         @Test
         void commandを取得() {
             String[] args = {"get", "sample", "database", "-s"};
@@ -28,7 +28,7 @@ class SeparateArgsTest {
     }
 
     @Nested
-    class GetValues {
+    class getValues {
         @Test
         void valuesを取得_valuesあり_optionsあり() {
             String[] args = {"get", "sample", "database", "-s"};
@@ -71,7 +71,7 @@ class SeparateArgsTest {
     }
 
     @Nested
-    class GetOptions {
+    class getOptions {
         @Test
         void optionsを取得_optionsあり() {
             String[] args = {"list", "-t", "--descend"};

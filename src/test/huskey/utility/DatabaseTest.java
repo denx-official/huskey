@@ -43,12 +43,12 @@ class DatabaseTest {
     }
 
     @Nested
-    class getDataset {
+    class getDBDoc {
         @Test
         void データセットの取得() {
             db = new Database(dbName, masterKey, dbDir);
             try {
-                String result = xmlToString(db.getDataset());
+                String result = xmlToString(db.getDBDoc());
                 String expect = xmlToString(createExpectDoc());
                 assertEquals(expect, result);
             } catch (Exception e) {
@@ -86,7 +86,7 @@ class DatabaseTest {
 
         @Test
         void データベースが存在しなかった場合() {
-            assertThrows(FileNotFoundException.class, db::getDataset);
+            assertThrows(FileNotFoundException.class, db::getDBDoc);
         }
 
         @Test

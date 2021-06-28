@@ -31,7 +31,7 @@ public class Database {
         return Objects.equals(this.masterKey, "sample");
     }
 
-    public Document getDataset() throws FileNotFoundException {
+    public Document getDBDoc() throws FileNotFoundException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         File file = Paths.get(this.dbDir + this.dbName).toFile();
         try {
