@@ -1,9 +1,10 @@
 #!/bin/sh
-if type java > /dev/null 2>&1; then # java コマンドが存在する場合
-    sh_file=`which huskey`
-    java -classpath ${sh_file%/*} Huskey $@
-else 
+
+if !(type java > /dev/null 2>&1); then # java コマンドが存在する場合
     echo "huskey を使用するには The Java Runtime Environment (JRE) をインストールする必要があります。"
     echo "Java | Oracle (https://java.com/) より最新版の JRE をインストールしてください。"
     exit 1
 fi
+
+sh_file=`which huskey`
+java -classpath ${sh_file%/*} Huskey $@
