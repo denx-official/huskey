@@ -1,10 +1,14 @@
 package utility;
 
 import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Objects;
 
@@ -27,13 +31,16 @@ public class Database {
         return Objects.equals(this.masterKey, "sample");
     }
 
-    public Document getDataset() throws Exception {
+    public Document getDataset() throws FileNotFoundException {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        File file = Paths.get(this.dbDir + this.dbName).toFile();
         try {
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
-            return builder.parse(Paths.get(this.dbDir + this.dbName).toFile());
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            return builder.parse(file);
+        } catch (FileNotFoundException e) {
+            throw e;
+        } catch (ParserConfigurationException | IOException | SAXException e) {
+            throw new RuntimeException(e);
         }
     }
 }
