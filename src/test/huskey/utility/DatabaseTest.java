@@ -79,15 +79,14 @@ class DatabaseTest {
 
     @Nested
     class 異常系 {
-        @BeforeAll
+        @BeforeEach
         void setup() {
-            db = new Database(dbName, masterKey, dbDir);
-            // データベースとハッシュ化したmasterKeyの削除
+            db = new Database(dbName, masterKey, "./hoge/");
         }
 
-        @AfterAll
-        void cleanUp() {
-            // 消したファイルの復元
+        @Test
+        void データベースが存在しなかった場合() {
+            assertThrows(FileNotFoundException.class, db::getDataset);
         }
 
         @Test
