@@ -16,11 +16,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DatabaseTest {
     private Database db;
+    private final String dbName = "sample";
+    private final String masterKey = "sample";
+    private final String dbDir = "./target/test-classes/resources/database/";
 
     @Test
     void データベース名のリストを取得() {
         String[] dbList = Database.showDBList();
-        String[] expect = {"sample"};
+        String[] expect = {dbName};
         assertArrayEquals(expect, dbList);
     }
 
@@ -28,13 +31,13 @@ class DatabaseTest {
     class isKeyMatched {
         @Test
         void masterKeyの照合_true() throws FileNotFoundException {
-            db = new Database("sample", "sample");
+            db = new Database(dbName, masterKey, dbDir);
             assertTrue(db.isKeyMatched());
         }
 
         @Test
         void masterKeyの照合_false() throws FileNotFoundException {
-            db = new Database("sample", "sanple");
+            db = new Database(dbName, "sanple", dbDir);
             assertFalse(db.isKeyMatched());
         }
     }
@@ -43,7 +46,7 @@ class DatabaseTest {
     class getDataset {
         @Test
         void データセットの取得() throws Exception {
-            db = new Database("sample", "sample");
+            db = new Database(dbName, masterKey, dbDir);
             String result = xmlToString(db.getDataset());
             String expect = xmlToString(createExpectDoc());
             assertEquals(expect, result);
@@ -51,7 +54,10 @@ class DatabaseTest {
 
         Document createExpectDoc() throws Exception {
             try {
-                String path = Database.class.getClassLoader().getResources("expect.xml").nextElement().toString();
+                String path = Database.class.getClassLoader()
+                    .getResources("expect.xml")
+                    .nextElement()
+                    .toString();
                 DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
                 DocumentBuilder builder = factory.newDocumentBuilder();
                 return builder.parse(Paths.get(path.replace("file:/", "")).toFile());
@@ -75,7 +81,7 @@ class DatabaseTest {
     class 異常系 {
         @BeforeAll
         void setup() {
-            db = new Database("sample", "sample");
+            db = new Database(dbName, masterKey, dbDir);
             // データベースとハッシュ化したmasterKeyの削除
         }
 

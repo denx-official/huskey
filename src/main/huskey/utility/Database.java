@@ -11,10 +11,12 @@ import java.util.Objects;
 public class Database {
     private final String dbName;
     private final String masterKey;
+    private final String dbDir;
 
-    public Database(String dbName, String masterKey) {
+    public Database(String dbName, String masterKey, String dbDir) {
         this.dbName = dbName;
         this.masterKey = masterKey;
+        this.dbDir = dbDir;
     }
 
     public static String[] showDBList() {
@@ -27,10 +29,9 @@ public class Database {
 
     public Document getDataset() throws Exception {
         try {
-            String path = Database.class.getClassLoader().getResources(this.dbName).nextElement().toString();
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
-            return builder.parse(Paths.get(path.replace("file:/", "")).toFile());
+            return builder.parse(Paths.get(this.dbDir + this.dbName).toFile());
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
