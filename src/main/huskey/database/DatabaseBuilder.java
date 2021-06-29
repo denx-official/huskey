@@ -24,7 +24,7 @@ public class DatabaseBuilder {
     }
 
     public static String[] showDBList() {
-        return new String[] {"sample"};
+        return new String[] {"SampleDB"};
     }
 
     public boolean isKeyMatched() throws FileNotFoundException {

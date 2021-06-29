@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DatabaseBuilderTest {
     private DatabaseBuilder db;
-    private final String dbName = "sample";
+    private final String dbName = "SampleDB";
     private final String masterKey = "sample";
     private final String dbDir = "./target/test-classes/resources/database/";
 

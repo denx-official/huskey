@@ -31,7 +31,7 @@
 ]>
 
 <database>
-  <name>Sample</name>
+  <name>SampleDB</name>
   <config/>
   <dataset>
     <data title="Google">
