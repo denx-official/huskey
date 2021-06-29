@@ -14,15 +14,15 @@ import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DatabaseTest {
-    private Database db;
+class DatabaseBuilderTest {
+    private DatabaseBuilder db;
     private final String dbName = "sample";
     private final String masterKey = "sample";
     private final String dbDir = "./target/test-classes/resources/database/";
 
     @Test
     void データベース名のリストを取得() {
-        String[] dbList = Database.showDBList();
+        String[] dbList = DatabaseBuilder.showDBList();
         String[] expect = {dbName};
         assertArrayEquals(expect, dbList);
     }
@@ -31,13 +31,13 @@ class DatabaseTest {
     class isKeyMatched {
         @Test
         void masterKeyの照合_true() throws FileNotFoundException {
-            db = new Database(dbName, masterKey, dbDir);
+            db = new DatabaseBuilder(dbName, masterKey, dbDir);
             assertTrue(db.isKeyMatched());
         }
 
         @Test
         void masterKeyの照合_false() throws FileNotFoundException {
-            db = new Database(dbName, "sanple", dbDir);
+            db = new DatabaseBuilder(dbName, "sanple", dbDir);
             assertFalse(db.isKeyMatched());
         }
     }
@@ -46,9 +46,9 @@ class DatabaseTest {
     class getDBDoc {
         @Test
         void データセットの取得() {
-            db = new Database(dbName, masterKey, dbDir);
+            db = new DatabaseBuilder(dbName, masterKey, dbDir);
             try {
-                String result = xmlToString(db.getDBDoc());
+                String result = xmlToString(db.getDatabase());
                 String expect = xmlToString(createExpectDoc());
                 assertEquals(expect, result);
             } catch (Exception e) {
@@ -57,7 +57,7 @@ class DatabaseTest {
         }
 
         Document createExpectDoc() throws Exception {
-            String path = Database.class.getClassLoader()
+            String path = DatabaseBuilder.class.getClassLoader()
                 .getResources("expect.xml")
                 .nextElement()
                 .toString();
@@ -81,12 +81,12 @@ class DatabaseTest {
     class 異常系 {
         @BeforeEach
         void setup() {
-            db = new Database(dbName, masterKey, "./hoge/");
+            db = new DatabaseBuilder(dbName, masterKey, "./hoge/");
         }
 
         @Test
         void データベースが存在しなかった場合() {
-            assertThrows(FileNotFoundException.class, db::getDBDoc);
+            assertThrows(FileNotFoundException.class, db::getDatabase);
         }
 
         @Test

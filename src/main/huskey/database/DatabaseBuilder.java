@@ -12,12 +12,12 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Objects;
 
-public class Database {
+public class DatabaseBuilder {
     private final String dbName;
     private final String masterKey;
     private final String dbDir;
 
-    public Database(String dbName, String masterKey, String dbDir) {
+    public DatabaseBuilder(String dbName, String masterKey, String dbDir) {
         this.dbName = dbName;
         this.masterKey = masterKey;
         this.dbDir = dbDir;
@@ -31,7 +31,7 @@ public class Database {
         return Objects.equals(this.masterKey, "sample");
     }
 
-    public Document getDBDoc() throws FileNotFoundException {
+    public Document getDatabase() throws FileNotFoundException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         File file = Paths.get(this.dbDir + this.dbName).toFile();
         try {
