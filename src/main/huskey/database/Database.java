@@ -1,4 +1,4 @@
-package utility;
+package database;
 
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;

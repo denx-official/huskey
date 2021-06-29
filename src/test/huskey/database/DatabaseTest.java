@@ -1,4 +1,4 @@
-package utility;
+package database;
 
 import org.junit.jupiter.api.*;
 import org.w3c.dom.Document;
