@@ -1,16 +1,8 @@
 package database;
 
 import org.junit.jupiter.api.*;
-import org.w3c.dom.Document;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.*;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 import java.io.FileNotFoundException;
-import java.io.StringWriter;
-import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -43,37 +35,15 @@ class DatabaseBuilderTest {
     }
 
     @Nested
-    class getDBDoc {
+    class buildDatabase {
         @Test
-        void データセットの取得() {
+        void データベースの構築() {
             db = new DatabaseBuilder(dbName, masterKey, dbDir);
             try {
-                String result = xmlToString(db.getDatabase());
-                String expect = xmlToString(createExpectDoc());
-                assertEquals(expect, result);
+                db.buildDatabase();
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                fail(e.getMessage());
             }
-        }
-
-        Document createExpectDoc() throws Exception {
-            String path = DatabaseBuilder.class.getClassLoader()
-                .getResources("expect.xml")
-                .nextElement()
-                .toString();
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            return builder.parse(Paths.get(path.replace("file:/", "")).toFile());
-        }
-
-        String xmlToString(Document doc) throws TransformerException {
-            StringWriter writer = new StringWriter();
-            TransformerFactory factory = TransformerFactory.newInstance();
-            Transformer transformer = factory.newTransformer();
-            transformer.setOutputProperty(OutputKeys.METHOD, "xml");
-            transformer.setOutputProperty("{http://xml.apache.org/xalan}indent-amount", "2");
-            transformer.transform(new DOMSource(doc), new StreamResult(writer));
-            return writer.toString();
         }
     }
 
@@ -86,7 +56,7 @@ class DatabaseBuilderTest {
 
         @Test
         void データベースが存在しなかった場合() {
-            assertThrows(FileNotFoundException.class, db::getDatabase);
+            assertThrows(FileNotFoundException.class, db::buildDatabase);
         }
 
         @Test
