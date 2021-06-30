@@ -32,7 +32,7 @@ public class Dataset {
             Element data = (Element) nodeList.item(i);
             String title = data.getAttribute("title");
             if (Objects.equals(title, target)) {
-                return createData(data);
+                return this.createData(data);
             }
         }
 
@@ -73,8 +73,8 @@ public class Dataset {
             data.getElementsByTagName("userName").item(0).getTextContent(),
             data.getElementsByTagName("password").item(0).getTextContent(),
             data.getElementsByTagName("message").item(0).getTextContent(),
-            elementToHkTime(createdElem),
-            elementToHkTime(updatedElem)
+            this.elementToHkTime(createdElem),
+            this.elementToHkTime(updatedElem)
         );
     }
 
