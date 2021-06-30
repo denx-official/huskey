@@ -1,5 +1,8 @@
 package database;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import java.time.LocalDateTime;
 
 public class HkTime {
@@ -36,6 +39,14 @@ public class HkTime {
             default:
                 throw new IllegalArgumentException("target " + target + " はメンバ変数に含まれていません。");
         }
+    }
+
+    public Element toElement(Document doc, String tag) {
+        Element elem = doc.createElement(tag);
+        for (String name: HkTime.iterator()) {
+            elem.setAttribute(name, String.valueOf(this.get(name)));
+        }
+        return elem;
     }
 
     public static String[] iterator() {

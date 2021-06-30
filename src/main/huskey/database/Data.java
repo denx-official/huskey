@@ -1,5 +1,8 @@
 package database;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 public class Data {
     private String _title;
     private String _userName;
@@ -17,12 +20,31 @@ public class Data {
         this._updated = updated;
     }
 
-    public String title() { return this._title; }
-    public String userName() { return this._userName; }
-    public String password() { return this._password; }
-    public String message() { return this._message; }
-    public HkTime created() { return this._created; }
-    public HkTime updated() { return this._updated; }
+    public String getText(String target) {
+        switch (target) {
+            case "title":
+                return this._title;
+            case "userName":
+                return this._userName;
+            case "password":
+                return this._password;
+            case "message":
+                return this._message;
+            default:
+                throw new IllegalArgumentException("target " + target + " getTextでは取得できません。");
+        }
+    }
+
+    public HkTime getTime(String target) {
+        switch (target) {
+            case "created":
+                return this._created;
+            case "updated":
+                return this._updated;
+            default:
+                throw new IllegalArgumentException("target " + target + " getTimeでは取得できません。");
+        }
+    }
 
     public void update(String target, String newValue) {
         switch (target) {
@@ -42,5 +64,31 @@ public class Data {
                 throw new IllegalArgumentException("引数 target には、title/userName/password/message のいずれかを指定してください。");
         }
         this._updated = HkTime.now();
+    }
+
+    public Element toElement(Document doc) {
+        Element dataElem = doc.createElement("data");
+        dataElem.setAttribute("title", this.getText("title"));
+
+        for (String target: Data.textIterator()) {
+            Element elem = doc.createElement(target);
+            elem.appendChild(doc.createTextNode(this.getText(target)));
+            dataElem.appendChild(elem);
+        }
+
+        for (String target: Data.timeIterator()) {
+            Element elem = this.getTime(target).toElement(doc, target);
+            dataElem.appendChild(elem);
+        }
+
+        return dataElem;
+    }
+
+    public static String[] textIterator() {
+        return new String[] {"userName", "password", "message"};
+    }
+
+    public static String[] timeIterator() {
+        return new String[] {"updated", "created"};
     }
 }

@@ -8,8 +8,8 @@ import org.w3c.dom.NodeList;
 import java.util.Objects;
 
 public class Dataset {
-    private Document doc;
-    private Node root;
+    private final Document doc;
+    private final Node root;
 
     public Dataset(Document doc, Node root) {
         this.doc = doc;
@@ -59,22 +59,10 @@ public class Dataset {
             Element elem = (Element) nodeList.item(i);
             String title = elem.getAttribute("title");
             if (Objects.equals(title, target)) {
-                updateDataset(elem, data);
+                this.removeData(target);
             }
         }
-    }
-
-    private void updateDataset(Element elem, Data data) {
-        elem.setAttribute("title", data.title());
-        elem.getElementsByTagName("userName").item(0).setTextContent(data.userName());
-        elem.getElementsByTagName("password").item(0).setTextContent(data.password());
-        elem.getElementsByTagName("message").item(0).setTextContent(data.message());
-
-        HkTime updated = data.updated();
-        Element updatedElem = (Element) elem.getElementsByTagName("updated").item(0);
-        for (String target: HkTime.iterator()) {
-            updatedElem.setAttribute(target, String.valueOf(updated.get(target)));
-        }
+        this.root.appendChild(data.toElement(this.doc));
     }
 
     private Data createData(Element data) {
