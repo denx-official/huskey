@@ -67,6 +67,7 @@ class DatasetTest {
             HkTime.now()
         );
         dataset.setData("huskey", data);
+        dataset.useData("huskey");
     }
 
     @Test
