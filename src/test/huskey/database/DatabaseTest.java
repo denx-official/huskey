@@ -26,7 +26,13 @@ class DatabaseTest {
     }
 
     @Test
-    void データセットの取得() {}
+    void データセットの取得() {
+        try {
+            db.useDataset();
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
+    }
 
     @Test
     void コンフィグの取得() {}
