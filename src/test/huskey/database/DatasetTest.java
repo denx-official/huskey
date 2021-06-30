@@ -57,7 +57,7 @@ class DatasetTest {
     }
 
     @Test
-    void データの追加_更新() {
+    void データの追加() {
         Data data = new Data(
             "huskey",
             "sample@sample.com",
@@ -67,7 +67,20 @@ class DatasetTest {
             HkTime.now()
         );
         dataset.setData("huskey", data);
+    }
 
-        assertEquals("huskey", dataset.useData("huskey").title());
+    @Test
+    void データの更新() {
+        Data data = dataset.useData("Google");
+        data.update("title", "Google2");
+        dataset.setData("Google", data);
+
+        try {
+            dataset.useData("Google");
+        } catch (IllegalArgumentException _e) {
+            return;
+        }
+
+        fail("データが更新されていません。");
     }
 }
