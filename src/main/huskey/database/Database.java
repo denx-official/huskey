@@ -23,7 +23,7 @@ public class Database {
             XPathExpression expr = xpath.compile("/database/dataset");
             NodeList dataset = (NodeList) expr.evaluate(this.doc, XPathConstants.NODESET);
             Node root = dataset.item(0);
-            return new Dataset(root);
+            return new Dataset(this.doc, root);
         } catch (XPathExpressionException e) {
             throw new RuntimeException(e);
         }

@@ -1,5 +1,6 @@
 package database;
 
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -7,9 +8,11 @@ import org.w3c.dom.NodeList;
 import java.util.Objects;
 
 public class Dataset {
+    private Document doc;
     private Node root;
 
-    public Dataset(Node root) {
+    public Dataset(Document doc, Node root) {
+        this.doc = doc;
         this.root = root;
     }
 
