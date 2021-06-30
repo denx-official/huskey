@@ -33,48 +33,41 @@
 <database>
   <name>SampleDB</name>
   <config/>
-  <dataset>
-    <data title="Google">
+  <dataset><data title="Google">
       <userName>sample@sample.com</userName>
       <password>sXw3BLNrSUx4OOU6jZOy</password>
       <message>something</message>
       <created year="2021" month="1" date="1" hours="0" minutes="0" seconds="0" />
       <updated year="2021" month="1" date="1" hours="0" minutes="0" seconds="0" />
-    </data>
-    <data title="Discord">
+    </data><data title="Discord">
       <userName>sample@sample.com</userName>
       <password>ECiK1GDGULKTUPFVqp9x</password>
       <message>something</message>
       <created year="2021" month="2" date="1" hours="0" minutes="0" seconds="0" />
       <updated year="2021" month="2" date="1" hours="0" minutes="0" seconds="0" />
-    </data>
-    <data title="Twitter">
+    </data><data title="Twitter">
       <userName>hogehogeman1234</userName>
       <password>r79airSs4VG7WrailN8p</password>
       <message>something</message>
       <created year="2021" month="2" date="2" hours="0" minutes="0" seconds="0" />
       <updated year="2021" month="2" date="2" hours="0" minutes="0" seconds="0" />
-    </data>
-    <data title="GitHub">
+    </data><data title="GitHub">
       <userName>hogehogeman1234</userName>
       <password>MYfAGIKIP8Co91KQJi7i</password>
       <message>something</message>
       <created year="2020" month="2" date="2" hours="1" minutes="0" seconds="0" />
       <updated year="2021" month="2" date="2" hours="1" minutes="0" seconds="0" />
-    </data>
-    <data title="GitLab">
+    </data><data title="GitLab">
       <userName>hogehogeman1234</userName>
       <password>fOsAPh9ktqoOQ1Bjgmz4</password>
       <message>something</message>
       <created year="2021" month="2" date="2" hours="1" minutes="1" seconds="0" />
       <updated year="2021" month="2" date="2" hours="1" minutes="1" seconds="0" />
-    </data>
-    <data title="GitBucket">
+    </data><data title="GitBucket">
       <userName>hogehogeman1234</userName>
       <password>U4GZAmUVG2sfrdmxiAbE</password>
       <message>something</message>
       <created year="2021" month="2" date="2" hours="1" minutes="1" seconds="10" />
       <updated year="2021" month="2" date="2" hours="1" minutes="1" seconds="10" />
-    </data>
-  </dataset>
+    </data></dataset>
 </database>
