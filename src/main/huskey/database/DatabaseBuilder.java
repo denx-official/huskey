@@ -31,12 +31,13 @@ public class DatabaseBuilder {
         return Objects.equals(this.masterKey, "sample");
     }
 
-    public Document getDatabase() throws FileNotFoundException {
+    public Database buildDatabase() throws FileNotFoundException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         File file = Paths.get(this.dbDir + this.dbName).toFile();
         try {
             DocumentBuilder builder = factory.newDocumentBuilder();
-            return builder.parse(file);
+            Document doc = builder.parse(file);
+            return new Database(doc, this.dbName, this.masterKey);
         } catch (FileNotFoundException e) {
             throw e;
         } catch (ParserConfigurationException | IOException | SAXException e) {
