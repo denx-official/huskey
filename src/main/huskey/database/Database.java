@@ -19,7 +19,7 @@ public class Database {
     public Dataset useDataset() {
         XPath xpath = XPathFactory.newInstance().newXPath();
         try {
-            XPathExpression expr = xpath.compile("/database/dataset");
+            XPathExpression expr = xpath.compile("/database/dataset/data");
             NodeList nodeList = (NodeList) expr.evaluate(this.doc, XPathConstants.NODESET);
             return new Dataset(nodeList);
         } catch (XPathExpressionException e) {
