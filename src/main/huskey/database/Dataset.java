@@ -36,6 +36,20 @@ public class Dataset {
         throw new IllegalArgumentException(target + " の名前を持つデータが存在しません。");
     }
 
+    public void removeData(String target) {
+        NodeList nodeList = this.root.getChildNodes();
+        for (int i = nodeList.getLength() - 1; i >= 0; i--) {
+            Element data = (Element) nodeList.item(i);
+            String title = data.getAttribute("title");
+            if (Objects.equals(title, target)) {
+                this.root.removeChild(data);
+                return;
+            }
+        }
+
+        throw new IllegalArgumentException(target + " の名前を持つデータが存在しません。");
+    }
+
     private Data createData(Element data) {
         Element createdElem = (Element) data.getElementsByTagName("created").item(0);
         Element updatedElem = (Element) data.getElementsByTagName("updated").item(0);
