@@ -57,8 +57,8 @@ class DatasetTest {
             "sample@sample.com",
             "S3nXpZMLBxJE2gWTqdN8",
             "something",
-            HkTime.currentTime(),
-            HkTime.currentTime()
+            HkTime.now(),
+            HkTime.now()
         );
         dataset.setData("huskey", data);
 

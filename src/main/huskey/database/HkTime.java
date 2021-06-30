@@ -1,5 +1,7 @@
 package database;
 
+import java.time.LocalDateTime;
+
 public class HkTime {
     public final int year;
     public final int month;
@@ -15,5 +17,17 @@ public class HkTime {
         this.hours = hours;
         this.minutes = minutes;
         this.seconds = seconds;
+    }
+
+    public static HkTime now() {
+        LocalDateTime now = LocalDateTime.now();
+        return new HkTime(
+            now.getYear(),
+            now.getMonthValue(),
+            now.getDayOfMonth(),
+            now.getHour(),
+            now.getMinute(),
+            now.getSecond()
+        );
     }
 }
