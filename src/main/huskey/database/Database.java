@@ -1,6 +1,7 @@
 package database;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import javax.xml.xpath.*;
@@ -19,9 +20,10 @@ public class Database {
     public Dataset useDataset() {
         XPath xpath = XPathFactory.newInstance().newXPath();
         try {
-            XPathExpression expr = xpath.compile("/database/dataset/data");
-            NodeList nodeList = (NodeList) expr.evaluate(this.doc, XPathConstants.NODESET);
-            return new Dataset(nodeList);
+            XPathExpression expr = xpath.compile("/database/dataset");
+            NodeList dataset = (NodeList) expr.evaluate(this.doc, XPathConstants.NODESET);
+            Node root = dataset.item(0);
+            return new Dataset(root);
         } catch (XPathExpressionException e) {
             throw new RuntimeException(e);
         }

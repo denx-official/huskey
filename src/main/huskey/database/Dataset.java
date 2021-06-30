@@ -7,24 +7,26 @@ import org.w3c.dom.NodeList;
 import java.util.Objects;
 
 public class Dataset {
-    private NodeList nodeList;
+    private Node root;
 
-    public Dataset(NodeList nodeList) {
-        this.nodeList = nodeList;
+    public Dataset(Node root) {
+        this.root = root;
     }
 
     public String[] getDataList() {
-        String[] dataList = new String[this.nodeList.getLength()];
-        for (int i = 0; i < this.nodeList.getLength(); i++) {
-            Element data = (Element) this.nodeList.item(i);
+        NodeList nodeList = this.root.getChildNodes();
+        String[] dataList = new String[nodeList.getLength()];
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            Element data = (Element) nodeList.item(i);
             dataList[i] = data.getAttribute("title");
         }
         return dataList;
     }
 
     public Data useData(String target) throws IllegalArgumentException {
-        for (int i = 0; i < this.nodeList.getLength(); i++) {
-            Element data = (Element) this.nodeList.item(i);
+        NodeList nodeList = this.root.getChildNodes();
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            Element data = (Element) nodeList.item(i);
             String title = data.getAttribute("title");
             if (Objects.equals(title, target)) {
                 return createData(data);
