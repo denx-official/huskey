@@ -5,6 +5,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Nested;
 
+import java.io.FileNotFoundException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class DatabaseTest {
@@ -16,7 +18,11 @@ class DatabaseTest {
         String masterKey = "sample";
         String dbDir = "./target/test-classes/resources/database/";
         DatabaseBuilder builder = new DatabaseBuilder(dbName, masterKey, dbDir);
-        db = builder.buildDatabase();
+        try {
+            db = builder.buildDatabase();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Test
