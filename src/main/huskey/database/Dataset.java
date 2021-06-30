@@ -17,52 +17,83 @@ public class Dataset {
     }
 
     public String[] getDataList() {
-        NodeList nodeList = this.root.getChildNodes();
-        String[] dataList = new String[nodeList.getLength()];
-        for (int i = 0; i < nodeList.getLength(); i++) {
-            Element data = (Element) nodeList.item(i);
-            dataList[i] = data.getAttribute("title");
-        }
-        return dataList;
+        int len = this.root.getChildNodes().getLength();
+
+        return this.processEachDataElem(new Callback<String[]>() {
+            final String[] result = new String[len];
+
+            @Override
+            public void method(Element dataElem, int i) {
+                result[i] = dataElem.getAttribute("title");
+            }
+
+            @Override
+            public String[] afterAll() { return result; }
+        });
     }
 
     public Data useData(String target) throws IllegalArgumentException {
-        NodeList nodeList = this.root.getChildNodes();
-        for (int i = 0; i < nodeList.getLength(); i++) {
-            Element data = (Element) nodeList.item(i);
-            String title = data.getAttribute("title");
-            if (Objects.equals(title, target)) {
-                return this.createData(data);
-            }
-        }
+        return this.processEachDataElem(new Callback<Data>() {
+            Data result;
 
-        throw new IllegalArgumentException(target + " の名前を持つデータが存在しません。");
+            @Override
+            public void method(Element dataElem, int _i) {
+                String title = dataElem.getAttribute("title");
+                if (Objects.equals(title, target)) {
+                    result = createData(dataElem);
+                }
+            }
+
+            @Override
+            public Data afterAll() {
+                if (result == null) {
+                    throw new IllegalArgumentException("データ " + target + " は存在しません。");
+                }
+                return result;
+            }
+        });
     }
 
     public void removeData(String target) {
-        NodeList nodeList = this.root.getChildNodes();
-        for (int i = nodeList.getLength() - 1; i >= 0; i--) {
-            Element data = (Element) nodeList.item(i);
-            String title = data.getAttribute("title");
-            if (Objects.equals(title, target)) {
-                this.root.removeChild(data);
-                return;
-            }
-        }
+        this.processEachDataElem(new Callback<Integer>() {
+            int status = 1;
 
-        throw new IllegalArgumentException(target + " の名前を持つデータが存在しません。");
+            @Override
+            public void method(Element dataElem, int _i) {
+                String title = dataElem.getAttribute("title");
+                if (Objects.equals(title, target)) {
+                    root.removeChild(dataElem);
+                    status = 0;
+                }
+            }
+
+            @Override
+            public Integer afterAll() {
+                if (status == 1) {
+                    throw new IllegalArgumentException("データ " + target + " は存在しません。");
+                }
+                return status;
+            }
+        });
     }
 
     public void setData(String target, Data data) {
+        try {
+            this.removeData(target);
+        } catch (IllegalArgumentException _e) {
+            // do nothing
+        }
+
+        this.root.appendChild(data.toElement(this.doc));
+    }
+
+    private <T> T processEachDataElem(Callback<T> callback) {
         NodeList nodeList = this.root.getChildNodes();
         for (int i = nodeList.getLength() - 1; i >= 0; i--) {
             Element elem = (Element) nodeList.item(i);
-            String title = elem.getAttribute("title");
-            if (Objects.equals(title, target)) {
-                this.removeData(target);
-            }
+            callback.method(elem, i);
         }
-        this.root.appendChild(data.toElement(this.doc));
+        return callback.afterAll();
     }
 
     private Data createData(Element data) {
@@ -87,5 +118,10 @@ public class Dataset {
             Integer.parseInt(elem.getAttribute("minutes")),
             Integer.parseInt(elem.getAttribute("seconds"))
         );
+    }
+
+    private interface Callback<T> {
+        void method(Element dataElem, int i);
+        T afterAll();
     }
 }
