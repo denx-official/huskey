@@ -66,15 +66,12 @@ public class Dataset {
         elem.getElementsByTagName("userName").item(0).setTextContent(data.userName());
         elem.getElementsByTagName("password").item(0).setTextContent(data.password());
         elem.getElementsByTagName("message").item(0).setTextContent(data.message());
-        Element updatedElem = (Element) elem.getElementsByTagName("updated").item(0);
 
         HkTime updated = data.updated();
-        updatedElem.setAttribute("year", String.valueOf(updated.year));
-        updatedElem.setAttribute("month", String.valueOf(updated.month));
-        updatedElem.setAttribute("date", String.valueOf(updated.date));
-        updatedElem.setAttribute("hours", String.valueOf(updated.hours));
-        updatedElem.setAttribute("minutes", String.valueOf(updated.minutes));
-        updatedElem.setAttribute("seconds", String.valueOf(updated.seconds));
+        Element updatedElem = (Element) elem.getElementsByTagName("updated").item(0);
+        for (String target: HkTime.iterator()) {
+            updatedElem.setAttribute(target, String.valueOf(updated.get(target)));
+        }
     }
 
     private Data createData(Element data) {
