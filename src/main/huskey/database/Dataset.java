@@ -16,6 +16,25 @@ public class Dataset {
         this.root = root;
     }
 
+    public boolean isDataExist(String target) {
+        return this.processEachDataElem(new Callback<Boolean>() {
+            boolean result = false;
+
+            @Override
+            public void method(Element dataElem, int i) {
+                String title = dataElem.getAttribute("title");
+                if (target.equals(title)) {
+                    result = true;
+                }
+            }
+
+            @Override
+            public Boolean afterAll() {
+                return result;
+            }
+        });
+    }
+
     public String[] getDataList() {
         int len = this.root.getChildNodes().getLength();
 
