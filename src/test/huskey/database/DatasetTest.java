@@ -84,4 +84,14 @@ class DatasetTest {
 
         fail("データが更新されていません。");
     }
+
+    @Test
+    void データの存在確認_true() {
+        assertTrue(dataset.isDataExist("Google"));
+    }
+
+    @Test
+    void データの存在確認_false() {
+        assertFalse(dataset.isDataExist("hoge"));
+    }
 }
