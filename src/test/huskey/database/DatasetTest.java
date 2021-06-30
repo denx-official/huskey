@@ -51,7 +51,7 @@ class DatasetTest {
     }
 
     @Test
-    void 新しいデータの追加() {
+    void データの追加_更新() {
         Data data = new Data(
             "huskey",
             "sample@sample.com",
@@ -63,14 +63,5 @@ class DatasetTest {
         dataset.setData("huskey", data);
 
         assertEquals("huskey", dataset.useData("huskey").title());
-    }
-
-    @Test
-    void データの更新() {
-        String newTitle = "Google2";
-        Data data = dataset.useData("Google");
-        data.update("title", newTitle);
-        dataset.setData("Google", data);
-        assertEquals(newTitle, dataset.useData(newTitle).title());
     }
 }
