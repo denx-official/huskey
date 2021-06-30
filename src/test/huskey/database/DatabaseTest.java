@@ -54,6 +54,6 @@ class DatabaseTest {
 
     @Test
     void データベースの書き出し() {
-        db.write();
+        // db.write();
     }
 }
