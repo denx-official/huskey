@@ -5,8 +5,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import java.util.Objects;
-
 public class Dataset {
     private final Document doc;
     private final Node root;
@@ -58,7 +56,7 @@ public class Dataset {
             @Override
             public void method(Element dataElem, int _i) {
                 String title = dataElem.getAttribute("title");
-                if (Objects.equals(title, target)) {
+                if (title.equals(target)) {
                     result = createData(dataElem);
                 }
             }
@@ -80,7 +78,7 @@ public class Dataset {
             @Override
             public void method(Element dataElem, int _i) {
                 String title = dataElem.getAttribute("title");
-                if (Objects.equals(title, target)) {
+                if (title.equals(target)) {
                     root.removeChild(dataElem);
                     status = 0;
                 }
