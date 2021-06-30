@@ -41,17 +41,6 @@ public class Data {
             default:
                 throw new IllegalArgumentException("引数 target には、title/userName/password/message のいずれかを指定してください。");
         }
-        updateTime();
-    }
-
-    private void updateTime() {
-        this._updated = new HkTime(
-            2021,
-            2,
-            2,
-            12,
-            0,
-            0
-        );
+        this._updated = HkTime.now();
     }
 }
