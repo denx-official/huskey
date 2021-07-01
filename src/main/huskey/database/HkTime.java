@@ -85,10 +85,15 @@ public class HkTime {
      * @author いっぺー
      */
     public Element toElement(Document doc, String tag) {
+        if (!(tag.equals("created") || tag.equals("updated"))) {
+            throw new IllegalArgumentException("引数 tag には、created/updated のどちらかを指定してください。");
+        }
+
         Element elem = doc.createElement(tag);
         for (String name: HkTime.iterator()) {
             elem.setAttribute(name, String.valueOf(this.get(name)));
         }
+
         return elem;
     }
 
