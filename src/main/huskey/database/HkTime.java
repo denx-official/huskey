@@ -98,7 +98,7 @@ public class HkTime {
      * @return String[]
      * @author いっぺー
      */
-    public static String[] iterator() {
+    private static String[] iterator() {
         return new String[] {"year", "month", "date", "hours", "minutes", "seconds"};
     }
 

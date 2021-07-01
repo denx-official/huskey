@@ -153,7 +153,7 @@ public class Data {
      * @return String[]
      * @author いっぺー
      */
-    public static String[] textIterator() {
+    private static String[] textIterator() {
         return new String[] {"userName", "password", "message"};
     }
 
@@ -163,7 +163,7 @@ public class Data {
      * @return String[]
      * @author いっぺー
      */
-    public static String[] timeIterator() {
+    private static String[] timeIterator() {
         return new String[] {"updated", "created"};
     }
 }
