@@ -5,6 +5,12 @@ import org.w3c.dom.Element;
 
 import java.time.LocalDateTime;
 
+/**
+ * Dataインスタンス内で保持する時間情報
+ *
+ * @see Data
+ * @author いっぺー
+ */
 public class HkTime {
     private final int year;
     private final int month;
@@ -22,6 +28,13 @@ public class HkTime {
         this.seconds = seconds;
     }
 
+    /**
+     * Element型からHkTimeインスタンスを生成
+     *
+     * @param element Element型の時間情報
+     * @return HkTime
+     * @author いっぺー
+     */
     public static HkTime newInstanceByElement(Element element) {
         return new HkTime(
             Integer.parseInt(element.getAttribute("year")),
@@ -33,6 +46,15 @@ public class HkTime {
         );
     }
 
+    /**
+     * 時間の取得
+     *
+     * <p>引数 target で指定した単位の情報をint型で取得する。
+     *
+     * @param target (year, month, date, hours, minutes, seconds)
+     * @return int
+     * @author いっぺー
+     */
     public int get(String target) {
         switch (target) {
             case "year":
@@ -52,6 +74,16 @@ public class HkTime {
         }
     }
 
+    /**
+     * HkTime型をElement型に変換
+     *
+     * <p>引数 tag で指定したタグ名でHkTime型をElement型に変換する。
+     *
+     * @param doc データベースにアクセスするためのDocumentインスタンス
+     * @param tag タグ名 (created, updated)
+     * @return Element
+     * @author いっぺー
+     */
     public Element toElement(Document doc, String tag) {
         Element elem = doc.createElement(tag);
         for (String name: HkTime.iterator()) {
@@ -60,10 +92,22 @@ public class HkTime {
         return elem;
     }
 
+    /**
+     * 時間情報を格納するElementを生成する際に使用するイテレーター
+     *
+     * @return String[]
+     * @author いっぺー
+     */
     public static String[] iterator() {
         return new String[] {"year", "month", "date", "hours", "minutes", "seconds"};
     }
 
+    /**
+     * 現在時刻をHkTime型で取得
+     *
+     * @return String[]
+     * @author いっぺー
+     */
     public static HkTime now() {
         LocalDateTime now = LocalDateTime.now();
         return new HkTime(
