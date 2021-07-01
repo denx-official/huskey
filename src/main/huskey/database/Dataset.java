@@ -31,12 +31,12 @@ public class Dataset {
      * @author いっぺー
      */
     public boolean isDataExist(String target) {
-        return this.processEachDataElem(new Callback<Boolean>() {
+        return this.processEachData(new Callback<Boolean>() {
             boolean result = false;
 
             @Override
-            public void method(HkElement dataHkElem, int i) {
-                if (dataHkElem.isTitleAttrEqualTo(target)) {
+            public void method(Data data, Element _dataElem, int _i) {
+                if (data.getText("title").equals(target)) {
                     result = true;
                 }
             }
@@ -57,12 +57,12 @@ public class Dataset {
     public String[] getDataList() {
         int len = this.root.getChildNodes().getLength();
 
-        return this.processEachDataElem(new Callback<String[]>() {
+        return this.processEachData(new Callback<String[]>() {
             final String[] result = new String[len];
 
             @Override
-            public void method(HkElement dataHkElem, int i) {
-                result[i] = dataHkElem.toElement().getAttribute("title");
+            public void method(Data data, Element _dataElem, int i) {
+                result[i] = data.toElement(doc).getAttribute("title");
             }
 
             @Override
@@ -78,13 +78,13 @@ public class Dataset {
      * @author いっぺー
      */
     public Data useData(String target) throws IllegalArgumentException {
-        return this.processEachDataElem(new Callback<Data>() {
+        return this.processEachData(new Callback<Data>() {
             Data result;
 
             @Override
-            public void method(HkElement dataHkElem, int _i) {
-                if (dataHkElem.isTitleAttrEqualTo(target)) {
-                    result = dataHkElem.toData();
+            public void method(Data data, Element _dataElem, int _i) {
+                if (data.getText("title").equals(target)) {
+                    result = data;
                 }
             }
 
@@ -104,13 +104,13 @@ public class Dataset {
      * @author いっぺー
      */
     public void removeData(String target) {
-        this.processEachDataElem(new Callback<Integer>() {
+        this.processEachData(new Callback<Integer>() {
             int status = 1;
 
             @Override
-            public void method(HkElement dataHkElem, int _i) {
-                if (dataHkElem.isTitleAttrEqualTo(target)) {
-                    root.removeChild(dataHkElem.toElement());
+            public void method(Data data, Element dataElem, int _i) {
+                if (data.getText("title").equals(target)) {
+                    root.removeChild(dataElem);
                     status = 0;
                 }
             }
@@ -154,11 +154,12 @@ public class Dataset {
         /**
          * 各データに対する処理
          *
-         * @param dataHkElem データ
+         * @param data Data型のデータ
+         * @param dataElem Element型のデータ
          * @param i データのインデックス
          * @author いっぺー
          */
-        void method(HkElement dataHkElem, int i);
+        void method(Data data, Element dataElem, int i);
 
         /**
          * method終了時の処理
@@ -177,13 +178,15 @@ public class Dataset {
      * 各メソッドが終了した際にCallback.afterAllを実行し、指定された型の値を返す。
      *
      * @param callback 各データに対する処理と、処理終了後に実行する関数
+     * @return T
      * @author いっぺー
      */
-    private <T> T processEachDataElem(Callback<T> callback) {
+    private <T> T processEachData(Callback<T> callback) {
         NodeList nodeList = this.root.getChildNodes();
         for (int i = nodeList.getLength() - 1; i >= 0; i--) {
-            Element elem = (Element) nodeList.item(i);
-            callback.method(new HkElement(elem), i);
+            Element dataElem = (Element) nodeList.item(i);
+            Data data = Data.newInstanceByElement(dataElem);
+            callback.method(data, dataElem, i);
         }
         return callback.afterAll();
     }

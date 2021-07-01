@@ -22,6 +22,17 @@ public class HkTime {
         this.seconds = seconds;
     }
 
+    public static HkTime newInstanceByElement(Element element) {
+        return new HkTime(
+            Integer.parseInt(element.getAttribute("year")),
+            Integer.parseInt(element.getAttribute("month")),
+            Integer.parseInt(element.getAttribute("date")),
+            Integer.parseInt(element.getAttribute("hours")),
+            Integer.parseInt(element.getAttribute("minutes")),
+            Integer.parseInt(element.getAttribute("seconds"))
+        );
+    }
+
     public int get(String target) {
         switch (target) {
             case "year":

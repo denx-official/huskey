@@ -20,6 +20,19 @@ public class Data {
         this._updated = updated;
     }
 
+    public static Data newInstanceByElement(Element element) {
+        Element createdElem = (Element) element.getElementsByTagName("created").item(0);
+        Element updatedElem = (Element) element.getElementsByTagName("updated").item(0);
+        return new Data(
+            element.getAttribute("title"),
+            element.getElementsByTagName("userName").item(0).getTextContent(),
+            element.getElementsByTagName("password").item(0).getTextContent(),
+            element.getElementsByTagName("message").item(0).getTextContent(),
+            HkTime.newInstanceByElement(createdElem),
+            HkTime.newInstanceByElement(updatedElem)
+        );
+    }
+
     public String getText(String target) {
         switch (target) {
             case "title":
