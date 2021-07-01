@@ -56,7 +56,7 @@ public class DatabaseBuilder {
      */
     public Database buildDatabase() throws FileNotFoundException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        File file = Paths.get(this.dbDir + this.dbName).toFile();
+        File file = Paths.get(this.dbDir + this.dbName + "/" + this.dbName + ".hkdb").toFile();
         try {
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document doc = builder.parse(file);
