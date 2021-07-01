@@ -101,9 +101,10 @@ public class Dataset {
     /**
      * データセットから対象のデータを削除
      *
+     * @exception IllegalArgumentException データがデータセット内に存在しなかった場合。
      * @author いっぺー
      */
-    public void removeData(String target) {
+    public void removeData(String target) throws IllegalArgumentException {
         this.processEachData(new Callback<Integer>() {
             int status = 1;
 
