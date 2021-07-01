@@ -57,7 +57,7 @@ public class Dataset {
             public void method(Element dataElem, int _i) {
                 String title = dataElem.getAttribute("title");
                 if (title.equals(target)) {
-                    result = createData(dataElem);
+                    result = elementToData(dataElem);
                 }
             }
 
@@ -113,7 +113,7 @@ public class Dataset {
         return callback.afterAll();
     }
 
-    private Data createData(Element data) {
+    private Data elementToData(Element data) {
         Element createdElem = (Element) data.getElementsByTagName("created").item(0);
         Element updatedElem = (Element) data.getElementsByTagName("updated").item(0);
         return new Data(
