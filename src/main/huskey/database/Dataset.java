@@ -19,9 +19,8 @@ public class Dataset {
             boolean result = false;
 
             @Override
-            public void method(Element dataElem, int i) {
-                String title = dataElem.getAttribute("title");
-                if (target.equals(title)) {
+            public void method(HkElement dataHkElem, int i) {
+                if (dataHkElem.isTitleAttrEqualTo(target)) {
                     result = true;
                 }
             }
@@ -40,8 +39,8 @@ public class Dataset {
             final String[] result = new String[len];
 
             @Override
-            public void method(Element dataElem, int i) {
-                result[i] = dataElem.getAttribute("title");
+            public void method(HkElement dataHkElem, int i) {
+                result[i] = dataHkElem.toElement().getAttribute("title");
             }
 
             @Override
@@ -54,10 +53,9 @@ public class Dataset {
             Data result;
 
             @Override
-            public void method(Element dataElem, int _i) {
-                String title = dataElem.getAttribute("title");
-                if (title.equals(target)) {
-                    result = elementToData(dataElem);
+            public void method(HkElement dataHkElem, int _i) {
+                if (dataHkElem.isTitleAttrEqualTo(target)) {
+                    result = dataHkElem.toData();
                 }
             }
 
@@ -76,10 +74,9 @@ public class Dataset {
             int status = 1;
 
             @Override
-            public void method(Element dataElem, int _i) {
-                String title = dataElem.getAttribute("title");
-                if (title.equals(target)) {
-                    root.removeChild(dataElem);
+            public void method(HkElement dataHkElem, int _i) {
+                if (dataHkElem.isTitleAttrEqualTo(target)) {
+                    root.removeChild(dataHkElem.toElement());
                     status = 0;
                 }
             }
@@ -105,7 +102,7 @@ public class Dataset {
     }
 
     private interface Callback<T> {
-        void method(Element dataElem, int i);
+        void method(HkElement dataHkElem, int i);
         T afterAll();
     }
 
@@ -113,32 +110,8 @@ public class Dataset {
         NodeList nodeList = this.root.getChildNodes();
         for (int i = nodeList.getLength() - 1; i >= 0; i--) {
             Element elem = (Element) nodeList.item(i);
-            callback.method(elem, i);
+            callback.method(new HkElement(elem), i);
         }
         return callback.afterAll();
-    }
-
-    private Data elementToData(Element data) {
-        Element createdElem = (Element) data.getElementsByTagName("created").item(0);
-        Element updatedElem = (Element) data.getElementsByTagName("updated").item(0);
-        return new Data(
-            data.getAttribute("title"),
-            data.getElementsByTagName("userName").item(0).getTextContent(),
-            data.getElementsByTagName("password").item(0).getTextContent(),
-            data.getElementsByTagName("message").item(0).getTextContent(),
-            this.elementToHkTime(createdElem),
-            this.elementToHkTime(updatedElem)
-        );
-    }
-
-    private HkTime elementToHkTime(Element elem) {
-        return new HkTime(
-            Integer.parseInt(elem.getAttribute("year")),
-            Integer.parseInt(elem.getAttribute("month")),
-            Integer.parseInt(elem.getAttribute("date")),
-            Integer.parseInt(elem.getAttribute("hours")),
-            Integer.parseInt(elem.getAttribute("minutes")),
-            Integer.parseInt(elem.getAttribute("seconds"))
-        );
     }
 }
