@@ -104,6 +104,11 @@ public class Dataset {
         this.root.appendChild(data.toElement(this.doc));
     }
 
+    private interface Callback<T> {
+        void method(Element dataElem, int i);
+        T afterAll();
+    }
+
     private <T> T processEachDataElem(Callback<T> callback) {
         NodeList nodeList = this.root.getChildNodes();
         for (int i = nodeList.getLength() - 1; i >= 0; i--) {
@@ -135,10 +140,5 @@ public class Dataset {
             Integer.parseInt(elem.getAttribute("minutes")),
             Integer.parseInt(elem.getAttribute("seconds"))
         );
-    }
-
-    private interface Callback<T> {
-        void method(Element dataElem, int i);
-        T afterAll();
     }
 }
