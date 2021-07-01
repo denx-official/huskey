@@ -8,6 +8,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Objects;
@@ -45,7 +46,25 @@ public class DatabaseBuilder {
      * @author いっぺー
      */
     public boolean isKeyMatched() throws FileNotFoundException {
-        return Objects.equals(this.masterKey, "sample");
+        File file = Paths.get(this.dbDir + this.dbName + "/hash").toFile();
+
+        if (!file.exists()) {
+            throw new FileNotFoundException("パスワードのハッシュ値が不明です。");
+        }
+
+        StringBuilder hash = new StringBuilder();
+        try {
+            int ch;
+            FileReader reader = new FileReader(file);
+            while ((ch = reader.read()) != -1) {
+                hash.append((char) ch);
+            }
+            reader.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return Objects.equals(this.masterKey, hash.toString());
     }
 
     /**
