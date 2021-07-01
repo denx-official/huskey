@@ -12,6 +12,11 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Objects;
 
+/**
+ * Databaseインスタンスを取得するAPI
+ *
+ * @author いっぺー
+ */
 public class DatabaseBuilder {
     private final String dbName;
     private final String masterKey;
@@ -23,14 +28,32 @@ public class DatabaseBuilder {
         this.dbDir = dbDir;
     }
 
+    /**
+     * 全データベースの名前を一覧で取得
+     *
+     * @return String[]
+     * @author いっぺー
+     */
     public static String[] showDBList() {
         return new String[] {"SampleDB"};
     }
 
+    /**
+     * masterKeyの照合
+     *
+     * @return boolean
+     * @author いっぺー
+     */
     public boolean isKeyMatched() throws FileNotFoundException {
         return Objects.equals(this.masterKey, "sample");
     }
 
+    /**
+     * Databaseインスタンスの構築
+     *
+     * @return Database
+     * @author いっぺー
+     */
     public Database buildDatabase() throws FileNotFoundException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         File file = Paths.get(this.dbDir + this.dbName).toFile();
