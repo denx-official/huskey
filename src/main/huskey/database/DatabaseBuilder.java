@@ -30,26 +30,6 @@ public class DatabaseBuilder {
     }
 
     /**
-     * 全データベースの名前を一覧で取得
-     *
-     * @return String[]
-     * @author いっぺー
-     */
-    public static String[] getDBList(String dbDir) {
-        File[] dbFiles = new File(dbDir).listFiles();
-        if (dbFiles == null) {
-            return new String[] {""};
-        }
-
-        String[] result = new String[dbFiles.length];
-        for (int i = 0; i < dbFiles.length; i++) {
-            result[i] = dbFiles[i].getName();
-        }
-
-        return result;
-    }
-
-    /**
      * masterKeyの照合
      *
      * @return boolean

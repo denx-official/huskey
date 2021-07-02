@@ -12,13 +12,6 @@ class DatabaseBuilderTest {
     private final String masterKey = "sample";
     private final String dbDir = "./target/test-classes/resources/database/";
 
-    @Test
-    void データベース名のリストを取得() {
-        String[] dbList = DatabaseBuilder.getDBList(dbDir);
-        String[] expect = {dbName};
-        assertArrayEquals(expect, dbList);
-    }
-
     @Nested
     class isKeyMatched {
         @Test

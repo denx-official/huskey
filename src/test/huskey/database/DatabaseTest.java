@@ -11,18 +11,25 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DatabaseTest {
     private Database db;
+    private final String dbName = "SampleDB";
+    private final String masterKey = "sample";
+    private final String dbDir = "./target/test-classes/resources/database/";
 
     @BeforeEach
     void setup() {
-        String dbName = "SampleDB";
-        String masterKey = "sample";
-        String dbDir = "./target/test-classes/resources/database/";
         DatabaseBuilder builder = new DatabaseBuilder(dbName, masterKey, dbDir);
         try {
             db = builder.buildDatabase();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Test
+    void データベース名のリストを取得() {
+        String[] dbList = Database.getDBList(dbDir);
+        String[] expect = {dbName};
+        assertArrayEquals(expect, dbList);
     }
 
     @Test

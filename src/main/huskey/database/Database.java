@@ -5,6 +5,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import javax.xml.xpath.*;
+import java.io.File;
 
 /**
  * データベース
@@ -24,6 +25,26 @@ public class Database {
         this.doc = doc;
         this.dbName = dbName;
         this.masterKey = masterKey;
+    }
+
+    /**
+     * 全データベースの名前を一覧で取得
+     *
+     * @return String[]
+     * @author いっぺー
+     */
+    public static String[] getDBList(String dbDir) {
+        File[] dbFiles = new File(dbDir).listFiles();
+        if (dbFiles == null) {
+            return new String[] {""};
+        }
+
+        String[] result = new String[dbFiles.length];
+        for (int i = 0; i < dbFiles.length; i++) {
+            result[i] = dbFiles[i].getName();
+        }
+
+        return result;
     }
 
     /**
