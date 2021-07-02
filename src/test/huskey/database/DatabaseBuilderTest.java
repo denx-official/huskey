@@ -14,7 +14,7 @@ class DatabaseBuilderTest {
 
     @Test
     void データベース名のリストを取得() {
-        String[] dbList = DatabaseBuilder.showDBList();
+        String[] dbList = DatabaseBuilder.getDBList(dbDir);
         String[] expect = {dbName};
         assertArrayEquals(expect, dbList);
     }

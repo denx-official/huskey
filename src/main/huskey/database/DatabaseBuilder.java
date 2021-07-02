@@ -35,8 +35,18 @@ public class DatabaseBuilder {
      * @return String[]
      * @author いっぺー
      */
-    public static String[] showDBList() {
-        return new String[] {"SampleDB"};
+    public static String[] getDBList(String dbDir) {
+        File[] dbFiles = new File(dbDir).listFiles();
+        if (dbFiles == null) {
+            return new String[] {""};
+        }
+
+        String[] result = new String[dbFiles.length];
+        for (int i = 0; i < dbFiles.length; i++) {
+            result[i] = dbFiles[i].getName();
+        }
+
+        return result;
     }
 
     /**
