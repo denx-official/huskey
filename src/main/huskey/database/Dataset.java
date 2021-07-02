@@ -3,7 +3,6 @@ package database;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 /**
  * データセット
@@ -11,6 +10,7 @@ import org.w3c.dom.NodeList;
  * <p>Databaseから取得することで、データセットの中身を操作することができる。
  *
  * @see Database
+ * @see ProcessEachData
  * @author いっぺー
  */
 public class Dataset {
@@ -31,21 +31,22 @@ public class Dataset {
      * @author いっぺー
      */
     public boolean isDataExist(String target) {
-        return this.processEachData(new Callback<Boolean>() {
-            boolean result = false;
+        ProcessEachData<Boolean> process = new ProcessEachData<Boolean>(this.root) {
+            boolean status = false;
 
             @Override
-            public void method(Data data, Element _dataElem, int _i) {
+            public void process(Data data, Element _dataElem, int _i) {
                 if (data.getText("title").equals(target)) {
-                    result = true;
+                    status = true;
+                    this.stopProcessing();
                 }
             }
 
             @Override
-            public Boolean afterAll() {
-                return result;
-            }
-        });
+            public Boolean afterAll() { return status; }
+        };
+
+        return process.run();
     }
 
     /**
@@ -55,19 +56,20 @@ public class Dataset {
      * @author いっぺー
      */
     public String[] getDataList() {
-        int len = this.root.getChildNodes().getLength();
-
-        return this.processEachData(new Callback<String[]>() {
+        ProcessEachData<String[]> process = new ProcessEachData<String[]>(this.root) {
+            final int len = this.root.getChildNodes().getLength();
             final String[] result = new String[len];
 
             @Override
-            public void method(Data data, Element _dataElem, int i) {
+            public void process(Data data, Element _dataElem, int i) {
                 result[i] = data.toElement(doc).getAttribute("title");
             }
 
             @Override
             public String[] afterAll() { return result; }
-        });
+        };
+
+        return process.run();
     }
 
     /**
@@ -78,13 +80,14 @@ public class Dataset {
      * @author いっぺー
      */
     public Data useData(String target) throws IllegalArgumentException {
-        return this.processEachData(new Callback<Data>() {
+        ProcessEachData<Data> process = new ProcessEachData<Data>(this.root) {
             Data result;
 
             @Override
-            public void method(Data data, Element _dataElem, int _i) {
+            public void process(Data data, Element _dataElem, int _i) {
                 if (data.getText("title").equals(target)) {
                     result = data;
+                    this.stopProcessing();
                 }
             }
 
@@ -95,7 +98,9 @@ public class Dataset {
                 }
                 return result;
             }
-        });
+        };
+
+        return process.run();
     }
 
     /**
@@ -105,14 +110,15 @@ public class Dataset {
      * @author いっぺー
      */
     public void removeData(String target) throws IllegalArgumentException {
-        this.processEachData(new Callback<Integer>() {
+        ProcessEachData<Integer> process = new ProcessEachData<Integer>(this.root) {
             int status = 1;
 
             @Override
-            public void method(Data data, Element dataElem, int _i) {
+            public void process(Data data, Element dataElem, int _i) {
                 if (data.getText("title").equals(target)) {
                     root.removeChild(dataElem);
                     status = 0;
+                    this.stopProcessing();
                 }
             }
 
@@ -123,7 +129,9 @@ public class Dataset {
                 }
                 return status;
             }
-        });
+        };
+
+        process.run();
     }
 
     /**
@@ -144,51 +152,5 @@ public class Dataset {
         }
 
         this.root.appendChild(data.toElement(this.doc));
-    }
-
-    /**
-     * processEachDataElemに渡すコールバック関数のインターフェース
-     *
-     * @author いっぺー
-     */
-    private interface Callback<T> {
-        /**
-         * 各データに対する処理
-         *
-         * @param data Data型のデータ
-         * @param dataElem Element型のデータ
-         * @param i データのインデックス
-         * @author いっぺー
-         */
-        void method(Data data, Element dataElem, int i);
-
-        /**
-         * method終了時の処理
-         *
-         * <p>戻り値はCallbackを宣言した際に指定した型となる。
-         *
-         * @author いっぺー
-         */
-        T afterAll();
-    }
-
-    /**
-     * 各データに対して指定した処理を実行
-     *
-     * <p>データセット内にある各データに対して、引数に渡したCallback.methodで処理を行う。
-     * 各メソッドが終了した際にCallback.afterAllを実行し、指定された型の値を返す。
-     *
-     * @param callback 各データに対する処理と、処理終了後に実行する関数
-     * @return T
-     * @author いっぺー
-     */
-    private <T> T processEachData(Callback<T> callback) {
-        NodeList nodeList = this.root.getChildNodes();
-        for (int i = nodeList.getLength() - 1; i >= 0; i--) {
-            Element dataElem = (Element) nodeList.item(i);
-            Data data = Data.newInstanceByElement(dataElem);
-            callback.method(data, dataElem, i);
-        }
-        return callback.afterAll();
     }
 }
