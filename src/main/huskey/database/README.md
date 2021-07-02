@@ -49,6 +49,18 @@ try {
 
 データベースの操作および書き出しを行うクラス。
 
+```java
+try {
+    Database db = builder.buildDatabase(); // データベースの構築
+    Dataset dataset = db.useDataset(); // データセットの取得
+} catch (FileNotFoundException e) {
+    // データベースが存在しなかったときの処理
+}
+
+// データベース名のリストを取得
+String[] dbList = Database.getDBList(GlobalConst.HUSKEY_DIR + "/database/");
+```
+
 ### Dataset
 
 データセットの操作を行うクラス。  
@@ -82,7 +94,7 @@ dataset.removeData("Google");
 ```java
 Document doc;
 
-// （doc の初期化）
+// ...
 
 ProcessEachData<T> process = new ProcessEachData<T>(doc) {
     @Override
