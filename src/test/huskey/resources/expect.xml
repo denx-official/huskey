@@ -3,7 +3,19 @@
 <!DOCTYPE database [
   <!ELEMENT database (name, config, dataset)>
   <!ELEMENT name (#PCDATA)>
-  <!ELEMENT config (#PCDATA)>
+
+  <!ELEMENT config (passLength*, charSet*, trials*)>
+  <!ELEMENT passLength (#PCDATA)>
+  <!ELEMENT charSet (#PCDATA)>
+  <!ELEMENT trials (#PCDATA)>
+  <!ATTLIST charSet
+    lowerCase CDATA #REQUIRED
+    upperCase CDATA #REQUIRED
+    number CDATA #REQUIRED
+    space CDATA #REQUIRED
+  >
+  <!ATTLIST trials deleteAfter CDATA #REQUIRED>
+
   <!ELEMENT dataset (data+)>
   <!ELEMENT data (userName, password, message, created, updated)>
   <!ATTLIST data title ID #REQUIRED>
