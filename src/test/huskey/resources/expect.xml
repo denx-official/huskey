@@ -1,21 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE database [
-    <!ELEMENT database (name, config, dataset)>
+    <!ELEMENT database (name, dataset)>
     <!ELEMENT name (#PCDATA)>
-
-    <!ELEMENT config (passLength*, charSet*, trials*)>
-    <!ELEMENT passLength (#PCDATA)>
-    <!ELEMENT charSet (#PCDATA)>
-    <!ELEMENT trials (#PCDATA)>
-    <!ATTLIST charSet
-        lowerCase CDATA #REQUIRED
-        upperCase CDATA #REQUIRED
-        number CDATA #REQUIRED
-        space CDATA #REQUIRED
-    >
-    <!ATTLIST trials deleteDBOnFailure CDATA #REQUIRED>
-
     <!ELEMENT dataset (data+)>
     <!ELEMENT data (userName, password, message, created, updated)>
     <!ATTLIST data title ID #REQUIRED>
@@ -44,7 +31,6 @@
 
 <database>
     <name>SampleDB</name>
-    <config/>
     <dataset>
         <data title="Google">
             <userName>sample@sample.com</userName>
