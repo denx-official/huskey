@@ -137,7 +137,7 @@ HkTime created = data.getTime("created");
 HkTime updated = data.getTime("updated");
 
 // データの更新
-data.update("password", "rTXm1ikZKI9bDUMzrKKU");
+data.set("password", "rTXm1ikZKI9bDUMzrKKU");
 ```
 
 #### HkTime

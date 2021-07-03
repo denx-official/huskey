@@ -102,7 +102,7 @@ public class Data {
      * @param newValue 新しい値
      * @author いっぺー
      */
-    public void update(String target, String newValue) {
+    public void set(String target, String newValue) {
         switch (target) {
             case "title":
                 this._title = newValue;

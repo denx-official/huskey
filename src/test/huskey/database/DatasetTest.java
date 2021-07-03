@@ -68,7 +68,7 @@ class DatasetTest {
     @Test
     void データの更新() {
         Data data = dataset.useData("Google");
-        data.update("title", "Google2");
+        data.set("title", "Google2");
         dataset.setData("Google", data);
 
         try {
