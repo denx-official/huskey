@@ -3,6 +3,7 @@ package database;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import utility.HuskeyException;
 
 /**
  * データセット
@@ -94,7 +95,7 @@ public class Dataset {
             @Override
             public Data afterAll() {
                 if (result == null) {
-                    throw new IllegalArgumentException("データ " + target + " は存在しません。");
+                    throw new HuskeyException("データ " + target + " は存在しません。");
                 }
                 return result;
             }
@@ -125,7 +126,7 @@ public class Dataset {
             @Override
             public Integer afterAll() {
                 if (status == 1) {
-                    throw new IllegalArgumentException("データ " + target + " は存在しません。");
+                    throw new HuskeyException("データ " + target + " は存在しません。");
                 }
                 return status;
             }
@@ -147,7 +148,7 @@ public class Dataset {
     public void setData(String target, Data data) {
         try {
             this.removeData(target);
-        } catch (IllegalArgumentException _e) {
+        } catch (HuskeyException _e) {
             // do nothing
         }
 

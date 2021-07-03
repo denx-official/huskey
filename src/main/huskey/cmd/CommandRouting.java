@@ -13,6 +13,7 @@ import cmd.removeCmd.RemoveCmd;
 import cmd.searchCmd.SearchCmd;
 import cmd.setCmd.SetCmd;
 import cmd.switchCmd.SwitchCmd;
+import utility.HuskeyException;
 
 /**
  * コマンドルーティング
@@ -31,10 +32,17 @@ public class CommandRouting extends Cmd {
      *
      * <p>commandの値によってコマンドを決定・実行する。
      *
-     * @exception IllegalArgumentException 該当するコマンドが存在しない場合
      * @author いっぺー
      */
     public void run() {
+        try {
+            this._run();
+        } catch (HuskeyException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    void _run() {
         Cmd cmd;
 
         switch (this.command) {
@@ -91,7 +99,7 @@ public class CommandRouting extends Cmd {
                 break;
 
             default:
-                throw new IllegalArgumentException("huskey: コマンド '" + this.command + "' は存在しません。コマンドの一覧は、'huskey help' によって確認できます。");
+                throw new HuskeyException("huskey: コマンド '" + this.command + "' は存在しません。コマンドの一覧は、'huskey help' によって確認できます。");
         }
 
         cmd.run();

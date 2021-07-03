@@ -4,8 +4,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Nested;
-
-import java.io.FileNotFoundException;
+import utility.HuskeyException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -34,7 +33,7 @@ class DatasetTest {
         String title = "Google";
         try {
             dataset.useData(title);
-        } catch (IllegalArgumentException _e) {
+        } catch (HuskeyException _e) {
             fail("データ " + title + " は存在しません。");
         }
     }
@@ -45,7 +44,7 @@ class DatasetTest {
 
         try {
             dataset.useData("Google");
-        } catch (IllegalArgumentException _e) {
+        } catch (HuskeyException _e) {
             return;
         }
 
@@ -74,7 +73,7 @@ class DatasetTest {
 
         try {
             dataset.useData("Google");
-        } catch (IllegalArgumentException _e) {
+        } catch (HuskeyException _e) {
             return;
         }
 

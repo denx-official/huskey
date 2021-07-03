@@ -2,7 +2,6 @@ package database;
 
 import org.junit.jupiter.api.*;
 
-import java.io.FileNotFoundException;
 import java.io.UncheckedIOException;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,13 +15,13 @@ class DatabaseBuilderTest {
     @Nested
     class isKeyMatched {
         @Test
-        void masterKeyの照合_true() throws FileNotFoundException {
+        void masterKeyの照合_true() {
             db = new DatabaseBuilder(dbName, masterKey, dbDir);
             assertTrue(db.isKeyMatched());
         }
 
         @Test
-        void masterKeyの照合_false() throws FileNotFoundException {
+        void masterKeyの照合_false() {
             db = new DatabaseBuilder(dbName, "sanple", dbDir);
             assertFalse(db.isKeyMatched());
         }
