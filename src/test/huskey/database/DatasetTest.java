@@ -18,12 +18,8 @@ class DatasetTest {
         String masterKey = "sample";
         String dbDir = "./target/test-classes/resources/database/";
         DatabaseBuilder builder = new DatabaseBuilder(dbName, masterKey, dbDir);
-        try {
-            Database db = builder.buildDatabase();
-            dataset = db.useDataset();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        Database db = builder.buildDatabase();
+        dataset = db.useDataset();
     }
 
     @Test

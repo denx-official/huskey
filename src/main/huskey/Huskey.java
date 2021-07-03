@@ -14,12 +14,6 @@ public class Huskey {
             sepArgs.getValues(),
             sepArgs.getOptions()
         );
-
-        try {
-            cr.run();
-        }
-        catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
+        cr.run();
     }
 }

@@ -79,7 +79,7 @@ public class Dataset {
      * @exception IllegalArgumentException データがデータセット内に存在しなかった場合。
      * @author いっぺー
      */
-    public Data useData(String target) throws IllegalArgumentException {
+    public Data useData(String target) {
         ProcessEachData<Data> process = new ProcessEachData<Data>(this.root) {
             Data result;
 
@@ -109,7 +109,7 @@ public class Dataset {
      * @exception IllegalArgumentException データがデータセット内に存在しなかった場合。
      * @author いっぺー
      */
-    public void removeData(String target) throws IllegalArgumentException {
+    public void removeData(String target) {
         ProcessEachData<Integer> process = new ProcessEachData<Integer>(this.root) {
             int status = 1;
 

@@ -3,6 +3,7 @@ package database;
 import org.junit.jupiter.api.*;
 
 import java.io.FileNotFoundException;
+import java.io.UncheckedIOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -49,12 +50,12 @@ class DatabaseBuilderTest {
 
         @Test
         void データベースが存在しなかった場合() {
-            assertThrows(FileNotFoundException.class, db::buildDatabase);
+            assertThrows(UncheckedIOException.class, db::buildDatabase);
         }
 
         @Test
         void ハッシュ化したファイルが存在しなかった場合() {
-            assertThrows(FileNotFoundException.class, db::isKeyMatched);
+            assertThrows(UncheckedIOException.class, db::isKeyMatched);
         }
     }
 }

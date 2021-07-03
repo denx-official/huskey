@@ -18,11 +18,7 @@ class DatabaseTest {
     @BeforeEach
     void setup() {
         DatabaseBuilder builder = new DatabaseBuilder(dbName, masterKey, dbDir);
-        try {
-            db = builder.buildDatabase();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        db = builder.buildDatabase();
     }
 
     @Test

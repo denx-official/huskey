@@ -7,9 +7,9 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.nio.file.Paths;
 import java.util.Objects;
 
@@ -35,12 +35,8 @@ public class DatabaseBuilder {
      * @return boolean
      * @author いっぺー
      */
-    public boolean isKeyMatched() throws FileNotFoundException {
+    public boolean isKeyMatched() {
         File file = Paths.get(this.dbDir + this.dbName + "/hash").toFile();
-
-        if (!file.exists()) {
-            throw new FileNotFoundException("パスワードのハッシュ値が不明です。");
-        }
 
         StringBuilder hash = new StringBuilder();
         try {
@@ -51,7 +47,7 @@ public class DatabaseBuilder {
             }
             reader.close();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new UncheckedIOException(e);
         }
 
         return Objects.equals(this.masterKey, hash.toString());
@@ -63,16 +59,16 @@ public class DatabaseBuilder {
      * @return Database
      * @author いっぺー
      */
-    public Database buildDatabase() throws FileNotFoundException {
+    public Database buildDatabase() {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         File file = Paths.get(this.dbDir + this.dbName + "/" + this.dbName + ".hkdb").toFile();
         try {
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document doc = builder.parse(file);
             return new Database(doc, this.dbName, this.masterKey);
-        } catch (FileNotFoundException e) {
-            throw e;
-        } catch (ParserConfigurationException | IOException | SAXException e) {
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        } catch (ParserConfigurationException | SAXException e) {
             throw new RuntimeException(e);
         }
     }

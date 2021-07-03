@@ -34,7 +34,7 @@ public class CommandRouting extends Cmd {
      * @exception IllegalArgumentException 該当するコマンドが存在しない場合
      * @author いっぺー
      */
-    public void run() throws IllegalArgumentException {
+    public void run() {
         Cmd cmd;
 
         switch (this.command) {
