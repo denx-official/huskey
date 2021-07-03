@@ -12,7 +12,7 @@
         number CDATA #REQUIRED
         space CDATA #REQUIRED
     >
-    <!ATTLIST trials deleteAfter CDATA #REQUIRED>
+    <!ATTLIST trials deleteDBOnFailure CDATA #REQUIRED>
 ]>
 
 <globalConfig>
@@ -36,7 +36,7 @@
 
     <!--
         パスワード入力の試行回数
-        試行回数が上限に達した時、データベースを削除するかをdeleteAfter属性（値: true/false）で指定できます。
+        試行回数が上限に達した時、データベースを削除するかをdeleteDBOnFailure属性（値: true/false）で指定できます。
     -->
-    <trials deleteAfter="false">2</trials>
+    <trials deleteDBOnFailure="false">2</trials>
 </globalConfig>

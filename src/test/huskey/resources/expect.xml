@@ -14,7 +14,7 @@
         number CDATA #REQUIRED
         space CDATA #REQUIRED
     >
-    <!ATTLIST trials deleteAfter CDATA #REQUIRED>
+    <!ATTLIST trials deleteDBOnFailure CDATA #REQUIRED>
 
     <!ELEMENT dataset (data+)>
     <!ELEMENT data (userName, password, message, created, updated)>

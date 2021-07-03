@@ -14,7 +14,7 @@ huskey では、複数の独立したデータベースによってパスワー�
         - passLength: 自動生成するパスワードの長さ
         - charSet: パスワードの自動生成に使用する文字/記号
         - trials: パスワード入力の試行回数
-            - deleteAfter: 試行回数が上限に達した時、データベースを削除するか否か
+            - deleteDBOnFailure: 試行回数が上限に達した時、データベースを削除するか否か
     - Dataset: 複数の Data の集合
         - Data
             - title: データの名前
