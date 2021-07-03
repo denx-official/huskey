@@ -21,7 +21,7 @@ import java.util.Objects;
  */
 public class DatabaseBuilder {
     private final String dbName;
-    private final String masterKey;
+    private String masterKey;
     private final String dbDir;
 
     public DatabaseBuilder(String dbName, String masterKey, String dbDir) {
@@ -52,6 +52,16 @@ public class DatabaseBuilder {
         }
 
         return Objects.equals(this.masterKey, hash.toString());
+    }
+
+    /**
+     * データベースの復号に使用するmasterKeyの更新
+     *
+     * @param newKey 新しいmasterKey
+     * @author いっぺー
+     */
+    void updatedMasterKey(String newKey) {
+        this.masterKey = newKey;
     }
 
     /**
