@@ -35,7 +35,7 @@ public class HkTime {
      * @return HkTime
      * @author いっぺー
      */
-    public static HkTime newInstanceByElement(Element element) {
+    static HkTime newInstanceByElement(Element element) {
         return new HkTime(
             Integer.parseInt(element.getAttribute("year")),
             Integer.parseInt(element.getAttribute("month")),
@@ -84,7 +84,7 @@ public class HkTime {
      * @return Element
      * @author いっぺー
      */
-    public Element toElement(Document doc, String tag) {
+    Element toElement(Document doc, String tag) {
         if (!(tag.equals("created") || tag.equals("updated"))) {
             throw new IllegalArgumentException("引数 tag には、created/updated のどちらかを指定してください。");
         }

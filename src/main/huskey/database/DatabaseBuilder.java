@@ -60,7 +60,7 @@ public class DatabaseBuilder {
      * @param newKey 新しいmasterKey
      * @author いっぺー
      */
-    void setMasterKey(String newKey) {
+    public void setMasterKey(String newKey) {
         this.masterKey = newKey;
     }
 

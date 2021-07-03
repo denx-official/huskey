@@ -36,7 +36,7 @@ public class Data {
      * @return Data
      * @author いっぺー
      */
-    public static Data newInstanceByElement(Element element) {
+    static Data newInstanceByElement(Element element) {
         Element createdElem = (Element) element.getElementsByTagName("created").item(0);
         Element updatedElem = (Element) element.getElementsByTagName("updated").item(0);
         return new Data(
@@ -129,7 +129,7 @@ public class Data {
      * @return Element
      * @author いっぺー
      */
-    public Element toElement(Document doc) {
+    Element toElement(Document doc) {
         Element dataElem = doc.createElement("data");
         dataElem.setAttribute("title", this.getText("title"));
 
