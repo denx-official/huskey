@@ -36,25 +36,53 @@ class DatabaseTest {
     }
 
     @Test
-    void コンフィグの取得() {}
+    void コンフィグの取得() {
+        try {
+            db.useConfig();
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
+    }
 
     @Test
-    void データセットの更新() {}
+    void データセットの更新() {
+        Dataset dataset = db.useDataset();
+        try {
+            db.setDataset(dataset);
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
+    }
 
     @Test
-    void コンフィグの更新() {}
+    void コンフィグの更新() {
+        Config config = db.useConfig();
+        try {
+            db.setConfig(config);
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
+    }
 
     @Test
-    void データベース名の変更() {}
+    void データベース名の変更() {
+        String expect = "SampleDB2";
+        db.setMasterKey(expect);
+        assertEquals(expect, db._getDBName());
+    }
 
     @Test
-    void masterKeyの更新() {}
-
-    @Test
-    void データベースのマージ() {} // 優先度_低
+    void masterKeyの更新() {
+        String expect = "sample2";
+        db.setMasterKey(expect);
+        assertEquals(expect, db._getMasterKey());
+    }
 
     @Test
     void データベースの書き出し() {
         // db.write();
     }
+
+    @Test
+    void データベースのマージ() {} // 優先度_低
 }
