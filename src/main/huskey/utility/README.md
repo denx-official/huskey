@@ -23,17 +23,8 @@ String masterKey = HiddenInput.read(databaseName);
 
 ## HuskeyException
 
-huskey実行時に発生しうる例外クラス。  
+huskey 実行時にユーザー側の不正な操作（例：コマンドライン引数が不正、masterKey の照合失敗など）が発生した時の例外クラス。  
 この例外は cmd.CommandRouting クラスの run メソッドで捕捉され、与えられたメッセージが標準エラーとして表示される。
-
-```java
-void doSomething() {
-    // ...
-    if (!status) {
-        throw new HuskeyException("（具体的なエラー内容）");
-    }
-}
-```
 
 ## SeparateArgs
 
