@@ -1,6 +1,7 @@
 package database;
 
 import org.junit.jupiter.api.*;
+import utility.HuskeyException;
 
 import java.io.UncheckedIOException;
 
@@ -49,7 +50,7 @@ class DatabaseBuilderTest {
 
         @Test
         void データベースが存在しなかった場合() {
-            assertThrows(UncheckedIOException.class, db::buildDatabase);
+            assertThrows(HuskeyException.class, db::buildDatabase);
         }
 
         @Test

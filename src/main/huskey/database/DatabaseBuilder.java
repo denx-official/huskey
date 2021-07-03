@@ -2,6 +2,7 @@ package database;
 
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
+import utility.HuskeyException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -62,13 +63,16 @@ public class DatabaseBuilder {
     public Database buildDatabase() {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         File file = Paths.get(this.dbDir + this.dbName + "/" + this.dbName + ".hkdb").toFile();
+
+        if (!file.exists()) {
+            throw new HuskeyException("データベース " + this.dbName + " は存在しません。");
+        }
+
         try {
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document doc = builder.parse(file);
             return new Database(doc, this.dbName, this.masterKey);
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
-        } catch (ParserConfigurationException | SAXException e) {
+        } catch (ParserConfigurationException | IOException | SAXException e) {
             throw new RuntimeException(e);
         }
     }
