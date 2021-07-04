@@ -4,6 +4,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Nested;
+import org.w3c.dom.NodeList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -89,5 +90,26 @@ class DatabaseTest {
     }
 
     @Test
+    void ノードの検索() {
+        NodeList nodeList = db.searchNodeList("/database");
+        if (nodeList.getLength() == 1) return;
+        fail();
+    }
+
+    @Test
     void データベースのマージ() {} // 優先度_低
+
+    @Nested
+    class 異常系 {
+        @Test
+        void 検索したノードが見つからなかった場合() {
+            try {
+                db.searchNodeList("/hoge");
+            } catch (IllegalArgumentException _e) {
+                return;
+            }
+
+            fail();
+        }
+    }
 }
