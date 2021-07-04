@@ -77,7 +77,7 @@ public class Dataset {
      * データセットから対象のデータを取得
      *
      * @return Data
-     * @exception IllegalArgumentException データがデータセット内に存在しなかった場合。
+     * @exception HuskeyException データがデータセット内に存在しなかった場合。
      * @author いっぺー
      */
     public Data useData(String target) {
@@ -107,7 +107,7 @@ public class Dataset {
     /**
      * データセットから対象のデータを削除
      *
-     * @exception IllegalArgumentException データがデータセット内に存在しなかった場合。
+     * @exception HuskeyException データがデータセット内に存在しなかった場合。
      * @author いっぺー
      */
     public void removeData(String target) {
