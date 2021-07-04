@@ -18,12 +18,10 @@ import java.io.File;
  */
 public class Database {
     private Document doc;
-    private String dbName;
     private String masterKey;
 
-    public Database(Document doc, String dbName, String masterKey) {
+    public Database(Document doc, String masterKey) {
         this.doc = doc;
-        this.dbName = dbName;
         this.masterKey = masterKey;
     }
 

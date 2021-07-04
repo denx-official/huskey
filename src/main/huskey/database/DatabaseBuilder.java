@@ -81,7 +81,7 @@ public class DatabaseBuilder {
         try {
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document doc = builder.parse(file);
-            return new Database(doc, this.dbName, this.masterKey);
+            return new Database(doc, this.masterKey);
         } catch (ParserConfigurationException | IOException | SAXException e) {
             throw new RuntimeException(e);
         }
