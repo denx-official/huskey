@@ -2,10 +2,8 @@ package cmd;
 
 import cmd.changeCmd.ChangeCmd;
 import cmd.databaseCmd.DatabaseCmd;
-import cmd.exportCmd.ExportCmd;
 import cmd.getCmd.GetCmd;
 import cmd.helpCmd.HelpCmd;
-import cmd.importCmd.ImportCmd;
 import cmd.initCmd.InitCmd;
 import cmd.listCmd.ListCmd;
 import cmd.mergeCmd.MergeCmd;
@@ -68,14 +66,6 @@ public class CommandRouting extends Cmd {
 
             case "merge":
                 cmd = new MergeCmd(this.command, this.values, this.options);
-                break;
-
-            case "export":
-                cmd = new ExportCmd(this.command, this.values, this.options);
-                break;
-
-            case "import":
-                cmd = new ImportCmd(this.command, this.values, this.options);
                 break;
 
             case "list":

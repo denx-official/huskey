@@ -45,8 +45,6 @@
 | huskey database --delete \<database>       | \<database> を削除する。                              |
 | huskey switch \<database>                  | 既定のデータベースを \<database> に変更する。         |
 | huskey merge \<database_1> (\<database_2>) | \<database_1> を \<database_2> にマージする。         |
-| huskey export (\<database>)                | \<database> をエクスポートする。                      |
-| huskey import \<exported_file>             | \<exported_file> をデータベースとしてインポートする。 |
 
 ### Dataset
 
