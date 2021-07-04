@@ -3,7 +3,7 @@ package database;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
-public abstract class DBChild {
+abstract class DBChild {
     protected final Document doc;
     protected final Node root;
 

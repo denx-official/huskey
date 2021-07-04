@@ -13,11 +13,11 @@ import org.w3c.dom.NodeList;
  * @see Dataset
  * @author いっぺー
  */
-public abstract class ProcessEachData<T> {
+abstract class ProcessEachData<T> {
     private boolean isStop = false;
     protected final Node root;
 
-    public ProcessEachData(Node root) {
+    ProcessEachData(Node root) {
         this.root = root;
     }
 
