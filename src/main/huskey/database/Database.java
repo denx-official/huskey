@@ -47,6 +47,7 @@ public class Database {
     /**
      * 全データベースの名前を一覧で取得
      *
+     * @param huskeyDir ドットフォルダーのディレクトリ
      * @return String[]
      * @author いっぺー
      */
@@ -64,20 +65,44 @@ public class Database {
         return result;
     }
 
+    /**
+     * データベース名の取得
+     *
+     * @return String
+     * @author いっぺー
+     */
     public String getDBName() {
         Node name = this.searchNodeList("/database/name").item(0);
         return name.getTextContent();
     }
 
+    /**
+     * データベース名の更新
+     *
+     * @param newDBName 新しいデータベース名
+     * @author いっぺー
+     */
     public void setDBName(String newDBName) {
         Node name = this.searchNodeList("/database/name").item(0);
         name.setTextContent(newDBName);
     }
 
-    public void setMasterKey(String masterKey) {
-        this.masterKey = masterKey;
+    /**
+     * データベースの暗号化に使用するmasterKeyの更新
+     *
+     * @param newKey 新しいmasterKey
+     * @author いっぺー
+     */
+    public void setMasterKey(String newKey) {
+        this.masterKey = newKey;
     }
 
+    /**
+     * masterKeyの取得（テスト用）
+     *
+     * @return String
+     * @author いっぺー
+     */
     String _getMasterKey() {
         return this.masterKey;
     }
@@ -85,9 +110,8 @@ public class Database {
     /**
      * データセットの取得
      *
-     * <p>データベースからデータセットを取得する。
-     *
      * @return Dataset
+     * @see Dataset
      * @author いっぺー
      */
     public Dataset useDataset() {
@@ -96,6 +120,13 @@ public class Database {
         return new Dataset(this.doc, root);
     }
 
+    /**
+     * コンフィグの取得
+     *
+     * @return Config
+     * @see Config
+     * @author いっぺー
+     */
     public Config useConfig() {
         NodeList dataset = this.searchNodeList("/database/config");
         Node root = dataset.item(0);
