@@ -11,16 +11,13 @@ import utility.HuskeyException;
  * <p>Databaseから取得することで、データセットの中身を操作することができる。
  *
  * @see Database
+ * @see DBChild
  * @see ProcessEachData
  * @author いっぺー
  */
-public class Dataset {
-    private final Document doc;
-    private final Node root;
-
+public class Dataset extends DBChild {
     public Dataset(Document doc, Node root) {
-        this.doc = doc;
-        this.root = root;
+        super(doc, root);
     }
 
     /**
