@@ -17,7 +17,7 @@ import java.io.File;
  * @author いっぺー
  */
 public class Database {
-    private Document doc;
+    private final Document doc;
     private String masterKey;
 
     public Database(Document doc, String masterKey) {
