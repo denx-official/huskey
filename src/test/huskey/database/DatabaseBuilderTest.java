@@ -8,7 +8,7 @@ import java.io.UncheckedIOException;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DatabaseBuilderTest {
-    private DatabaseBuilder db;
+    private DatabaseBuilder builder;
     private final String dbName = "SampleDB";
     private final String masterKey = "sample";
     private final String dbDir = "./target/test-classes/resources/database/";
@@ -17,14 +17,14 @@ class DatabaseBuilderTest {
     class isKeyMatched {
         @Test
         void masterKeyの照合_true() {
-            db = new DatabaseBuilder(dbName, masterKey, dbDir);
-            assertTrue(db.isKeyMatched());
+            builder = new DatabaseBuilder(dbName, masterKey, dbDir);
+            assertTrue(builder.isKeyMatched());
         }
 
         @Test
         void masterKeyの照合_false() {
-            db = new DatabaseBuilder(dbName, "sanple", dbDir);
-            assertFalse(db.isKeyMatched());
+            builder = new DatabaseBuilder(dbName, "sanple", dbDir);
+            assertFalse(builder.isKeyMatched());
         }
     }
 
@@ -32,9 +32,9 @@ class DatabaseBuilderTest {
     class buildDatabase {
         @Test
         void データベースの構築() {
-            db = new DatabaseBuilder(dbName, masterKey, dbDir);
+            builder = new DatabaseBuilder(dbName, masterKey, dbDir);
             try {
-                db.buildDatabase();
+                builder.buildDatabase();
             } catch (Exception e) {
                 fail(e.getMessage());
             }
@@ -45,17 +45,17 @@ class DatabaseBuilderTest {
     class 異常系 {
         @BeforeEach
         void setup() {
-            db = new DatabaseBuilder(dbName, masterKey, "./hoge/");
+            builder = new DatabaseBuilder(dbName, masterKey, "./hoge/");
         }
 
         @Test
         void データベースが存在しなかった場合() {
-            assertThrows(HuskeyException.class, db::buildDatabase);
+            assertThrows(HuskeyException.class, builder::buildDatabase);
         }
 
         @Test
         void ハッシュ化したファイルが存在しなかった場合() {
-            assertThrows(UncheckedIOException.class, db::isKeyMatched);
+            assertThrows(UncheckedIOException.class, builder::isKeyMatched);
         }
     }
 }
