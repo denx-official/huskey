@@ -55,6 +55,14 @@ public class Database {
         name.setTextContent(newDBName);
     }
 
+    public void setMasterKey(String masterKey) {
+        this.masterKey = masterKey;
+    }
+
+    String _getMasterKey() {
+        return this.masterKey;
+    }
+
     /**
      * データセットの取得
      *
