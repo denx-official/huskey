@@ -2,6 +2,7 @@ package database;
 
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
+import utility.GlobalConst;
 import utility.HuskeyException;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -24,7 +25,13 @@ public class DatabaseBuilder {
     private String masterKey;
     private final String huskeyDir;
 
-    public DatabaseBuilder(String dbName, String masterKey, String huskeyDir) {
+    public DatabaseBuilder(String dbName, String masterKey) {
+        this.dbName = dbName;
+        this.masterKey = masterKey;
+        this.huskeyDir = GlobalConst.HUSKEY_DIR;
+    }
+
+    DatabaseBuilder(String dbName, String masterKey, String huskeyDir) {
         this.dbName = dbName;
         this.masterKey = masterKey;
         this.huskeyDir = huskeyDir;

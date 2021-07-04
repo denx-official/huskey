@@ -3,6 +3,7 @@ package database;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import utility.GlobalConst;
 
 import javax.xml.xpath.*;
 import java.io.File;
@@ -19,9 +20,15 @@ import java.io.File;
 public class Database {
     private final Document doc;
     private String masterKey;
-    private String huskeyDir;
+    private final String huskeyDir;
 
-    public Database(Document doc, String masterKey, String huskeyDir) {
+    public Database(Document doc, String masterKey) {
+        this.doc = doc;
+        this.masterKey = masterKey;
+        this.huskeyDir = GlobalConst.HUSKEY_DIR;
+    }
+
+    Database(Document doc, String masterKey, String huskeyDir) {
         this.doc = doc;
         this.masterKey = masterKey;
         this.huskeyDir = huskeyDir;
@@ -33,7 +40,17 @@ public class Database {
      * @return String[]
      * @author いっぺー
      */
-    public static String[] getDBList(String huskeyDir) {
+    public static String[] getDBList() {
+        return Database.getDBList(GlobalConst.HUSKEY_DIR);
+    }
+
+    /**
+     * 全データベースの名前を一覧で取得
+     *
+     * @return String[]
+     * @author いっぺー
+     */
+    static String[] getDBList(String huskeyDir) {
         File[] dbFiles = new File(huskeyDir + "database/").listFiles();
         if (dbFiles == null) {
             return new String[] {""};

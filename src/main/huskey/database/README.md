@@ -31,7 +31,7 @@ Database インスタンスを取得するためのクラス。
 masterKey の照合、データベースの読み込み／復号を行う。
 
 ```java
-DatabaseBuilder builder = new DatabaseBuilder(dbName, masterKey, huskeyDir);
+DatabaseBuilder builder = new DatabaseBuilder(dbName, masterKey);
 
 if (!builder.isKeyMatched()) {
     // 不正なパスワードが入力されたときの処理
@@ -57,7 +57,7 @@ try {
 }
 
 // データベース名のリストを取得
-String[] dbList = Database.getDBList(GlobalConst.HUSKEY_DIR + "/database/");
+String[] dbList = Database.getDBList();
 ```
 
 ### Dataset
