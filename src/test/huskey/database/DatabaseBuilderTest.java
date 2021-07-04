@@ -34,7 +34,7 @@ class DatabaseBuilderTest {
         void データベースの構築() {
             builder = new DatabaseBuilder(dbName, masterKey, dbDir);
             try {
-                builder.buildDatabase();
+                Database _db = builder.buildDatabase();
             } catch (Exception e) {
                 fail(e.getMessage());
             }

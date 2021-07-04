@@ -32,7 +32,7 @@ class DatasetTest {
     void Dataの取得() {
         String title = "Google";
         try {
-            dataset.useData(title);
+            Data _data = dataset.useData(title);
         } catch (HuskeyException _e) {
             fail("データ " + title + " は存在しません。");
         }

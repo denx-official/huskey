@@ -29,7 +29,7 @@ class DatabaseTest {
     @Test
     void データセットの取得() {
         try {
-            db.useDataset();
+            Dataset _dataset = db.useDataset();
         } catch (Exception e) {
             fail(e.getMessage());
         }
@@ -38,7 +38,7 @@ class DatabaseTest {
     @Test
     void コンフィグの取得() {
         try {
-            db.useConfig();
+            Config _config = db.useConfig();
         } catch (Exception e) {
             fail(e.getMessage());
         }
