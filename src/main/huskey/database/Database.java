@@ -45,6 +45,16 @@ public class Database {
         return result;
     }
 
+    public String getDBName() {
+        Node name = this.searchNodeList("/database/name").item(0);
+        return name.getTextContent();
+    }
+
+    public void setDBName(String newDBName) {
+        Node name = this.searchNodeList("/database/name").item(0);
+        name.setTextContent(newDBName);
+    }
+
     /**
      * データセットの取得
      *
