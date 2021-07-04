@@ -28,6 +28,25 @@ class DatabaseTest {
     }
 
     @Test
+    void データベース名の取得() {
+        assertEquals(dbName, db.getDBName());
+    }
+
+    @Test
+    void データベース名の変更() {
+        String expect = "SampleDB2";
+        db.setDBName(expect);
+        assertEquals(expect, db.getDBName());
+    }
+
+    @Test
+    void masterKeyの更新() {
+        String expect = "sample2";
+        db.setMasterKey(expect);
+        assertEquals(expect, db._getMasterKey());
+    }
+
+    @Test
     void データセットの取得() {
         try {
             Dataset _dataset = db.useDataset();
@@ -66,28 +85,12 @@ class DatabaseTest {
     }
 
     @Test
-    void データベース名の取得() {
-        assertEquals(dbName, db.getDBName());
-    }
-
-    @Test
-    void データベース名の変更() {
-        String expect = "SampleDB2";
-        db.setDBName(expect);
-        assertEquals(expect, db.getDBName());
-    }
-
-    @Test
-    void masterKeyの更新() {
-        String expect = "sample2";
-        db.setMasterKey(expect);
-        assertEquals(expect, db._getMasterKey());
-    }
-
-    @Test
     void データベースの書き出し() {
         // db.write();
     }
+
+    @Test
+    void データベースのマージ() {} // 優先度_低
 
     @Test
     void ノードの検索() {
@@ -95,9 +98,6 @@ class DatabaseTest {
         if (nodeList.getLength() == 1) return;
         fail();
     }
-
-    @Test
-    void データベースのマージ() {} // 優先度_低
 
     @Nested
     class 異常系 {
