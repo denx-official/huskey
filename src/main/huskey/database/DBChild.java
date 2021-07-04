@@ -3,11 +3,11 @@ package database;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
-abstract class DBChild {
+public abstract class DBChild {
     protected final Document doc;
     protected final Node root;
 
-    DBChild(Document doc, Node root) {
+    public DBChild(Document doc, Node root) {
         this.doc = doc;
         this.root = root;
     }

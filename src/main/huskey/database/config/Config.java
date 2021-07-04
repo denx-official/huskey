@@ -1,5 +1,6 @@
-package database;
+package database.config;
 
+import database.DBChild;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
