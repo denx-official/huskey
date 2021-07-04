@@ -32,7 +32,7 @@ Database インスタンスを取得するためのクラス。
 masterKey の照合、データベースの読み込み／復号を行う。
 
 ```java
-DatabaseBuilder builder = new DatabaseBuilder(dbName, masterKey, dbDir);
+DatabaseBuilder builder = new DatabaseBuilder(dbName, masterKey, huskeyDir);
 
 if (!builder.isKeyMatched()) {
     // 不正なパスワードが入力されたときの処理

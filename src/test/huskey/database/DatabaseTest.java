@@ -12,17 +12,17 @@ class DatabaseTest {
     private Database db;
     private final String dbName = "SampleDB";
     private final String masterKey = "sample";
-    private final String dbDir = "./target/test-classes/resources/database/";
+    private final String huskeyDir = "./target/test-classes/resources/";
 
     @BeforeEach
     void setup() {
-        DatabaseBuilder builder = new DatabaseBuilder(dbName, masterKey, dbDir);
+        DatabaseBuilder builder = new DatabaseBuilder(dbName, masterKey, huskeyDir);
         db = builder.buildDatabase();
     }
 
     @Test
     void データベース名のリストを取得() {
-        String[] dbList = Database.getDBList(dbDir);
+        String[] dbList = Database.getDBList(huskeyDir);
         String[] expect = {dbName};
         assertArrayEquals(expect, dbList);
     }

@@ -22,12 +22,12 @@ import java.util.Objects;
 public class DatabaseBuilder {
     private final String dbName;
     private String masterKey;
-    private final String dbDir;
+    private final String huskeyDir;
 
-    public DatabaseBuilder(String dbName, String masterKey, String dbDir) {
+    public DatabaseBuilder(String dbName, String masterKey, String huskeyDir) {
         this.dbName = dbName;
         this.masterKey = masterKey;
-        this.dbDir = dbDir;
+        this.huskeyDir = huskeyDir;
     }
 
     /**
@@ -37,7 +37,8 @@ public class DatabaseBuilder {
      * @author いっぺー
      */
     public boolean isKeyMatched() {
-        File file = Paths.get(this.dbDir + this.dbName + "/hash").toFile();
+        String path = this.huskeyDir + "/database/" + this.dbName + "/hash";
+        File file = Paths.get(path).toFile();
 
         StringBuilder hash = new StringBuilder();
         try {
@@ -72,7 +73,8 @@ public class DatabaseBuilder {
      */
     public Database buildDatabase() {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        File file = Paths.get(this.dbDir + this.dbName + "/" + this.dbName + ".hkdb").toFile();
+        String path = this.huskeyDir + "/database/" + this.dbName + "/" + this.dbName + ".hkdb";
+        File file = Paths.get(path).toFile();
 
         if (!file.exists()) {
             throw new HuskeyException("データベース " + this.dbName + " は存在しません。");
@@ -81,7 +83,7 @@ public class DatabaseBuilder {
         try {
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document doc = builder.parse(file);
-            return new Database(doc, this.masterKey);
+            return new Database(doc, this.masterKey, this.huskeyDir);
         } catch (ParserConfigurationException | IOException | SAXException e) {
             throw new RuntimeException(e);
         }

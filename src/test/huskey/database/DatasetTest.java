@@ -15,8 +15,8 @@ class DatasetTest {
     void setup() {
         String dbName = "SampleDB";
         String masterKey = "sample";
-        String dbDir = "./target/test-classes/resources/database/";
-        DatabaseBuilder builder = new DatabaseBuilder(dbName, masterKey, dbDir);
+        String huskeyDir = "./target/test-classes/resources/";
+        DatabaseBuilder builder = new DatabaseBuilder(dbName, masterKey, huskeyDir);
         Database db = builder.buildDatabase();
         dataset = db.useDataset();
     }

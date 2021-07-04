@@ -19,10 +19,12 @@ import java.io.File;
 public class Database {
     private final Document doc;
     private String masterKey;
+    private String huskeyDir;
 
-    public Database(Document doc, String masterKey) {
+    public Database(Document doc, String masterKey, String huskeyDir) {
         this.doc = doc;
         this.masterKey = masterKey;
+        this.huskeyDir = huskeyDir;
     }
 
     /**
@@ -31,8 +33,8 @@ public class Database {
      * @return String[]
      * @author いっぺー
      */
-    public static String[] getDBList(String dbDir) {
-        File[] dbFiles = new File(dbDir).listFiles();
+    public static String[] getDBList(String huskeyDir) {
+        File[] dbFiles = new File(huskeyDir + "database/").listFiles();
         if (dbFiles == null) {
             return new String[] {""};
         }

@@ -11,19 +11,19 @@ class DatabaseBuilderTest {
     private DatabaseBuilder builder;
     private final String dbName = "SampleDB";
     private final String masterKey = "sample";
-    private final String dbDir = "./target/test-classes/resources/database/";
+    private final String huskeyDir = "./target/test-classes/resources/";
 
     @Nested
     class isKeyMatched {
         @Test
         void masterKeyの照合_true() {
-            builder = new DatabaseBuilder(dbName, masterKey, dbDir);
+            builder = new DatabaseBuilder(dbName, masterKey, huskeyDir);
             assertTrue(builder.isKeyMatched());
         }
 
         @Test
         void masterKeyの照合_false() {
-            builder = new DatabaseBuilder(dbName, "sanple", dbDir);
+            builder = new DatabaseBuilder(dbName, "sanple", huskeyDir);
             assertFalse(builder.isKeyMatched());
         }
     }
@@ -32,7 +32,7 @@ class DatabaseBuilderTest {
     class buildDatabase {
         @Test
         void データベースの構築() {
-            builder = new DatabaseBuilder(dbName, masterKey, dbDir);
+            builder = new DatabaseBuilder(dbName, masterKey, huskeyDir);
             try {
                 Database _db = builder.buildDatabase();
             } catch (Exception e) {

@@ -41,7 +41,7 @@ huskey 実行時にユーザー側の不正な操作（例：コマンドライ�
 
 ```java
 void doSomething() {
-    DatabaseBuilder builder = new DatabaseBuilder(dbName, masterKey, dbDir);
+    DatabaseBuilder builder = new DatabaseBuilder(dbName, masterKey, huskeyDir);
 
     if (!builder.isKeyMatched()) {
         throw new HuskeyException("データベース " + dbName + " のパスワードが正しくありません。");
