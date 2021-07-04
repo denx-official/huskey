@@ -79,6 +79,12 @@ public class Database {
         return new Dataset(this.doc, root);
     }
 
+    public Config useConfig() {
+        NodeList dataset = this.searchNodeList("/database/config");
+        Node root = dataset.item(0);
+        return new Config(this.doc, root);
+    }
+
     /**
      * ノードの検索
      *
