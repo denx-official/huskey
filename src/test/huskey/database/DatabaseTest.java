@@ -65,6 +65,11 @@ class DatabaseTest {
     }
 
     @Test
+    void データベース名の取得() {
+        assertEquals(dbName, db.getDBName());
+    }
+
+    @Test
     void データベース名の変更() {
         String expect = "SampleDB2";
         db.setDBName(expect);
