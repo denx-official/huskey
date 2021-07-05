@@ -1,6 +1,7 @@
 package database;
 
 import database.config.Config;
+import database.dataset.Data;
 import database.dataset.Dataset;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -67,12 +68,16 @@ class DatabaseTest {
 
     @Test
     void データセットの更新() {
-        Dataset dataset = db.useDataset();
-        try {
+        {
+            Dataset dataset = db.useDataset();
+            Data data = dataset.useData("Google");
+            data.set("title", "Google2");
+            dataset.setData("Google", data);
             db.setDataset(dataset);
-        } catch (Exception e) {
-            fail(e.getMessage());
         }
+
+        Dataset dataset = db.useDataset();
+        dataset.useData("Google2");
     }
 
     @Test
