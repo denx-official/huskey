@@ -135,6 +135,20 @@ public class Database {
         return new Config(this.doc, root);
     }
 
+    public void setDataset(Dataset dataset) {
+        Node db = this.searchNodeList("/database").item(0);
+        Node oldDataset = this.searchNodeList("/database/dataset").item(0);
+        db.removeChild(oldDataset);
+        db.appendChild(dataset.root);
+    }
+
+    public void setConfig(Config config) {
+        Node db = this.searchNodeList("/database").item(0);
+        Node oldConfig = this.searchNodeList("/database/config").item(0);
+        db.removeChild(oldConfig);
+        db.appendChild(config.root);
+    }
+
     /**
      * ノードの検索
      *
