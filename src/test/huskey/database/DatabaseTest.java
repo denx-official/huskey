@@ -6,7 +6,7 @@ import database.dataset.Dataset;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Nested;
-import org.w3c.dom.NodeList;
+import org.w3c.dom.Node;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -100,9 +100,7 @@ class DatabaseTest {
 
     @Test
     void ノードの検索() {
-        NodeList nodeList = db.searchNodeList("/database");
-        if (nodeList.getLength() == 1) return;
-        fail();
+        Node _node = db.searchNode("/database");
     }
 
     @Nested
@@ -110,7 +108,7 @@ class DatabaseTest {
         @Test
         void 検索したノードが見つからなかった場合() {
             try {
-                db.searchNodeList("/hoge");
+                db.searchNode("/hoge");
             } catch (IllegalArgumentException _e) {
                 return;
             }

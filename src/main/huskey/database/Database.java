@@ -74,7 +74,7 @@ public class Database {
      * @author いっぺー
      */
     public String getDBName() {
-        Node name = this.searchNodeList("/database/name").item(0);
+        Node name = this.searchNode("/database/name");
         return name.getTextContent();
     }
 
@@ -85,7 +85,7 @@ public class Database {
      * @author いっぺー
      */
     public void setDBName(String newDBName) {
-        Node name = this.searchNodeList("/database/name").item(0);
+        Node name = this.searchNode("/database/name");
         name.setTextContent(newDBName);
     }
 
@@ -121,7 +121,7 @@ public class Database {
      */
     @SuppressWarnings("unchecked")
     public <T extends DBChild> T useDBChild(String target) {
-        Node child = this.searchNodeList("/database/" + target).item(0);
+        Node child = this.searchNode("/database/" + target);
 
         switch (target) {
             case "dataset":
@@ -154,8 +154,8 @@ public class Database {
             throw new IllegalArgumentException("引数 target の内容と引数 child の型が矛盾しています。");
         }
 
-        Node db = this.searchNodeList("/database").item(0);
-        Node oldChild = this.searchNodeList("/database/" + target).item(0);
+        Node db = this.searchNode("/database");
+        Node oldChild = this.searchNode("/database/" + target);
         db.removeChild(oldChild);
         db.appendChild(child.root);
     }
@@ -166,10 +166,10 @@ public class Database {
      * <p>XPathを用いてDocumentを検索する。
      *
      * @param expression 検索条件
-     * @return NodeList
+     * @return Node
      * @author いっぺー
      */
-    NodeList searchNodeList(String expression) {
+    Node searchNode(String expression) {
         XPath xpath = XPathFactory.newInstance().newXPath();
         try {
             XPathExpression expr = xpath.compile(expression);
@@ -179,7 +179,7 @@ public class Database {
                 throw new IllegalArgumentException("該当するノードが存在しません。");
             }
 
-            return nodeList;
+            return nodeList.item(0);
         } catch (XPathExpressionException e) {
             throw new RuntimeException(e);
         }
