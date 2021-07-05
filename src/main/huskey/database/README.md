@@ -51,7 +51,7 @@ try {
 ```java
 try {
     Database db = builder.buildDatabase(); // データベースの構築
-    Dataset dataset = db.useDataset(); // データセットの取得
+    Dataset dataset = db.useDBChild("dataset"); // データセットの取得
 } catch (FileNotFoundException e) {
     // データベースが存在しなかったときの処理
 }
@@ -67,7 +67,7 @@ Database の `useDataset` メソッドからインスタンスを取得できる
 
 ```java
 // データセットの取得
-Dataset dataset = db.useDataset();
+Dataset dataset = db.useDBChild("dataset");
 
 // データセット内にある全データの名前を取得
 String[] dataList = dataset.getDataList();

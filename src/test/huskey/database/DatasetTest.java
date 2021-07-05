@@ -19,7 +19,7 @@ class DatasetTest {
         String huskeyDir = "./target/test-classes/resources/";
         DatabaseBuilder builder = new DatabaseBuilder(dbName, masterKey, huskeyDir);
         Database db = builder.buildDatabase();
-        dataset = db.useDataset();
+        dataset = db.useDBChild("dataset");
     }
 
     @Test

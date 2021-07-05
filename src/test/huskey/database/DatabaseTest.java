@@ -51,7 +51,7 @@ class DatabaseTest {
     @Test
     void データセットの取得() {
         try {
-            Dataset _dataset = db.useDataset();
+            Dataset _dataset = db.useDBChild("dataset");
         } catch (Exception e) {
             fail(e.getMessage());
         }
@@ -60,7 +60,7 @@ class DatabaseTest {
     @Test
     void コンフィグの取得() {
         try {
-            Config _config = db.useConfig();
+            Config _config = db.useDBChild("config");
         } catch (Exception e) {
             fail(e.getMessage());
         }
@@ -69,20 +69,20 @@ class DatabaseTest {
     @Test
     void データセットの更新() {
         {
-            Dataset dataset = db.useDataset();
+            Dataset dataset = db.useDBChild("dataset");
             Data data = dataset.useData("Google");
             data.set("title", "Google2");
             dataset.setData("Google", data);
             db.setDataset(dataset);
         }
 
-        Dataset dataset = db.useDataset();
+        Dataset dataset = db.useDBChild("dataset");
         dataset.useData("Google2");
     }
 
     @Test
     void コンフィグの更新() {
-        Config config = db.useConfig();
+        Config config = db.useDBChild("config");
         try {
             db.setConfig(config);
         } catch (Exception e) {
