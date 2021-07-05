@@ -148,6 +148,12 @@ public class Database {
             throw new IllegalArgumentException("引数 target の値は dataset/config のどちらかを指定してください。");
         }
 
+        if ((target.equals("dataset") && child.getClass() != Dataset.class) ||
+            (target.equals("config") && child.getClass() != Config.class)
+        ) {
+            throw new IllegalArgumentException("引数 target の内容と引数 child の型が矛盾しています。");
+        }
+
         Node db = this.searchNodeList("/database").item(0);
         Node oldChild = this.searchNodeList("/database/" + target).item(0);
         db.removeChild(oldChild);
