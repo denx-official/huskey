@@ -4,10 +4,8 @@ import database.config.Config;
 import database.dataset.Dataset;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import utility.GlobalConst;
 
-import javax.xml.xpath.*;
 import java.io.File;
 
 /**
@@ -19,19 +17,18 @@ import java.io.File;
  * @see DatabaseBuilder
  * @author いっぺー
  */
-public class Database {
-    private final Document doc;
+public class Database extends DBOriginSystem {
     private String masterKey;
     private final String huskeyDir;
 
     public Database(Document doc, String masterKey) {
-        this.doc = doc;
+        super(doc);
         this.masterKey = masterKey;
         this.huskeyDir = GlobalConst.HUSKEY_DIR;
     }
 
     Database(Document doc, String masterKey, String huskeyDir) {
-        this.doc = doc;
+        super(doc);
         this.masterKey = masterKey;
         this.huskeyDir = huskeyDir;
     }
@@ -158,30 +155,5 @@ public class Database {
         Node oldChild = this.searchNode("/database/" + target);
         db.removeChild(oldChild);
         db.appendChild(child.root);
-    }
-
-    /**
-     * ノードの検索
-     *
-     * <p>XPathを用いてDocumentを検索する。
-     *
-     * @param expression 検索条件
-     * @return Node
-     * @author いっぺー
-     */
-    Node searchNode(String expression) {
-        XPath xpath = XPathFactory.newInstance().newXPath();
-        try {
-            XPathExpression expr = xpath.compile(expression);
-            NodeList nodeList = (NodeList) expr.evaluate(this.doc, XPathConstants.NODESET);
-
-            if (nodeList.getLength() == 0) {
-                throw new IllegalArgumentException("該当するノードが存在しません。");
-            }
-
-            return nodeList.item(0);
-        } catch (XPathExpressionException e) {
-            throw new RuntimeException(e);
-        }
     }
 }
