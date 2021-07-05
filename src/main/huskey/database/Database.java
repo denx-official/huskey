@@ -133,18 +133,15 @@ public class Database {
         }
     }
 
-    public void setDataset(Dataset dataset) {
-        Node db = this.searchNodeList("/database").item(0);
-        Node oldDataset = this.searchNodeList("/database/dataset").item(0);
-        db.removeChild(oldDataset);
-        db.appendChild(dataset.root);
-    }
+    public <T extends DBChild> void setDBChild(String target, T child) {
+        if (!(target.equals("dataset") || target.equals("config"))) {
+            throw new IllegalArgumentException("引数 target の値は dataset/config のどちらかを指定してください。");
+        }
 
-    public void setConfig(Config config) {
         Node db = this.searchNodeList("/database").item(0);
-        Node oldConfig = this.searchNodeList("/database/config").item(0);
-        db.removeChild(oldConfig);
-        db.appendChild(config.root);
+        Node oldChild = this.searchNodeList("/database/" + target).item(0);
+        db.removeChild(oldChild);
+        db.appendChild(child.root);
     }
 
     /**

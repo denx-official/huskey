@@ -73,7 +73,7 @@ class DatabaseTest {
             Data data = dataset.useData("Google");
             data.set("title", "Google2");
             dataset.setData("Google", data);
-            db.setDataset(dataset);
+            db.setDBChild("dataset", dataset);
         }
 
         Dataset dataset = db.useDBChild("dataset");
@@ -84,7 +84,7 @@ class DatabaseTest {
     void コンフィグの更新() {
         Config config = db.useDBChild("config");
         try {
-            db.setConfig(config);
+            db.setDBChild("config", config);
         } catch (Exception e) {
             fail(e.getMessage());
         }
