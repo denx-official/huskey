@@ -110,29 +110,27 @@ public class Database {
     }
 
     /**
-     * データセットの取得
+     * データセット/コンフィグの取得
      *
-     * @return Dataset
+     * @param target "dataset" or "config"
+     * @return T extends DBChild (Dataset, Config)
+     * @see DBChild
      * @see Dataset
-     * @author いっぺー
-     */
-    public Dataset useDataset() {
-        NodeList dataset = this.searchNodeList("/database/dataset");
-        Node root = dataset.item(0);
-        return new Dataset(this.doc, root);
-    }
-
-    /**
-     * コンフィグの取得
-     *
-     * @return Config
      * @see Config
      * @author いっぺー
      */
-    public Config useConfig() {
-        NodeList dataset = this.searchNodeList("/database/config");
-        Node root = dataset.item(0);
-        return new Config(this.doc, root);
+    @SuppressWarnings("unchecked")
+    public <T extends DBChild> T useDBChild(String target) {
+        Node child = this.searchNodeList("/database/" + target).item(0);
+
+        switch (target) {
+            case "dataset":
+                return (T) new Dataset(this.doc, child);
+            case "config":
+                return (T) new Config(this.doc, child);
+            default:
+                throw new IllegalArgumentException("引数 target の値は dataset/config のどちらかを指定してください。");
+        }
     }
 
     public void setDataset(Dataset dataset) {
