@@ -126,11 +126,20 @@ process.run();
 
 ### Data
 
-データを操作するクラス。  
-Dataset クラスの `useData` メソッドからインスタンスを生成できる。
+データを操作するクラス。
 
 ```java
-// データの取得
+// データの新規作成
+Data newData = new Data(
+    "huskey", // title
+    "jonh", // userName
+    "8lQEANKe600DUNmo0XZb", // password
+    "", // message
+    HkTime.now(), // created
+    HkTime.now() // updated
+);
+
+// データセットからデータの取得
 Data data = dataset.useData("Google");
 
 // テキスト情報の取得
