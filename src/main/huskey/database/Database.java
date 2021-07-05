@@ -1,34 +1,35 @@
 package database;
 
-import database.config.Config;
-import database.dataset.Dataset;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import utility.GlobalConst;
 
+import javax.xml.xpath.*;
 import java.io.File;
 
 /**
  * データベース
  *
  * <p>DatabaseBuilderから取得することで、データベースの中身を操作することができる。
- * データベースはXML形式であるが、Database/Dataset/Configクラスではその具体的なDOM操作を隠蔽する。
+ * データベースはXML形式であり、その操作にはDOMとXPathを用いる。
  *
  * @see DatabaseBuilder
  * @author いっぺー
  */
-public class Database extends DBOriginSystem {
+public class Database {
+    public final Document doc;
     private String masterKey;
     private final String huskeyDir;
 
     public Database(Document doc, String masterKey) {
-        super(doc);
+        this.doc = doc;
         this.masterKey = masterKey;
         this.huskeyDir = GlobalConst.HUSKEY_DIR;
     }
 
     Database(Document doc, String masterKey, String huskeyDir) {
-        super(doc);
+        this.doc = doc;
         this.masterKey = masterKey;
         this.huskeyDir = huskeyDir;
     }
@@ -65,28 +66,6 @@ public class Database extends DBOriginSystem {
     }
 
     /**
-     * データベース名の取得
-     *
-     * @return String
-     * @author いっぺー
-     */
-    public String getDBName() {
-        Node name = this.searchNode("/database/name");
-        return name.getTextContent();
-    }
-
-    /**
-     * データベース名の更新
-     *
-     * @param newDBName 新しいデータベース名
-     * @author いっぺー
-     */
-    public void setDBName(String newDBName) {
-        Node name = this.searchNode("/database/name");
-        name.setTextContent(newDBName);
-    }
-
-    /**
      * データベースの暗号化に使用するmasterKeyの更新
      *
      * @param newKey 新しいmasterKey
@@ -107,53 +86,40 @@ public class Database extends DBOriginSystem {
     }
 
     /**
-     * データセット/コンフィグの取得
+     * ノードの検索
      *
-     * @param target "dataset" or "config"
-     * @return T extends DBChild (Dataset, Config)
-     * @see DBChild
-     * @see Dataset
-     * @see Config
+     * <p>XPathを用いてDocumentを検索し、条件に一致したノードを取得する。
+     *
+     * @param expression 検索条件
+     * @return Node
      * @author いっぺー
      */
-    @SuppressWarnings("unchecked")
-    public <T extends DBChild> T useDBChild(String target) {
-        Node child = this.searchNode("/database/" + target);
-
-        switch (target) {
-            case "dataset":
-                return (T) new Dataset(this.doc, child);
-            case "config":
-                return (T) new Config(this.doc, child);
-            default:
-                throw new IllegalArgumentException("引数 target の値は dataset/config のどちらかを指定してください。");
-        }
+    public Node searchNode(String expression) {
+        return this.searchNodeList(expression).item(0);
     }
 
     /**
-     * データセット/コンフィグの更新
+     * ノードの検索
      *
-     * @param target "dataset" or "config"
-     * @param child DBChild及びそのサブクラス
-     * @see DBChild
-     * @see Dataset
-     * @see Config
+     * <p>XPathを用いてDocumentを検索し、条件に一致したノードをNodeListで取得する。
+     *
+     * @param expression 検索条件
+     * @return Node
      * @author いっぺー
      */
-    public <T extends DBChild> void setDBChild(String target, T child) {
-        if (!(target.equals("dataset") || target.equals("config"))) {
-            throw new IllegalArgumentException("引数 target の値は dataset/config のどちらかを指定してください。");
-        }
+    public NodeList searchNodeList(String expression) {
+        XPath xpath = XPathFactory.newInstance().newXPath();
+        try {
+            XPathExpression expr = xpath.compile(expression);
+            NodeList nodeList = (NodeList) expr.evaluate(this.doc, XPathConstants.NODESET);
 
-        if ((target.equals("dataset") && child.getClass() != Dataset.class) ||
-            (target.equals("config") && child.getClass() != Config.class)
-        ) {
-            throw new IllegalArgumentException("引数 target の内容と引数 child の型が矛盾しています。");
-        }
+            if (nodeList.getLength() == 0) {
+                throw new IllegalArgumentException("該当するノードが存在しません。");
+            }
 
-        Node db = this.searchNode("/database");
-        Node oldChild = this.searchNode("/database/" + target);
-        db.removeChild(oldChild);
-        db.appendChild(child.root);
+            return nodeList;
+        } catch (XPathExpressionException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
