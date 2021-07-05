@@ -133,6 +133,16 @@ public class Database {
         }
     }
 
+    /**
+     * データセット/コンフィグの更新
+     *
+     * @param target "dataset" or "config"
+     * @param child DBChild及びそのサブクラス
+     * @see DBChild
+     * @see Dataset
+     * @see Config
+     * @author いっぺー
+     */
     public <T extends DBChild> void setDBChild(String target, T child) {
         if (!(target.equals("dataset") || target.equals("config"))) {
             throw new IllegalArgumentException("引数 target の値は dataset/config のどちらかを指定してください。");
