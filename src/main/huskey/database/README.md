@@ -37,11 +37,7 @@ if (!builder.isKeyMatched()) {
     // 不正なパスワードが入力されたときの処理
 }
 
-try {
-    Database db = builder.buildDatabase();
-} catch (FileNotFoundException e) {
-    // データベースが存在しなかったときの処理
-}
+Database db = builder.buildDatabase();
 ```
 
 ## Database（開発中）
@@ -49,12 +45,24 @@ try {
 データベースの操作および書き出しを行うクラス。
 
 ```java
-try {
-    Database db = builder.buildDatabase(); // データベースの構築
-    Dataset dataset = db.useDBChild("dataset"); // データセットの取得
-} catch (FileNotFoundException e) {
-    // データベースが存在しなかったときの処理
-}
+// データベースの構築
+Database db = builder.buildDatabase();
+
+// データベース名の変更
+String name = db.getDBName();
+db.setDBName("something");
+
+// masterKeyの更新
+String newKey = "boZzfgstKkwCKClO60PM";
+db.setMasterKey(newKey);
+
+// データセット/コンフィグの取得
+Dataset dataset = db.useDBChild("dataset");
+Config config = db.useDBChild("config");
+
+// データセット/コンフィグの更新
+db.setDBChild("dataset", dataset);
+db.setDBChild("config", config);
 
 // データベース名のリストを取得
 String[] dbList = Database.getDBList();
