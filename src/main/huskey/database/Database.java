@@ -30,7 +30,7 @@ public class Database {
     private String masterKey;
     private String dbDir;
 
-    public Database(Document doc, String masterKey, String dbDir) {
+    public Database(Document doc, String dbName, String masterKey, String dbDir) {
         this.doc = doc;
         this.dbName = dbName;
         this.masterKey = masterKey;
@@ -135,10 +135,7 @@ public class Database {
      * @author いっぺー
      */
     public void write() {
-        Node nameNode = this.searchNodeList("//name").item(0);
-        String dbName = nameNode.getTextContent();
-
-        String path = this.dbDir + dbName + "/" + dbName + ".hkdb";
+        String path = this.dbDir + this.dbName + ".hkdb";
         byte[] byteDB = this.xmlToBytes();
 
         // （データベースの暗号化処理）

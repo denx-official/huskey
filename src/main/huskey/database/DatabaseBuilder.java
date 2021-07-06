@@ -25,13 +25,13 @@ public class DatabaseBuilder {
     public DatabaseBuilder(String dbName, String masterKey) {
         this.dbName = dbName;
         this.masterKey = masterKey;
-        this.dbDir = GlobalConst.HUSKEY_DIR + "/database/";
+        this.dbDir = GlobalConst.HUSKEY_DIR + "/database/" + dbName + "/";
     }
 
     DatabaseBuilder(String dbName, String masterKey, String huskeyDir) {
         this.dbName = dbName;
         this.masterKey = masterKey;
-        this.dbDir = huskeyDir + "/database/";
+        this.dbDir = huskeyDir + "/database/" + dbName + "/";
     }
 
     /**
@@ -41,7 +41,7 @@ public class DatabaseBuilder {
      * @author いっぺー
      */
     public boolean isKeyMatched() {
-        String path = this.dbDir + this.dbName + "/" + "hash";
+        String path = this.dbDir + "hash";
         File file = Paths.get(path).toFile();
 
         StringBuilder hash = new StringBuilder();
@@ -109,6 +109,6 @@ public class DatabaseBuilder {
      * @author いっぺー
      */
     private String hkdbPath() {
-        return this.dbDir + this.dbName + "/" + this.dbName + ".hkdb";
+        return this.dbDir + this.dbName + ".hkdb";
     }
 }
