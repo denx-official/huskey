@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE database [
-    <!ELEMENT database (name, config, dataset)>
-
-    <!ELEMENT name (#PCDATA)>
+    <!ELEMENT database (config, dataset)>
 
     <!ELEMENT config (passLength, charSet, trials)>
     <!ELEMENT passLength (#PCDATA)>
@@ -43,10 +41,9 @@
 ]>
 
 <database>
-    <name>SampleDB</name>
     <config>
         <passLength>16</passLength>
-        <charSet lowerCase="true" upperCase="true" number="true" space="false"></charSet>
+        <charSet lowerCase="true" upperCase="true" number="true" space="false" />
         <trials>2</trials>
     </config>
     <dataset>
