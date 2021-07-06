@@ -5,6 +5,11 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Node;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.attribute.FileTime;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class DatabaseTest {
@@ -67,7 +72,18 @@ class DatabaseTest {
 
     @Test
     void データベースの書き出し() {
-        // db.write();
+        Path path = Paths.get(huskeyDir + "database/SampleDB/SampleDB.hkdb");
+
+        try {
+            FileTime before = Files.getLastModifiedTime(path);
+            db.write();
+            FileTime after = Files.getLastModifiedTime(path);
+
+            assertNotEquals(before.toString(), after.toString());
+        } catch (Exception e) {
+            e.getStackTrace();
+            fail();
+        }
     }
 
     @Test
