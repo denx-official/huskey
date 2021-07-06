@@ -46,7 +46,7 @@ Database db = builder.buildDatabase();
 
 ### Database
 
-データベースの操作および書き出しを行うクラス（具体的な操作法は次章にて解説）。  
+データベースの操作および書き出しを行うクラス（具体的な操作法は次章にて解説）。
 
 ```java
 // データベースの構築
@@ -57,7 +57,7 @@ String newKey = "boZzfgstKkwCKClO60PM";
 db.setMasterKey(newKey);
 
 // ノードの検索
-Node node = db.searchNode("/database/dataset/data[@title = 'Google']");
+Node node = db.searchNode("/database/dataset/data[@title = 'Google']").item(0);
 
 // データベース名のリストを取得
 String[] dbList = Database.getDBList();
@@ -99,7 +99,7 @@ Element elem = hkTime.toElement(db.doc, "updated");
 
 ## データベースの操作法について
 
-前述の通り、データベースの操作には **DOM** という XML 文章の操作規格、および **XPath** という XML 文章の検索APIの２つを用いる。  
+前述の通り、データベースの操作には **DOM** という XML 文章の操作規格、および **XPath** という XML 文章の検索 API の２つを用いる。  
 ここで簡単ではあるが、これらの使い方について解説を行う。
 
 ### 前提知識
@@ -142,7 +142,7 @@ XML (_Extensible Markup Language_) とは、 **データの意味と内容を記
 DOM (_Document Object Model_) とは、 **HTML や XML といった文章を取り扱うための API** のことである。
 
 DOM では文章全体のことを **Document** と呼び、それを構成するオブジェクトを **Node** という。  
-Node にはいくつかの種類があり、上で挙げた **Element** や **Attr** 、Elementの中に文字で内容が書かれた **Text** 、「売り物リスト」と書かれたコメントアウトを示す **Comment** などなど、これらは全て Node の一種である。
+Node にはいくつかの種類があり、上で挙げた **Element** や **Attr** 、Element の中に文字で内容が書かれた **Text** 、「売り物リスト」と書かれたコメントアウトを示す **Comment** などなど、これらは全て Node の一種である。
 
 今回のプロジェクトにおいてはひとまずこれだけ理解できればなんとかなる、はず。
 
@@ -155,13 +155,41 @@ Node にはいくつかの種類があり、上で挙げた **Element** や **At
 
 XPath (_XML Path Language_) とは、 **XML 文章の検索を目的とした構文、およびそれを利用した検索 API** のことである。
 
-例えば、先ほど例に挙げた XML 文章の「『くだもの』の中にある『りんご』の中にある『値段』要素が欲しい」という時は、 `/くだもの/りんご/値段` と記述することで、その要素にアクセスすることができる。
+例えば、先ほど例に挙げた XML 文章の「『売り物』の中にある『果物 name="りんご"』要素が欲しい」という時は、 `/売り物/果物[@name = 'りんご']` と記述することで、その要素にアクセスすることができる。
 
-さらに実践的な使い方は次章にて紹介する。
+XPath の記法は非常に多く存在するため詳細は割愛するが、最低限以下のものを押さえておけばなんとかなる。
 
-参考
+- `//`
+    - 意味: パスの省略
+    - 例: `//果物`
+        - 果物要素を取得
+- `@(属性名)`
+    - 意味: 属性の値
+    - 例: `//果物[@name = 'りんご']`
+        - 属性 name の値が「りんご」の果物要素を取得
+- `text()`
+    - 意味: 要素内の Text
+    - 例: `//値段[text() = 2000]`
+        - Text が「2000」の値段要素を取得
+- `*`
+    - 意味: すべて
+    - 例: `/売り物/*`
+        - 売り物要素内にあるすべての要素を取得
+- `[contains(（対象）, '（検索内容）')]`
+    - 意味: （対象）内に（検索内容）を含む要素を取得
+    - 例: `//果物[contains(@name, 'り')]`
+        - 属性 name に「り」を含む果物要素を取得
+    - 例: `//値段[contains(text(), '0')]`
+        - Text に「0」を含む値段要素を取得
+- `or`, `and`
+    - 意味: もしくは／かつ
+    - 例: `//果物[contains(@name, 'り') or contains(@name, 'め')]`
+        - 属性 name に「り」もしくは「め」を含む果物要素を取得
 
-- [Java標準APIでのXML読み込み方4つを大紹介 サンプルで比較しよう](https://engineer-club.jp/java-xml-read)
+詳しい記法は以下の URL を参考に。
+
+- [XPathとは？基本概念や書き方をわかりやすく解説！ | Octoparse](https://www.octoparse.jp/blog/xpath-introduction/)
+- [便利なXPathまとめ - ZOZO Technologies TECH BLOG](https://techblog.zozo.com/entry/xpath)
 
 ### huskey におけるデータベースの操作
 
@@ -170,46 +198,36 @@ XPath (_XML Path Language_) とは、 **XML 文章の検索を目的とした構
 huskey では XPath 構文を用いて Node を簡単に取得できるよう、 Database クラスに `searchNodeList` メソッドを用意している。  
 このメソッドは、引数に XPath 構文を入力することで検索結果に該当した全ての Node を NodeList 型として取得できる。
 
-
 ```java
 Database db = builder.buildDatabase();
 
-// database > dataset > title="Google" という Attr を持つ data 要素を取得する
-// 今回は１つしか取得できるものがないと確定しているので、要素の長さは１
-Node node = db.searchNodeList("/database/dataset/data[@title = 'Google']").item(0);
+// data 要素をすべて取得
+NodeList dataList = db.searchNodeList("//data);
+Node firstData = dataList.item(0); // 先頭の node を取得
 ```
 
 また、Node ではなく Element で取得したい場合は、型をキャスト（型変換）することで可能となる。
 
 ```java
-Element elem = (Element) db.searchNode("/database/dataset/data[@title = 'Google']").item(0);
-
-// Attr の内容を取得
-String title = elem.getAttribute("title");
-```
-
-```java
-// database > dataset >  data 要素を全て取得
-NodeList nodeList = db.searchNodeList("/database/dataset/data");
+NodeList nodeList = db.searchNodeList("//data");
 
 for (int i = 0; i < nodeList.getLength(); i++) {
-    Element data = (Element) nodeList.item(i); // i 番目の Node を Element 型にキャスト
-    Node passNode = data.getElementsByTagName("password").item(0); // data 要素内の "password" タグを持つ要素の取得
-    String password = passNode.getTextContent(); // password 要素内の Text を取得
+    Element data = (Element) nodeList.item(i); // i 番目の Node を Element 型で取得
+    String title = data.getAttribute("title"); // title 属性の値を取得
 }
 ```
 
-Element 型では Attr や要素内の Element へのアクセスが簡単にできるため、こうしたケースでは Element 型を利用した方がコードを簡潔に書ける。
+Element 型では属性へのアクセスが簡単にできるため、こうしたケースでは Element 型を利用した方がコードを簡潔に書ける。
 
 #### データベースの更新
 
 データベースの内容を更新する際は、先ほどの `searchNodeList` メソッドなどから Node/Element を取得し、それらから提供されるメソッドを用いることで可能となる。
 
 ```java
-Element data = (Element) db.searchNode("/database/dataset/data[@title = 'Google']");
+Element data = (Element) db.searchNode("//data[@title = 'Google']");
 data.setAttribute("title", "Google2"); // title 属性の更新
 
-Node passNode = data.getElementsByTagName("password").item(0);
+Node passNode = data.getElementsByTagName("password").item(0); // Element 内から password タグを持つ Node を取得
 passNode.setTextContent("MJ0fQstGuhzYA5BaHqL0"); // password 要素内の Text を更新
 ```
 
@@ -228,6 +246,6 @@ Data data = new Data(
 );
 Element dataElem = data.toElement(db.doc); // Data 型を Element 型に変換
 
-Node dataset = db.searchNode("/database/dataset");
+Node dataset = db.searchNodeList("//dataset").item(0);
 dataset.appendChild(dataElem); // データセットに新規データを追加
 ```
