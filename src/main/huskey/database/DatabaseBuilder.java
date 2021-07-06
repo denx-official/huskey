@@ -89,7 +89,7 @@ public class DatabaseBuilder {
      * @author いっぺー
      */
     public Database buildDatabase() {
-        byte[] byteDB = FileIO.readDB(this.hkdbPath());
+        byte[] byteDB = FileIO.readFileAsBytes(this.hkdbPath());
         InputSource src = new InputSource(new ByteArrayInputStream(byteDB));
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();

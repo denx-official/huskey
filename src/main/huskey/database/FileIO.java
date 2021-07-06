@@ -4,7 +4,7 @@ import java.io.*;
 import java.nio.file.Paths;
 
 public class FileIO {
-    static byte[] readDB(String path) {
+    static byte[] readFileAsBytes(String path) {
         File dbFile = Paths.get(path).toFile();
 
         try (
@@ -26,7 +26,7 @@ public class FileIO {
         }
     }
 
-    static void writeDB(String path, byte[] byteDB) {
+    static void writeFileFromBytes(String path, byte[] byteDB) {
         try (
                 FileOutputStream fos = new FileOutputStream(path);
                 BufferedOutputStream bos = new BufferedOutputStream(fos)
