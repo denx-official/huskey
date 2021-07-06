@@ -127,6 +127,11 @@ public class Database {
         }
     }
 
+    /**
+     * データベースを暗号化して書き出し
+     *
+     * @author いっぺー
+     */
     public void write() {
         Node nameNode = this.searchNodeList("//name").item(0);
         String dbName = nameNode.getTextContent();
@@ -139,6 +144,12 @@ public class Database {
         FileIO.writeDB(path, byteDB);
     }
 
+    /**
+     * XML文章をbyte[]に変換
+     *
+     * @return byte[]
+     * @author いっぺー
+     */
     private byte[] xmlToBytes() {
         StringWriter writer = new StringWriter();
         TransformerFactory factory = TransformerFactory.newInstance();
