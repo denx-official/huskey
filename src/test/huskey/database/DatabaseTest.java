@@ -72,7 +72,7 @@ class DatabaseTest {
 
     @Test
     void データベースの書き出し() {
-        Path path = Paths.get(huskeyDir + "database/SampleDB/SampleDB.hkdb");
+        Path path = Paths.get(huskeyDir + "database/SampleDB/.hkdb");
 
         try {
             FileTime before = Files.getLastModifiedTime(path);

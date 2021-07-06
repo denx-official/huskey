@@ -135,7 +135,7 @@ public class Database {
      * @author いっぺー
      */
     public void write() {
-        String path = this.dbDir + this.dbName + ".hkdb";
+        String path = this.dbDir + ".hkdb";
         byte[] byteDB = this.xmlToBytes();
 
         // （データベースの暗号化処理）

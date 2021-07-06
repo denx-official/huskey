@@ -109,6 +109,6 @@ public class DatabaseBuilder {
      * @author いっぺー
      */
     private String hkdbPath() {
-        return this.dbDir + this.dbName + ".hkdb";
+        return this.dbDir + ".hkdb";
     }
 }
