@@ -1,11 +1,19 @@
 package database;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import utility.GlobalConst;
 
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import javax.xml.xpath.*;
 import java.io.File;
+import java.io.StringWriter;
+import java.nio.charset.StandardCharsets;
 
 /**
  * データベース
@@ -117,5 +125,31 @@ public class Database {
         } catch (XPathExpressionException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void write() {
+        Node nameNode = this.searchNodeList("//name").item(0);
+        String dbName = nameNode.getTextContent();
+
+        String path = this.dbDir + dbName + ".hkdb";
+        byte[] byteDB = this.xmlToBytes();
+
+        // （データベースの暗号化処理）
+
+        FileIO.writeDB(path, byteDB);
+    }
+
+    private byte[] xmlToBytes() {
+        StringWriter writer = new StringWriter();
+        TransformerFactory factory = TransformerFactory.newInstance();
+
+        try {
+            Transformer transformer = factory.newTransformer();
+            transformer.transform(new DOMSource(this.doc), new StreamResult(writer));
+        } catch (TransformerException e) {
+            throw new RuntimeException(e);
+        }
+
+        return writer.toString().getBytes(StandardCharsets.UTF_8);
     }
 }
