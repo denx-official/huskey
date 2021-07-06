@@ -20,8 +20,8 @@ import java.nio.charset.StandardCharsets;
  * <p>DatabaseBuilderから取得することで、データベースの中身を操作することができる。
  * データベースはXML形式であり、その操作にはDOMとXPathを用いる。
  *
- * @see DatabaseBuilder
  * @author いっぺー
+ * @see DatabaseBuilder
  */
 public class Database {
     public final Document doc;
@@ -56,7 +56,7 @@ public class Database {
     static String[] getDBList(String huskeyDir) {
         File[] dbFiles = new File(huskeyDir + "database/").listFiles();
         if (dbFiles == null) {
-            return new String[] {""};
+            return new String[]{""};
         }
 
         String[] result = new String[dbFiles.length];

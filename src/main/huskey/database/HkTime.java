@@ -8,8 +8,8 @@ import java.time.LocalDateTime;
 /**
  * Dataインスタンス内で保持する時間情報
  *
- * @see Data
  * @author いっぺー
+ * @see Data
  */
 public class HkTime {
     public final int year;
@@ -62,7 +62,7 @@ public class HkTime {
         }
 
         Element elem = doc.createElement(tag);
-        for (String name: HkTime.iterator()) {
+        for (String name : HkTime.iterator()) {
             elem.setAttribute(name, String.valueOf(this.get(name)));
         }
 
@@ -104,6 +104,6 @@ public class HkTime {
      * @author いっぺー
      */
     private static String[] iterator() {
-        return new String[] {"year", "month", "date", "hours", "minutes", "seconds"};
+        return new String[]{"year", "month", "date", "hours", "minutes", "seconds"};
     }
 }

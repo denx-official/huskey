@@ -9,8 +9,8 @@ import org.w3c.dom.Element;
  * <p>Dataは "title, userName, password, message, created, updated" の6つの情報から成る。
  * created/updatedはHkTimeインスタンスによって保持する。
  *
- * @see HkTime
  * @author いっぺー
+ * @see HkTime
  */
 public class Data {
     public final String _title;
@@ -40,13 +40,13 @@ public class Data {
         Element dataElem = doc.createElement("data");
         dataElem.setAttribute("title", this.getText("title"));
 
-        for (String target: Data.textIterator()) {
+        for (String target : Data.textIterator()) {
             Element elem = doc.createElement(target);
             elem.appendChild(doc.createTextNode(this.getText(target)));
             dataElem.appendChild(elem);
         }
 
-        for (String target: Data.timeIterator()) {
+        for (String target : Data.timeIterator()) {
             Element elem = this.getTime(target).toElement(doc, target);
             dataElem.appendChild(elem);
         }
@@ -105,7 +105,7 @@ public class Data {
      * @author いっぺー
      */
     private static String[] textIterator() {
-        return new String[] {"userName", "password", "message"};
+        return new String[]{"userName", "password", "message"};
     }
 
     /**
@@ -115,6 +115,6 @@ public class Data {
      * @author いっぺー
      */
     private static String[] timeIterator() {
-        return new String[] {"updated", "created"};
+        return new String[]{"updated", "created"};
     }
 }

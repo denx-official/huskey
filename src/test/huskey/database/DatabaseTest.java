@@ -87,5 +87,6 @@ class DatabaseTest {
     }
 
     @Test
-    void データベースのマージ() {} // 優先度_低
+    void データベースのマージ() {
+    } // 優先度_低
 }

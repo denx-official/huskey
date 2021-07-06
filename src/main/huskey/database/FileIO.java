@@ -8,14 +8,14 @@ public class FileIO {
         File dbFile = Paths.get(path).toFile();
 
         try (
-            FileInputStream fis = new FileInputStream(dbFile);
-            BufferedInputStream bis = new BufferedInputStream(fis)
+                FileInputStream fis = new FileInputStream(dbFile);
+                BufferedInputStream bis = new BufferedInputStream(fis)
         ) {
             ByteArrayOutputStream out = new ByteArrayOutputStream();
 
             byte[] readBuffer = new byte[1024];
             int size = bis.read(readBuffer);
-            while(size != -1) {
+            while (size != -1) {
                 out.write(readBuffer, 0, size);
                 size = bis.read(readBuffer);
             }
@@ -28,8 +28,8 @@ public class FileIO {
 
     static void writeDB(String path, byte[] byteDB) {
         try (
-            FileOutputStream fos = new FileOutputStream(path);
-            BufferedOutputStream bos = new BufferedOutputStream(fos)
+                FileOutputStream fos = new FileOutputStream(path);
+                BufferedOutputStream bos = new BufferedOutputStream(fos)
         ) {
             bos.write(byteDB);
             bos.flush();

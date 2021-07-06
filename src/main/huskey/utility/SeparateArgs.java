@@ -59,7 +59,7 @@ public class SeparateArgs {
         int cutPoint = this.getCutPoint();
 
         if (cutPoint == -1) {
-            return new String[] {""};
+            return new String[]{""};
         }
 
         return this.cutout(Target.OPTIONS, cutPoint);
@@ -83,14 +83,14 @@ public class SeparateArgs {
      *
      * <p>Target.OPTIONSの場合、コマンドライン引数のcutPointから最後までの配列を返す。
      *
-     * @param target 取得する引数の種類（Target.VALUES or Target.OPTIONS）
+     * @param target   取得する引数の種類（Target.VALUES or Target.OPTIONS）
      * @param cutPoint optionsが始まるインデックス
      * @return String[]
      * @author いっぺー
      */
     private String[] cutout(Target target, int cutPoint) {
         if (target == Target.VALUES && cutPoint - 1 <= 0) {
-            return new String[] {""};
+            return new String[]{""};
         }
 
         String[] result;

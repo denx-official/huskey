@@ -9,15 +9,15 @@
 ![huskey_architecture](img/huskey_architecture.jpg)
 
 - Database
-  - master_key, config, Dataset をまとめたもの
+    - master_key, config, Dataset をまとめたもの
 - master_key
-  - データベースへのアクセスに必要なキー
+    - データベースへのアクセスに必要なキー
 - config
-  - パスワード生成等のデータベースの設定
+    - パスワード生成等のデータベースの設定
 - Dataset
-  - Data の集合
+    - Data の集合
 - Data
-  - タイトル、ユーザー名、パスワード、メッセージ、作成日時を持つもの
+    - タイトル、ユーザー名、パスワード、メッセージ、作成日時を持つもの
 
 ## コマンド
 

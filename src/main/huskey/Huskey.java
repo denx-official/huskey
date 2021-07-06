@@ -10,9 +10,9 @@ public class Huskey {
     public static void main(String[] args) {
         SeparateArgs sepArgs = new SeparateArgs(args);
         CommandRouting cr = new CommandRouting(
-            sepArgs.getCommand(),
-            sepArgs.getValues(),
-            sepArgs.getOptions()
+                sepArgs.getCommand(),
+                sepArgs.getValues(),
+                sepArgs.getOptions()
         );
         cr.run();
     }

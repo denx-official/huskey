@@ -5,8 +5,8 @@ package utility;
  *
  * <p>この例外は cmd.CommandRouting クラスの run メソッドで捕捉され、与えられたメッセージが標準エラーとして表示される。
  *
- * @see cmd.CommandRouting
  * @author いっぺー
+ * @see cmd.CommandRouting
  */
 public class HuskeyException extends RuntimeException {
     public HuskeyException(String message) {
