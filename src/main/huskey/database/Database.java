@@ -140,7 +140,7 @@ public class Database {
         // （データベースの暗号化処理）
         // （masterKeyのハッシュ値を書き出す処理）
 
-        FileIO.writeBinFile(path, byteDB);
+        BinFileIO.writeBinFile(path, byteDB);
     }
 
     /**

@@ -110,9 +110,9 @@ HkTime hkTime = HkTime.now();
 Element elem = hkTime.toElement(db.doc, "updated");
 ```
 
-#### FileIO
+#### BinFileIO
 
-バイト列によるファイルの入出力を行うクラス（詳細は割愛）。
+バイナリファイルの入出力を行うクラス（詳細は割愛）。
 
 ## データベースの操作法について
 

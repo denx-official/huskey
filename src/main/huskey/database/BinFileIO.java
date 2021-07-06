@@ -9,7 +9,7 @@ import java.nio.file.Paths;
  * @author いっぺー
  * @see Database
  */
-public class FileIO {
+public class BinFileIO {
 
     /**
      * バイナリファイルの読み込み

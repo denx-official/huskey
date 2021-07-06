@@ -7,18 +7,18 @@ import java.nio.charset.StandardCharsets;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class FileIOTest {
+class BinFileIOTest {
     private final String path = "./target/test-classes/resources/testFile";
 
     @AfterEach
     void cleanUp() {
         byte[] content = "testFile".getBytes(StandardCharsets.UTF_8);
-        FileIO.writeBinFile(path, content);
+        BinFileIO.writeBinFile(path, content);
     }
 
     @Test
     void ファイルの読み込み() {
-        String result = new String(FileIO.readBinFile(path));
+        String result = new String(BinFileIO.readBinFile(path));
         assertEquals("testFile", result);
     }
 
@@ -26,9 +26,9 @@ class FileIOTest {
     void ファイルの書き出し() {
         String content = "testFile2";
         byte[] bytes = content.getBytes(StandardCharsets.UTF_8);
-        FileIO.writeBinFile(path, bytes);
+        BinFileIO.writeBinFile(path, bytes);
 
-        String result = new String(FileIO.readBinFile(path));
+        String result = new String(BinFileIO.readBinFile(path));
         assertEquals(content, result);
     }
 }
