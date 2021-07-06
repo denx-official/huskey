@@ -39,6 +39,19 @@ class DatabaseTest {
     }
 
     @Nested
+    class nodeExist {
+        @Test
+        void ノードが存在するか否か_true() {
+            assertTrue(db.nodeExist("/database"));
+        }
+
+        @Test
+        void ノードが存在するか否か_false() {
+            assertFalse(db.nodeExist("/hoge"));
+        }
+    }
+
+    @Nested
     class 異常系 {
         @Test
         void 検索したノードが見つからなかった場合() {

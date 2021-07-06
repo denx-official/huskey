@@ -85,6 +85,22 @@ public class Database {
     }
 
     /**
+     * 対象のノードが存在するか否か
+     *
+     * @return boolean
+     * @author いっぺー
+     */
+    public boolean nodeExist(String expression) {
+        try {
+            this.searchNodeList(expression);
+        } catch (IllegalArgumentException _e) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * ノードの検索
      *
      * <p>XPathを用いてDocumentを検索し、条件に一致したノードをNodeListで取得する。
