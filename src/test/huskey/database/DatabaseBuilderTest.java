@@ -50,7 +50,8 @@ class DatabaseBuilderTest {
             try {
                 Database _db = builder.buildDatabase();
             } catch (Exception e) {
-                fail(e.getMessage());
+                e.printStackTrace();
+                fail();
             }
         }
     }

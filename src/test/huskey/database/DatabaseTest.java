@@ -81,7 +81,7 @@ class DatabaseTest {
 
             assertNotEquals(before.toString(), after.toString());
         } catch (Exception e) {
-            e.getStackTrace();
+            e.printStackTrace();
             fail();
         }
     }
