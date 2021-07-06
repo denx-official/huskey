@@ -37,8 +37,14 @@ masterKey の照合、データベースの読み込み／復号を行う。
 ```java
 DatabaseBuilder builder = new DatabaseBuilder(dbName, masterKey);
 
+if (!builder.exists()) {
+    // データベースが存在しないときの処理
+}
+
 if (!builder.isKeyMatched()) {
     // 不正なパスワードが入力されたときの処理
+    builder.setMasterKey("newPassword");
+    retry();
 }
 
 Database db = builder.buildDatabase();
@@ -52,8 +58,13 @@ Database db = builder.buildDatabase();
 // データベースの構築
 Database db = builder.buildDatabase();
 
+String path = "//data[@title = 'Google']";
+if (!db.nodeExist(path)) {
+    // 対象の Node が存在しないときの処理
+}
+
 // ノードの検索
-Node node = db.searchNode("/database/dataset/data[@title = 'Google']").item(0);
+Node node = db.searchNode(path).item(0);
 
 // masterKeyの更新
 String newKey = "boZzfgstKkwCKClO60PM";
@@ -98,6 +109,10 @@ HkTime hkTime = HkTime.now();
 // HkTime 型を Element 型に変換
 Element elem = hkTime.toElement(db.doc, "updated");
 ```
+
+#### FileIO
+
+バイト列によるファイルの入出力を行うクラス（詳細は割愛）。
 
 ## データベースの操作法について
 
@@ -234,7 +249,7 @@ passNode.setTextContent("MJ0fQstGuhzYA5BaHqL0"); // password 要素内の Text �
 
 // データを更新した際は、updated 要素の更新も行う事
 Node updated = data.getElementsByTagName("updated").item(0);
-Element newUpdated = HkTime.now().toElement();
+Element newUpdated = HkTime.now().toElement(db.doc, "updated");
 data.removeChild(updated);
 data.appendChild(newUpdated);
 ```
