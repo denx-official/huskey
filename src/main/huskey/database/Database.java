@@ -19,18 +19,12 @@ import java.io.File;
 public class Database {
     public final Document doc;
     private String masterKey;
-    private final String huskeyDir;
+    private final String dbDir;
 
-    public Database(Document doc, String masterKey) {
+    public Database(Document doc, String masterKey, String dbDir) {
         this.doc = doc;
         this.masterKey = masterKey;
-        this.huskeyDir = GlobalConst.HUSKEY_DIR;
-    }
-
-    Database(Document doc, String masterKey, String huskeyDir) {
-        this.doc = doc;
-        this.masterKey = masterKey;
-        this.huskeyDir = huskeyDir;
+        this.dbDir = dbDir;
     }
 
     /**
