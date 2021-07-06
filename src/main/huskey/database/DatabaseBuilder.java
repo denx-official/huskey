@@ -56,6 +56,8 @@ public class DatabaseBuilder {
             throw new UncheckedIOException(e);
         }
 
+        // （masterKeyをハッシュ化する処理）
+
         return Objects.equals(this.masterKey, hash.toString());
     }
 

@@ -140,6 +140,7 @@ public class Database {
         byte[] byteDB = this.xmlToBytes();
 
         // （データベースの暗号化処理）
+        // （masterKeyのハッシュ値を書き出す処理）
 
         FileIO.writeDB(path, byteDB);
     }
