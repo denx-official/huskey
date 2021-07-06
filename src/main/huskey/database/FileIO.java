@@ -25,4 +25,16 @@ public class FileIO {
             throw new UncheckedIOException(e);
         }
     }
+
+    static void writeDB(String path, byte[] byteDB) {
+        try (
+            FileOutputStream fos = new FileOutputStream(path);
+            BufferedOutputStream bos = new BufferedOutputStream(fos)
+        ) {
+            bos.write(byteDB);
+            bos.flush();
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+    }
 }
