@@ -1,17 +1,14 @@
 package database;
 
 import org.w3c.dom.Document;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import utility.GlobalConst;
-import utility.HuskeyException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.UncheckedIOException;
+import java.io.*;
 import java.nio.file.Paths;
 import java.util.Objects;
 
@@ -79,20 +76,20 @@ public class DatabaseBuilder {
      * @author いっぺー
      */
     public Database buildDatabase() {
+        byte[] byteDB = FileIO.readDB(this.dbPath());
+        InputSource src = new InputSource(new ByteArrayInputStream(byteDB));
+
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        String path = this.dbDir + this.dbName + ".hkdb";
-        File file = Paths.get(path).toFile();
-
-        if (!file.exists()) {
-            throw new HuskeyException("データベース " + this.dbName + " は存在しません。");
-        }
-
         try {
             DocumentBuilder builder = factory.newDocumentBuilder();
-            Document doc = builder.parse(file);
-            return new Database(doc, this.masterKey, this.huskeyDir);
+            Document doc = builder.parse(src);
+            return new Database(doc, this.masterKey, this.dbDir);
         } catch (ParserConfigurationException | IOException | SAXException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private String dbPath() {
+        return this.dbDir + this.dbName + ".hkdb";
     }
 }
