@@ -146,18 +146,10 @@ Node にはいくつかの種類があり、上で挙げた **Element** や **At
 
 今回のプロジェクトにおいてはひとまずこれだけ理解できればなんとかなる、はず。
 
-##### （補足）Node のもうちょっと正確な意味
-
-わからなかったら読み飛ばしてOK。
-
-Node とは、先ほどの Element や Attribute といった各オブジェクトが継承しているインターフェースのこと（つまり Node 自体に具体的な機能は無く、その実装は継承先によって行われる）。  
-XML を構成するすべてのオブジェクトが Node を継承しているため、様々なタイプを同じように扱える。
-
 参考
 
 - [DOM、Node、Elementの違いとそれぞれの使い分け | Black Everyday Company](https://kuroeveryday.blogspot.com/2018/11/difference-between-dom-and-node-and-element.html)
 - [XMLデータを操作する～DOMの詳細：技術者のためのXML再入門（11） - ＠IT](https://www.atmarkit.co.jp/ait/articles/0209/10/news002.html)
-- [Node - Web API | MDN](https://developer.mozilla.org/ja/docs/Web/API/Node)
 
 #### XPath
 
@@ -171,75 +163,30 @@ XPath (_XML Path Language_) とは、 **XML 文章の検索を目的とした構
 
 - [Java標準APIでのXML読み込み方4つを大紹介 サンプルで比較しよう](https://engineer-club.jp/java-xml-read)
 
-#### DTD
-
-DTD (_Document Type Definition_) とは、 **XML 文章の構造を定義するための言語の一種** のことである（こうした言語のことを「スキーマ言語」と呼ぶ）。
-
-先ほどのくだものに関する XML 文章に DTD を付加すると以下のようになる。
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-
-<!DOCTYPE 売り物 [
-    <!ELEMENT 売り物 (果物*)>
-    <!ELEMENT 果物 (値段, 個数)>
-    <!ATTLIST 果物
-        name ID #REQUIRED
-    >
-    <!ELEMENT 値段 (#PCDATA)>
-    <!ELEMENT 個数 (#PCDATA)>
-]>
-
-<!-- 売り物リスト -->
-<売り物>
-    <果物 name="りんご">
-        <値段>500</値段>
-        <個数>3</個数>
-    </果物>
-    <果物 name="ばなな">
-        <値段>300</値段>
-        <個数>5</個数>
-    </果物>
-    <果物 name="すいか">
-        <値段>2000</値段>
-        <個数>1</個数>
-    </果物>
-</売り物>
-```
-
-今回のプロジェクトにおいて DTD の詳細を把握する必要はないが、「データベースを更新した際に huskey のデータベース構造が正しく保たれているかどうかをチェックするために DTD を用いている」ということは押さえておくこと。
-
-詳しく知りたい方は、 [DTDによるXML構造の定義 | XML入門](https://www.javadrive.jp/xml/dtd/) を参照。
-
 ### huskey におけるデータベースの操作
 
 #### Node/Element の取得
 
-huskey では XPath 構文を用いて Node を簡単に取得できるよう、 Database クラスに `searchNode` および `searchNodeList` メソッドを用意している。
+huskey では XPath 構文を用いて Node を簡単に取得できるよう、 Database クラスに `searchNodeList` メソッドを用意している。  
+このメソッドは、引数に XPath 構文を入力することで検索結果に該当した全ての Node を NodeList 型として取得できる。
 
-例
 
 ```java
 Database db = builder.buildDatabase();
 
 // database > dataset > title="Google" という Attr を持つ data 要素を取得する
-Node node = db.searchNode("/database/dataset/data[@title = 'Google']");
+// 今回は１つしか取得できるものがないと確定しているので、要素の長さは１
+Node node = db.searchNodeList("/database/dataset/data[@title = 'Google']").item(0);
 ```
-
-引数には XPath の構文を入力することで、検索条件に一致した Node を取得することができる。
 
 また、Node ではなく Element で取得したい場合は、型をキャスト（型変換）することで可能となる。
 
 ```java
-Element elem = (Element) db.searchNode("/database/dataset/data[@title = 'Google']");
+Element elem = (Element) db.searchNode("/database/dataset/data[@title = 'Google']").item(0);
 
 // Attr の内容を取得
 String title = elem.getAttribute("title");
 ```
-
-Element 型では Attr へのアクセスが容易であるため、こうしたケースでは Element 型を利用した方がコードを簡潔に書ける。
-
-一方 `searchNodeList` では、検索結果に該当した全ての Node を NodeList 型として取得することができる。
 
 ```java
 // database > dataset >  data 要素を全て取得
@@ -252,9 +199,11 @@ for (int i = 0; i < nodeList.getLength(); i++) {
 }
 ```
 
+Element 型では Attr や要素内の Element へのアクセスが簡単にできるため、こうしたケースでは Element 型を利用した方がコードを簡潔に書ける。
+
 #### データベースの更新
 
-データベースの内容を更新する際は、先ほどの `searchNode` や `searchNodeList` メソッドなどから Node/Element を取得し、その API を用いることで可能となる。
+データベースの内容を更新する際は、先ほどの `searchNodeList` メソッドなどから Node/Element を取得し、それらから提供されるメソッドを用いることで可能となる。
 
 ```java
 Element data = (Element) db.searchNode("/database/dataset/data[@title = 'Google']");
@@ -266,7 +215,7 @@ passNode.setTextContent("MJ0fQstGuhzYA5BaHqL0"); // password 要素内の Text �
 
 #### データの新規追加
 
-データセットに新たなデータを作成する場合は、Data クラスを通して取得できる Element を追加することでできる。
+データセットに新たなデータを作成する場合は、Data クラスを通して取得できる Element を追加することで実現できる。
 
 ```java
 Data data = new Data(
@@ -282,9 +231,3 @@ Element dataElem = data.toElement(db.doc); // Data 型を Element 型に変換
 Node dataset = db.searchNode("/database/dataset");
 dataset.appendChild(dataElem); // データセットに新規データを追加
 ```
-
-#### データベースの検証
-
-データベースの更新を行った場合は、Document が DTD に則した内容であるかをチェックすること。
-
-（開発中）
