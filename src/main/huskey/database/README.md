@@ -246,8 +246,8 @@ Element 型では Attr へのアクセスが容易であるため、こうした
 NodeList nodeList = db.searchNodeList("/database/dataset/data");
 
 for (int i = 0; i < nodeList.getLength(); i++) {
-    Element data = (Element) nodeList.item(i);
-    Node passNode = data.getElementsByTagName("password").item(0); // "password" タグを持つ要素の取得
+    Element data = (Element) nodeList.item(i); // i 番目の Node を Element 型にキャスト
+    Node passNode = data.getElementsByTagName("password").item(0); // data 要素内の "password" タグを持つ要素の取得
     String password = passNode.getTextContent(); // password 要素内の Text を取得
 }
 ```
@@ -266,7 +266,7 @@ passNode.setTextContent("MJ0fQstGuhzYA5BaHqL0"); // password 要素内の Text �
 
 #### データの新規追加
 
-データセットに新たなデータを作成する場合は、Data クラスを通して Element を作成できるようにしている。
+データセットに新たなデータを作成する場合は、Data クラスを通して取得できる Element を追加することでできる。
 
 ```java
 Data data = new Data(
