@@ -1,7 +1,6 @@
 package database;
 
 import org.junit.jupiter.api.*;
-import utility.HuskeyException;
 
 import java.io.UncheckedIOException;
 
@@ -29,6 +28,21 @@ class DatabaseBuilderTest {
     }
 
     @Nested
+    class exists {
+        @Test
+        void データベースの存在確認_true() {
+            builder = new DatabaseBuilder(dbName, masterKey, huskeyDir);
+            assertTrue(builder.exists());
+        }
+
+        @Test
+        void データベースの存在確認_false() {
+            builder = new DatabaseBuilder(dbName, masterKey, "./hoge/");
+            assertFalse(builder.exists());
+        }
+    }
+
+    @Nested
     class buildDatabase {
         @Test
         void データベースの構築() {
@@ -46,11 +60,6 @@ class DatabaseBuilderTest {
         @BeforeEach
         void setup() {
             builder = new DatabaseBuilder(dbName, masterKey, "./hoge/");
-        }
-
-        @Test
-        void データベースが存在しなかった場合() {
-            assertThrows(HuskeyException.class, builder::buildDatabase);
         }
 
         @Test

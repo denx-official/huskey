@@ -59,6 +59,11 @@ public class DatabaseBuilder {
         return Objects.equals(this.masterKey, hash.toString());
     }
 
+    public boolean exists() {
+        File file = Paths.get(this.dbPath()).toFile();
+        return file.exists();
+    }
+
     /**
      * データベースの復号に使用するmasterKeyの更新
      *
