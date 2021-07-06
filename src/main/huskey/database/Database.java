@@ -27,7 +27,7 @@ import java.nio.charset.StandardCharsets;
 public class Database {
     public final Document doc;
     private String masterKey;
-    private final String dbDir;
+    private String dbDir;
 
     public Database(Document doc, String masterKey, String dbDir) {
         this.doc = doc;
@@ -136,7 +136,7 @@ public class Database {
         Node nameNode = this.searchNodeList("//name").item(0);
         String dbName = nameNode.getTextContent();
 
-        String path = this.dbDir + dbName + ".hkdb";
+        String path = this.dbDir + dbName + "/" + dbName + ".hkdb";
         byte[] byteDB = this.xmlToBytes();
 
         // （データベースの暗号化処理）
