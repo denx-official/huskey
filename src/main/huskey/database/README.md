@@ -52,18 +52,20 @@ Database db = builder.buildDatabase();
 // データベースの構築
 Database db = builder.buildDatabase();
 
+// ノードの検索
+Node node = db.searchNode("/database/dataset/data[@title = 'Google']").item(0);
+
 // masterKeyの更新
 String newKey = "boZzfgstKkwCKClO60PM";
 db.setMasterKey(newKey);
 
-// ノードの検索
-Node node = db.searchNode("/database/dataset/data[@title = 'Google']").item(0);
+// データベースの書き出し
+db.write();
+
+// ==============================
 
 // データベース名のリストを取得
 String[] dbList = Database.getDBList();
-
-// データベースの書き出し
-// （開発中）
 ```
 
 ### Data
