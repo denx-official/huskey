@@ -75,12 +75,12 @@ String[] dbList = Database.getDBList();
 ```java
 // データの新規作成
 Data data = new Data(
-    "huskey", // title
-    "jonh", // userName
-    "8lQEANKe600DUNmo0XZb", // password
-    "", // message
-    HkTime.now(), // created
-    HkTime.now() // updated
+        "huskey", // title
+        "jonh", // userName
+        "8lQEANKe600DUNmo0XZb", // password
+        "", // message
+        HkTime.now(), // created
+        HkTime.now() // updated
 );
 
 // Data 型を Element 型に変換
@@ -231,6 +231,12 @@ data.setAttribute("title", "Google2"); // title 属性の更新
 
 Node passNode = data.getElementsByTagName("password").item(0); // Element 内から password タグを持つ Node を取得
 passNode.setTextContent("MJ0fQstGuhzYA5BaHqL0"); // password 要素内の Text を更新
+
+// データを更新した際は、updated 要素の更新も行う事
+Node updated = data.getElementsByTagName("updated").item(0);
+Element newUpdated = HkTime.now().toElement();
+data.removeChild(updated);
+data.appendChild(newUpdated);
 ```
 
 #### データの新規追加
@@ -239,12 +245,12 @@ passNode.setTextContent("MJ0fQstGuhzYA5BaHqL0"); // password 要素内の Text �
 
 ```java
 Data data = new Data(
-    "huskey", // title
-    "jonh", // userName
-    "8lQEANKe600DUNmo0XZb", // password
-    "", // message
-    HkTime.now(), // created
-    HkTime.now() // updated
+        "huskey", // title
+        "jonh", // userName
+        "8lQEANKe600DUNmo0XZb", // password
+        "", // message
+        HkTime.now(), // created
+        HkTime.now() // updated
 );
 Element dataElem = data.toElement(db.doc); // Data 型を Element 型に変換
 
