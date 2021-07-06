@@ -7,9 +7,9 @@ public class FileIO {
     static byte[] readDB(String path) {
         File dbFile = Paths.get(path).toFile();
 
-        try(
-                FileInputStream fis = new FileInputStream(dbFile);
-                BufferedInputStream bis = new BufferedInputStream(fis)
+        try (
+            FileInputStream fis = new FileInputStream(dbFile);
+            BufferedInputStream bis = new BufferedInputStream(fis)
         ) {
             ByteArrayOutputStream out = new ByteArrayOutputStream();
 
@@ -22,7 +22,7 @@ public class FileIO {
 
             return out.toByteArray();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new UncheckedIOException(e);
         }
     }
 }
