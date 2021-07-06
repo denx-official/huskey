@@ -13,12 +13,12 @@ class FileIOTest {
     @AfterEach
     void cleanUp() {
         byte[] content = "testFile".getBytes(StandardCharsets.UTF_8);
-        FileIO.writeFileFromBytes(path, content);
+        FileIO.writeBinFile(path, content);
     }
 
     @Test
     void ファイルの読み込み() {
-        String result = new String(FileIO.readFileAsBytes(path));
+        String result = new String(FileIO.readBinFile(path));
         assertEquals("testFile", result);
     }
 
@@ -26,9 +26,9 @@ class FileIOTest {
     void ファイルの書き出し() {
         String content = "testFile2";
         byte[] bytes = content.getBytes(StandardCharsets.UTF_8);
-        FileIO.writeFileFromBytes(path, bytes);
+        FileIO.writeBinFile(path, bytes);
 
-        String result = new String(FileIO.readFileAsBytes(path));
+        String result = new String(FileIO.readBinFile(path));
         assertEquals(content, result);
     }
 }

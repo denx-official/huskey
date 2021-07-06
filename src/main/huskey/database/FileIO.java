@@ -3,12 +3,26 @@ package database;
 import java.io.*;
 import java.nio.file.Paths;
 
+/**
+ * バイナリファイルの入出力を行うクラス
+ *
+ * @author いっぺー
+ * @see Database
+ */
 public class FileIO {
-    static byte[] readFileAsBytes(String path) {
-        File dbFile = Paths.get(path).toFile();
+
+    /**
+     * バイナリファイルの読み込み
+     *
+     * @param path 読み込むファイルのパス
+     * @return byte[]
+     * @author いっぺー
+     */
+    static byte[] readBinFile(String path) {
+        File file = Paths.get(path).toFile();
 
         try (
-                FileInputStream fis = new FileInputStream(dbFile);
+                FileInputStream fis = new FileInputStream(file);
                 BufferedInputStream bis = new BufferedInputStream(fis)
         ) {
             ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -26,12 +40,19 @@ public class FileIO {
         }
     }
 
-    static void writeFileFromBytes(String path, byte[] byteDB) {
+    /**
+     * バイナリファイルの書き出し
+     *
+     * @param path  書き出すファイルのパス
+     * @param bytes バイト列のファイル情報
+     * @author いっぺー
+     */
+    static void writeBinFile(String path, byte[] bytes) {
         try (
                 FileOutputStream fos = new FileOutputStream(path);
                 BufferedOutputStream bos = new BufferedOutputStream(fos)
         ) {
-            bos.write(byteDB);
+            bos.write(bytes);
             bos.flush();
         } catch (IOException e) {
             throw new UncheckedIOException(e);
