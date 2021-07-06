@@ -59,6 +59,12 @@ public class DatabaseBuilder {
         return Objects.equals(this.masterKey, hash.toString());
     }
 
+    /**
+     * データベースの存在確認
+     *
+     * @return boolean
+     * @author いっぺー
+     */
     public boolean exists() {
         File file = Paths.get(this.dbPath()).toFile();
         return file.exists();
@@ -94,6 +100,12 @@ public class DatabaseBuilder {
         }
     }
 
+    /**
+     * データベースファイルのパスを取得
+     *
+     * @return String
+     * @author いっぺー
+     */
     private String dbPath() {
         return this.dbDir + this.dbName + ".hkdb";
     }
