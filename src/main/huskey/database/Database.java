@@ -1,7 +1,6 @@
 package database;
 
 import org.w3c.dom.Document;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import utility.GlobalConst;
 
@@ -88,23 +87,10 @@ public class Database {
     /**
      * ノードの検索
      *
-     * <p>XPathを用いてDocumentを検索し、条件に一致したノードを取得する。
-     *
-     * @param expression 検索条件
-     * @return Node
-     * @author いっぺー
-     */
-    public Node searchNode(String expression) {
-        return this.searchNodeList(expression).item(0);
-    }
-
-    /**
-     * ノードの検索
-     *
      * <p>XPathを用いてDocumentを検索し、条件に一致したノードをNodeListで取得する。
      *
      * @param expression 検索条件
-     * @return Node
+     * @return NodeList
      * @author いっぺー
      */
     public NodeList searchNodeList(String expression) {

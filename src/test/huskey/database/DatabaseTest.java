@@ -35,7 +35,7 @@ class DatabaseTest {
 
     @Test
     void ノードの検索() {
-        Node _node = db.searchNode("/database");
+        Node _node = db.searchNodeList("/database").item(0);
     }
 
     @Nested
@@ -43,7 +43,7 @@ class DatabaseTest {
         @Test
         void 検索したノードが見つからなかった場合() {
             try {
-                db.searchNode("/hoge");
+                db.searchNodeList("/hoge");
             } catch (IllegalArgumentException _e) {
                 return;
             }
