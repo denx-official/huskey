@@ -23,18 +23,18 @@ import java.util.Objects;
 public class DatabaseBuilder {
     private final String dbName;
     private String masterKey;
-    private final String huskeyDir;
+    private final String dbDir;
 
     public DatabaseBuilder(String dbName, String masterKey) {
         this.dbName = dbName;
         this.masterKey = masterKey;
-        this.huskeyDir = GlobalConst.HUSKEY_DIR;
+        this.dbDir = GlobalConst.HUSKEY_DIR + "/database/" + dbName + "/";
     }
 
     DatabaseBuilder(String dbName, String masterKey, String huskeyDir) {
         this.dbName = dbName;
         this.masterKey = masterKey;
-        this.huskeyDir = huskeyDir;
+        this.dbDir = huskeyDir + "/database/" + dbName + "/";
     }
 
     /**
@@ -44,7 +44,7 @@ public class DatabaseBuilder {
      * @author いっぺー
      */
     public boolean isKeyMatched() {
-        String path = this.huskeyDir + "/database/" + this.dbName + "/hash";
+        String path = this.dbDir + "hash";
         File file = Paths.get(path).toFile();
 
         StringBuilder hash = new StringBuilder();
@@ -80,7 +80,7 @@ public class DatabaseBuilder {
      */
     public Database buildDatabase() {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        String path = this.huskeyDir + "/database/" + this.dbName + "/" + this.dbName + ".hkdb";
+        String path = this.dbDir + this.dbName + ".hkdb";
         File file = Paths.get(path).toFile();
 
         if (!file.exists()) {
