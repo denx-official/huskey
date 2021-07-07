@@ -56,20 +56,6 @@ class DatabaseTest {
         }
     }
 
-    @Nested
-    class 異常系 {
-        @Test
-        void 検索したノードが見つからなかった場合() {
-            try {
-                db.searchNodeList("/hoge");
-            } catch (IllegalArgumentException _e) {
-                return;
-            }
-
-            fail();
-        }
-    }
-
     @Test
     void データベースの書き出し() {
         Path path = Paths.get(huskeyDir + "database/SampleDB/.hkdb");
@@ -82,6 +68,20 @@ class DatabaseTest {
             assertNotEquals(before.toString(), after.toString());
         } catch (Exception e) {
             e.printStackTrace();
+            fail();
+        }
+    }
+
+    @Nested
+    class 異常系 {
+        @Test
+        void 検索したノードが見つからなかった場合() {
+            try {
+                db.searchNodeList("/hoge");
+            } catch (IllegalArgumentException _e) {
+                return;
+            }
+
             fail();
         }
     }
