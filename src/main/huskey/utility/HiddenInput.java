@@ -12,20 +12,20 @@ public class HiddenInput {
      * <p>標準入力の値をコンソール上に表示せずに取得する。
      *
      * <pre>
-     *     String databaseName = "sample";
-     *     String masterKey = HiddenInput.read(databaseName);
+     *     String msg = "データベース SampleDB のパスワード: ";
+     *     String masterKey = HiddenInput.read(msg);
      *     // コンソールの出力: データベース sample のパスワード:
      * </pre>
      *
-     * @param databaseName データベースの名前
+     * @param msg 文字を入力する際に表示されるメッセージ
      * @author いっぺー
      */
-    public static String read(String databaseName) {
-        String msg = "データベース " + databaseName + " のパスワード: ";
+    public static String read(String msg) {
         Console console = System.console();
         char[] input = console.readPassword(msg);
 
         if (input == null) {
+            // Ctrl + C 等で入力がキャンセルされた場合
             System.exit(0);
         }
 
