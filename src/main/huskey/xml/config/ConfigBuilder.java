@@ -5,6 +5,12 @@ import xml.XMLBuilder;
 import org.w3c.dom.Document;
 import utility.GlobalConst;
 
+/**
+ * Configインスタンスを取得するためのAPI
+ *
+ * @author いっぺー
+ * @see XMLBuilder
+ */
 public class ConfigBuilder extends XMLBuilder<Config> {
     private final String huskeyDir;
 
@@ -16,6 +22,12 @@ public class ConfigBuilder extends XMLBuilder<Config> {
         this.huskeyDir = huskeyDir;
     }
 
+    /**
+     * Configインスタンスの構築
+     *
+     * @return Config
+     * @author いっぺー
+     */
     public Config build() {
         String path = this.huskeyDir + "config.xml";
         BinFileIO fileIO = new BinFileIO(path);
