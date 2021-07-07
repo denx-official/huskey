@@ -48,7 +48,7 @@ class DatabaseBuilderTest {
         void データベースの構築() {
             builder = new DatabaseBuilder(dbName, masterKey, huskeyDir);
             try {
-                Database _db = builder.buildDatabase();
+                Database _db = builder.build();
             } catch (Exception e) {
                 e.printStackTrace();
                 fail();

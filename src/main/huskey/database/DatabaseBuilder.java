@@ -1,13 +1,8 @@
 package database;
 
 import org.w3c.dom.Document;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
 import utility.GlobalConst;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
 import java.nio.file.Paths;
 import java.util.Objects;
@@ -17,19 +12,16 @@ import java.util.Objects;
  *
  * @author いっぺー
  */
-public class DatabaseBuilder {
-    private final String dbName;
+public class DatabaseBuilder extends XMLBuilder<Database> {
     private String masterKey;
     private final String dbDir;
 
     public DatabaseBuilder(String dbName, String masterKey) {
-        this.dbName = dbName;
         this.masterKey = masterKey;
         this.dbDir = GlobalConst.HUSKEY_DIR + "/database/" + dbName + "/";
     }
 
     DatabaseBuilder(String dbName, String masterKey, String huskeyDir) {
-        this.dbName = dbName;
         this.masterKey = masterKey;
         this.dbDir = huskeyDir + "/database/" + dbName + "/";
     }
@@ -88,19 +80,14 @@ public class DatabaseBuilder {
      * @return Database
      * @author いっぺー
      */
-    public Database buildDatabase() {
+    public Database build() {
         BinFileIO fileIO = new BinFileIO(this.hkdbPath());
-        byte[] byteDB = fileIO.readBinFile();
-        InputSource src = new InputSource(new ByteArrayInputStream(byteDB));
+        byte[] bytes = fileIO.readBinFile();
 
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        try {
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            Document doc = builder.parse(src);
-            return new Database(doc, this.masterKey, this.dbDir);
-        } catch (ParserConfigurationException | IOException | SAXException e) {
-            throw new RuntimeException(e);
-        }
+        // （復号処理）
+
+        Document doc = this.bytesToDoc(bytes);
+        return new Database(doc, this.masterKey, this.dbDir);
     }
 
     /**

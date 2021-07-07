@@ -21,7 +21,7 @@ class DatabaseTest {
     @BeforeEach
     void setup() {
         DatabaseBuilder builder = new DatabaseBuilder(dbName, masterKey, huskeyDir);
-        db = builder.buildDatabase();
+        db = builder.build();
     }
 
     @Test

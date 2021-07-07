@@ -1,18 +1,9 @@
 package database;
 
 import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
 import utility.GlobalConst;
 
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.xpath.*;
 import java.io.File;
-import java.io.StringWriter;
-import java.nio.charset.StandardCharsets;
 
 /**
  * データベース
@@ -23,13 +14,12 @@ import java.nio.charset.StandardCharsets;
  * @author いっぺー
  * @see DatabaseBuilder
  */
-public class Database {
-    public final Document doc;
+public class Database extends AbsXML {
     private String masterKey;
     private final String dbDir;
 
     public Database(Document doc, String masterKey, String dbDir) {
-        this.doc = doc;
+        super(doc);
         this.masterKey = masterKey;
         this.dbDir = dbDir;
     }
@@ -102,31 +92,6 @@ public class Database {
     }
 
     /**
-     * ノードの検索
-     *
-     * <p>XPathを用いてDocumentを検索し、条件に一致したノードをNodeListで取得する。
-     *
-     * @param expression 検索条件
-     * @return NodeList
-     * @author いっぺー
-     */
-    public NodeList searchNodeList(String expression) {
-        XPath xpath = XPathFactory.newInstance().newXPath();
-        try {
-            XPathExpression expr = xpath.compile(expression);
-            NodeList nodeList = (NodeList) expr.evaluate(this.doc, XPathConstants.NODESET);
-
-            if (nodeList.getLength() == 0) {
-                throw new IllegalArgumentException("該当するノードが存在しません。");
-            }
-
-            return nodeList;
-        } catch (XPathExpressionException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    /**
      * データベースを暗号化して書き出し
      *
      * @author いっぺー
@@ -140,25 +105,5 @@ public class Database {
 
         BinFileIO fileIO = new BinFileIO(path);
         fileIO.writeBinFile(byteDB);
-    }
-
-    /**
-     * XML文章をbyte[]に変換
-     *
-     * @return byte[]
-     * @author いっぺー
-     */
-    private byte[] xmlToBytes() {
-        StringWriter writer = new StringWriter();
-        TransformerFactory factory = TransformerFactory.newInstance();
-
-        try {
-            Transformer transformer = factory.newTransformer();
-            transformer.transform(new DOMSource(this.doc), new StreamResult(writer));
-        } catch (TransformerException e) {
-            throw new RuntimeException(e);
-        }
-
-        return writer.toString().getBytes(StandardCharsets.UTF_8);
     }
 }
