@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ConfTest {
     private Conf conf;
     private ConfBuilder builder;
-    private final String huskeyDir = "./target/test-classes/resources/";
+    private final String huskeyDir = "./target/classes/";
 
     @Test
     void globalConfの読み込み() {
