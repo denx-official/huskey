@@ -16,7 +16,7 @@ import java.nio.charset.StandardCharsets;
  * Documentの保持やファイルの書き出し機能を定義した抽象クラス
  *
  * @author いっぺー
- * @see xml.conf.Conf
+ * @see xml.config.Config
  * @see xml.database.Database
  */
 public abstract class AbsXML {
