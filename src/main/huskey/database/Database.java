@@ -25,13 +25,11 @@ import java.nio.charset.StandardCharsets;
  */
 public class Database {
     public final Document doc;
-    private final String dbName;
     private String masterKey;
     private final String dbDir;
 
-    public Database(Document doc, String dbName, String masterKey, String dbDir) {
+    public Database(Document doc, String masterKey, String dbDir) {
         this.doc = doc;
-        this.dbName = dbName;
         this.masterKey = masterKey;
         this.dbDir = dbDir;
     }
