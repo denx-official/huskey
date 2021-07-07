@@ -12,6 +12,13 @@ import javax.xml.xpath.*;
 import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * Documentの保持やファイルの書き出し機能を定義した抽象クラス
+ *
+ * @author いっぺー
+ * @see xml.conf.Conf
+ * @see xml.database.Database
+ */
 public abstract class AbsXML {
     public final Document doc;
     protected final String fileDir;
@@ -66,5 +73,10 @@ public abstract class AbsXML {
         return writer.toString().getBytes(StandardCharsets.UTF_8);
     }
 
+    /**
+     * Documentの書き出し
+     *
+     * @author いっぺー
+     */
     abstract public void write();
 }
