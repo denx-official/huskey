@@ -18,12 +18,10 @@ import java.io.File;
  */
 public class Database extends AbsXML {
     private String masterKey;
-    private final String dbDir;
 
-    public Database(Document doc, String masterKey, String dbDir) {
-        super(doc);
+    public Database(Document doc, String masterKey, String fileDir) {
+        super(doc, fileDir);
         this.masterKey = masterKey;
-        this.dbDir = dbDir;
     }
 
     /**
@@ -99,7 +97,7 @@ public class Database extends AbsXML {
      * @author いっぺー
      */
     public void write() {
-        String path = this.dbDir + ".hkdb";
+        String path = this.fileDir + ".hkdb";
         byte[] byteDB = this.xmlToBytes();
 
         // （データベースの暗号化処理）

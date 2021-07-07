@@ -14,9 +14,11 @@ import java.nio.charset.StandardCharsets;
 
 public abstract class AbsXML {
     public final Document doc;
+    protected final String fileDir;
 
-    public AbsXML(Document doc) {
+    public AbsXML(Document doc, String fileDir) {
         this.doc = doc;
+        this.fileDir = fileDir;
     }
 
     /**

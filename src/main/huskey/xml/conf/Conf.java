@@ -6,16 +6,14 @@ import org.w3c.dom.Document;
 
 public class Conf extends AbsXML {
     private final ConfType type;
-    private final String huskeyDir;
 
-    public Conf(Document doc, ConfType type, String huskeyDir) {
-        super(doc);
+    public Conf(Document doc, ConfType type, String fileDir) {
+        super(doc, fileDir);
         this.type = type;
-        this.huskeyDir = huskeyDir;
     }
 
     public void write() {
-        String path = this.huskeyDir + this.type.fileName;
+        String path = this.fileDir + this.type.fileName;
         byte[] byteDB = this.xmlToBytes();
 
         BinFileIO fileIO = new BinFileIO(path);
