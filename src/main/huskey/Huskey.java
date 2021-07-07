@@ -1,5 +1,5 @@
 import cmd.CommandRouting;
-import utility.*;
+import utility.SeparateArgs;
 
 /**
  * コマンドライン引数を分解 -> コマンドルーティングへ渡し、実行
