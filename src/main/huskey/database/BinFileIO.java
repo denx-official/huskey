@@ -10,16 +10,20 @@ import java.nio.file.Paths;
  * @see Database
  */
 public class BinFileIO {
+    private final String path;
+
+    public BinFileIO(String path) {
+        this.path = path;
+    }
 
     /**
      * バイナリファイルの読み込み
      *
-     * @param path 読み込むファイルのパス
      * @return byte[]
      * @author いっぺー
      */
-    static byte[] readBinFile(String path) {
-        File file = Paths.get(path).toFile();
+    public byte[] readBinFile() {
+        File file = Paths.get(this.path).toFile();
 
         try (
                 FileInputStream fis = new FileInputStream(file);
@@ -43,13 +47,12 @@ public class BinFileIO {
     /**
      * バイナリファイルの書き出し
      *
-     * @param path  書き出すファイルのパス
      * @param bytes バイト列のファイル情報
      * @author いっぺー
      */
-    static void writeBinFile(String path, byte[] bytes) {
+    public void writeBinFile(byte[] bytes) {
         try (
-                FileOutputStream fos = new FileOutputStream(path);
+                FileOutputStream fos = new FileOutputStream(this.path);
                 BufferedOutputStream bos = new BufferedOutputStream(fos)
         ) {
             bos.write(bytes);
