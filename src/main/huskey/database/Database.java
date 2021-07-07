@@ -27,7 +27,7 @@ public class Database {
     public final Document doc;
     private final String dbName;
     private String masterKey;
-    private String dbDir;
+    private final String dbDir;
 
     public Database(Document doc, String dbName, String masterKey, String dbDir) {
         this.doc = doc;
