@@ -1,4 +1,4 @@
-package database.conf;
+package xml.conf;
 
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Node;

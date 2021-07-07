@@ -1,7 +1,9 @@
-package database;
+package xml.database;
 
 import org.w3c.dom.Document;
 import utility.GlobalConst;
+import utility.BinFileIO;
+import xml.XMLBuilder;
 
 import java.io.*;
 import java.nio.file.Paths;

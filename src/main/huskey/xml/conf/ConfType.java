@@ -1,4 +1,4 @@
-package database.conf;
+package xml.conf;
 
 public enum ConfType {
     globalConf("globalConf.xml"),

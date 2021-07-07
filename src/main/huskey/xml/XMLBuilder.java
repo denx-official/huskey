@@ -1,4 +1,4 @@
-package database;
+package xml;
 
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;

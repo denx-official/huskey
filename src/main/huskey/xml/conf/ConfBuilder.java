@@ -1,7 +1,7 @@
-package database.conf;
+package xml.conf;
 
-import database.BinFileIO;
-import database.XMLBuilder;
+import utility.BinFileIO;
+import xml.XMLBuilder;
 import org.w3c.dom.Document;
 import utility.GlobalConst;
 

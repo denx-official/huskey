@@ -1,4 +1,6 @@
-package database;
+package utility;
+
+import xml.database.Database;
 
 import java.io.*;
 import java.nio.file.Paths;

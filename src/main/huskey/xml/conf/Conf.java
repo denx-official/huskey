@@ -1,7 +1,7 @@
-package database.conf;
+package xml.conf;
 
-import database.AbsXML;
-import database.BinFileIO;
+import xml.AbsXML;
+import utility.BinFileIO;
 import org.w3c.dom.Document;
 
 public class Conf extends AbsXML {

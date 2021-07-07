@@ -12,7 +12,7 @@ public class DatabaseCmd extends Cmd {
         String values_str = String.join(", ", this.values);
         String options_str = String.join(", ", this.options);
 
-        System.out.println("run database");
+        System.out.println("run xml.database");
         System.out.println("values: " + values_str);
         System.out.println("options: " + options_str);
     }
