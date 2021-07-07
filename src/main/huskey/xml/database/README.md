@@ -47,7 +47,7 @@ if (!builder.isKeyMatched()) {
     retry();
 }
 
-Database db = builder.buildDatabase();
+Database db = builder.build();
 ```
 
 ### Database
@@ -56,7 +56,7 @@ Database db = builder.buildDatabase();
 
 ```java
 // データベースの構築
-Database db = builder.buildDatabase();
+Database db = builder.build();
 
 String path = "//data[@title = 'Google']";
 if (!db.nodeExist(path)) {
@@ -125,7 +125,7 @@ huskey では XPath 構文を用いて Node を簡単に取得できるよう、
 このメソッドは、引数に XPath 構文を入力することで検索結果に該当した全ての Node を NodeList 型として取得できる。
 
 ```java
-Database db = builder.buildDatabase();
+Database db = builder.build();
 
 // data 要素をすべて取得
 NodeList dataList = db.searchNodeList("//data);
@@ -155,8 +155,11 @@ data.setAttribute("title", "Google2"); // title 属性の更新
 
 Node passNode = data.getElementsByTagName("password").item(0); // Element 内から password タグを持つ Node を取得
 passNode.setTextContent("MJ0fQstGuhzYA5BaHqL0"); // password 要素内の Text を更新
+```
 
-// データを更新した際は、updated 要素の更新も行う事
+**データを更新した際は、updated 要素の更新も忘れずに行うこと！**
+
+```java
 Node updated = data.getElementsByTagName("updated").item(0);
 Element newUpdated = HkTime.now().toElement(db.doc, "updated");
 data.removeChild(updated);
