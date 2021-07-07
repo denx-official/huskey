@@ -9,8 +9,8 @@
 ![huskey_architecture](img/huskey_architecture.jpg)
 
 - Database
-    - master_key, Settings, Dataset をまとめたもの
-- master_key
+    - masterKey, Settings, Dataset をまとめたもの
+- masterKey
     - データベースへのアクセスに必要なキー
 - Settings
     - パスワード生成等のデータベースの設定
@@ -39,7 +39,7 @@
 | Commands                                   | Description                                           |
 | :----------------------------------------- | :---------------------------------------------------- |
 | huskey init \<new_database>                | 新しいデータベースを作成する。                        |
-| huskey change key (\<database>)            | \<database> の _master_key_ を変更する。              |
+| huskey change key (\<database>)            | \<database> の _masterKey_ を変更する。              |
 | huskey change settings (\<database>)         | \<database> の設定を変更する。                        |
 | huskey database                            | データベースの一覧と、既定のデータベースを表示する。  |
 | huskey database --delete \<database>       | \<database> を削除する。                              |
