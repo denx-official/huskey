@@ -10,7 +10,7 @@ huskey では、複数の独立したデータベースによってパスワー�
 
 - Database
     - masterKey: データベースを暗号化／復号するための共通鍵
-    - Config: データベースの設定
+    - Settings: データベースの設定
         - passLength: 自動生成するパスワードの長さ
         - charSet: パスワードの自動生成に使用する文字/記号
         - trials: パスワード入力の試行回数

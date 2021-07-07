@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE database [
-    <!ELEMENT database (config, dataset)>
+    <!ELEMENT database (settings, dataset)>
 
-    <!ELEMENT config (passLength, charSet, trials)>
+    <!ELEMENT settings (passLength, charSet, trials)>
     <!ELEMENT passLength (#PCDATA)>
     <!ELEMENT charSet (#PCDATA)>
     <!ELEMENT trials (#PCDATA)>
@@ -41,11 +41,11 @@
 ]>
 
 <database>
-    <config>
+    <settings>
         <passLength>16</passLength>
         <charSet lowerCase="true" upperCase="true" number="true" space="false" />
         <trials>2</trials>
-    </config>
+    </settings>
     <dataset>
         <data title="Google">
             <userName>sample@sample.com</userName>
