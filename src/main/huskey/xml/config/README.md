@@ -1,6 +1,6 @@
 # config
 
-huskey 全体で用いられる設定ファイル（config.xml）に関連したパッケージ。
+huskey 全体で用いられる設定ファイル（_~/.huskey/config.xml_）に関連したパッケージ。
 
 ## ConfigBuilder
 
