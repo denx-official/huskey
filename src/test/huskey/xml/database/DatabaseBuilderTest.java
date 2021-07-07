@@ -42,17 +42,14 @@ class DatabaseBuilderTest {
         }
     }
 
-    @Nested
-    class buildDatabase {
-        @Test
-        void データベースの構築() {
-            builder = new DatabaseBuilder(dbName, masterKey, huskeyDir);
-            try {
-                Database _db = builder.build();
-            } catch (Exception e) {
-                e.printStackTrace();
-                fail();
-            }
+    @Test
+    void データベースの構築() {
+        builder = new DatabaseBuilder(dbName, masterKey, huskeyDir);
+        try {
+            Database _db = builder.build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail();
         }
     }
 
