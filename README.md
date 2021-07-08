@@ -17,7 +17,7 @@
 - Dataset
     - Data の集合
 - Data
-    - タイトル、ユーザー名、パスワード、メッセージ、作成日時を持つもの
+    - タイトル、ユーザー名、パスワード、メッセージ、作成/更新日時を持つもの
 
 ## コマンド
 
@@ -34,6 +34,15 @@
 | :----------------------- | :---------------------------------------------------------------------------------------------------------- |
 | huskey help (\<command>) | huskey のコマンドとそれらの解説の一覧を表示する。\<command>が入力された場合、そのコマンドの詳細を表示する。 |
 
+### Config
+
+Config とは、huskey 全体に適用される共通の設定のこと。  
+状態は _~/.huskey/config.xml_ に保持される。
+
+| Commands                                   | Description                                           |
+| :----------------------------------------- | :---------------------------------------------------- |
+| huskey switch \<database>                  | 既定のデータベースを \<database> に変更する。         |
+
 ### Database
 
 | Commands                                   | Description                                           |
@@ -43,7 +52,6 @@
 | huskey change settings (\<database>)         | \<database> の設定を変更する。                        |
 | huskey database                            | データベースの一覧と、既定のデータベースを表示する。  |
 | huskey database --delete \<database>       | \<database> を削除する。                              |
-| huskey switch \<database>                  | 既定のデータベースを \<database> に変更する。         |
 | huskey merge \<database_1> (\<database_2>) | \<database_1> を \<database_2> にマージする。         |
 
 ### Dataset

@@ -20,9 +20,9 @@ String hkDir = GlobalConst.HUSKEY_DIR;
 標準入力の値をコンソール上に表示せずに取得するクラス。
 
 ```java
-String databaseName = "sample";
-String masterKey = HiddenInput.read(databaseName);
-// -> データベース sample のパスワード:
+String msg = "データベース SampleDB のパスワード: ";
+String masterKey = HiddenInput.read(msg);
+// -> データベース SampleDB のパスワード: 
 ```
 
 ## HuskeyException
