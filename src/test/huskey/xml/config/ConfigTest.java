@@ -5,6 +5,11 @@ import org.junit.jupiter.api.Test;
 import org.w3c.dom.Node;
 import xml.StaticXMLMethods;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.attribute.FileTime;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ConfigTest {
@@ -22,5 +27,21 @@ class ConfigTest {
         Node node = StaticXMLMethods.searchNodeList(conf.getDoc(), "//defaultDB").item(0);
         String result = node.getTextContent();
         assertEquals("SampleDB", result);
+    }
+
+    @Test
+    void configファイルの書き出し() {
+        Path path = Paths.get(huskeyDir + "config.xml");
+
+        try {
+            FileTime before = Files.getLastModifiedTime(path);
+            conf.write();
+            FileTime after = Files.getLastModifiedTime(path);
+
+            assertNotEquals(before.toString(), after.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail();
+        }
     }
 }
