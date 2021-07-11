@@ -4,12 +4,12 @@ import org.w3c.dom.Document;
 import utility.BinFileIO;
 
 /**
- * AbsXMLのサブクラスのインスタンスを取得するAPIの抽象クラス
+ * XMLWriterのサブクラスのインスタンスを取得するAPIの抽象クラス
  *
  * @author いっぺー
  * @see XMLBuilder
  */
-public abstract class XMLBuilder<T extends AbsXML> {
+public abstract class XMLBuilder<T extends XMLWriter> {
     abstract protected byte[] decrypt(byte[] bytes);
 
     abstract protected String getFilePath();
@@ -17,9 +17,9 @@ public abstract class XMLBuilder<T extends AbsXML> {
     abstract protected T returnNewInstance(Document doc);
 
     /**
-     * T (extends AbsXML) インスタンスの構築
+     * T (extends XMLWriter) インスタンスの構築
      *
-     * @return T (extends AbsXML)
+     * @return T (extends XMLWriter)
      * @author いっぺー
      */
     public T build() {

@@ -4,13 +4,13 @@ import org.w3c.dom.Document;
 import utility.BinFileIO;
 
 /**
- * Documentの保持やファイルの書き出し機能を定義した抽象クラス
+ * XMLファイルの情報を出力する機能を持った抽象クラス
  *
  * @author いっぺー
  * @see xml.config.Config
  * @see xml.database.Database
  */
-public abstract class AbsXML {
+public abstract class XMLWriter {
     abstract protected Document getDoc();
 
     abstract protected byte[] encrypt(byte[] bytes);

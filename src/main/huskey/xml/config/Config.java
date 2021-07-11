@@ -1,15 +1,15 @@
 package xml.config;
 
-import xml.AbsXML;
+import xml.XMLWriter;
 import org.w3c.dom.Document;
 
 /**
  * config.xmlにアクセスするためのクラス
  *
  * @author いっぺー
- * @see AbsXML
+ * @see XMLWriter
  */
-public class Config extends AbsXML {
+public class Config extends XMLWriter {
     private final Document doc;
     private final String fileDir;
 

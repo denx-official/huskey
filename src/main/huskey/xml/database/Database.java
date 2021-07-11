@@ -2,7 +2,7 @@ package xml.database;
 
 import org.w3c.dom.Document;
 import utility.GlobalConst;
-import xml.AbsXML;
+import xml.XMLWriter;
 import xml.StaticXMLMethods;
 
 import java.io.File;
@@ -16,7 +16,7 @@ import java.io.File;
  * @author いっぺー
  * @see DatabaseBuilder
  */
-public class Database extends AbsXML {
+public class Database extends XMLWriter {
     private final Document doc;
     private String masterKey;
     private final String fileDir;
