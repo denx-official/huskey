@@ -3,7 +3,6 @@ package xml.database;
 import org.w3c.dom.Document;
 import utility.GlobalConst;
 import xml.AbsXML;
-import utility.BinFileIO;
 import xml.StaticXMLMethods;
 
 import java.io.File;
@@ -18,11 +17,14 @@ import java.io.File;
  * @see DatabaseBuilder
  */
 public class Database extends AbsXML {
+    private final Document doc;
     private String masterKey;
+    private final String fileDir;
 
     public Database(Document doc, String masterKey, String fileDir) {
-        super(doc, fileDir);
+        this.doc = doc;
         this.masterKey = masterKey;
+        this.fileDir = fileDir;
     }
 
     /**
@@ -92,19 +94,18 @@ public class Database extends AbsXML {
         return true;
     }
 
-    /**
-     * データベースを暗号化して書き出し
-     *
-     * @author いっぺー
-     */
-    public void write() {
-        String path = this.fileDir + ".hkdb";
-        byte[] byteDB = StaticXMLMethods.xmlToBytes(this.doc);
+    @Override
+    public Document getDoc() {
+        return this.doc;
+    }
 
-        // （データベースの暗号化処理）
-        // （masterKeyのハッシュ値を書き出す処理）
+    @Override
+    protected byte[] encrypt(byte[] bytes) {
+        return bytes;
+    }
 
-        BinFileIO fileIO = new BinFileIO(path);
-        fileIO.writeBinFile(byteDB);
+    @Override
+    protected String getFilePath() {
+        return this.fileDir + ".hkdb";
     }
 }

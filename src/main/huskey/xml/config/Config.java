@@ -1,9 +1,7 @@
 package xml.config;
 
 import xml.AbsXML;
-import utility.BinFileIO;
 import org.w3c.dom.Document;
-import xml.StaticXMLMethods;
 
 /**
  * config.xmlにアクセスするためのクラス
@@ -12,20 +10,26 @@ import xml.StaticXMLMethods;
  * @see AbsXML
  */
 public class Config extends AbsXML {
+    private final Document doc;
+    private final String fileDir;
+
     public Config(Document doc, String fileDir) {
-        super(doc, fileDir);
+        this.doc = doc;
+        this.fileDir = fileDir;
     }
 
-    /**
-     * config.xmlの書き出し
-     *
-     * @author いっぺー
-     */
-    public void write() {
-        String path = this.fileDir + "config.xml";
-        byte[] byteDB = StaticXMLMethods.xmlToBytes(this.doc);
+    @Override
+    public Document getDoc() {
+        return this.doc;
+    }
 
-        BinFileIO fileIO = new BinFileIO(path);
-        fileIO.writeBinFile(byteDB);
+    @Override
+    protected byte[] encrypt(byte[] bytes) {
+        return bytes;
+    }
+
+    @Override
+    protected String getFilePath() {
+        return this.fileDir + "config.xml";
     }
 }

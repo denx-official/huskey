@@ -1,6 +1,7 @@
 package xml;
 
 import org.w3c.dom.Document;
+import utility.BinFileIO;
 
 /**
  * Documentの保持やファイルの書き出し機能を定義した抽象クラス
@@ -10,18 +11,23 @@ import org.w3c.dom.Document;
  * @see xml.database.Database
  */
 public abstract class AbsXML {
-    public final Document doc;
-    protected final String fileDir;
+    abstract protected Document getDoc();
 
-    public AbsXML(Document doc, String fileDir) {
-        this.doc = doc;
-        this.fileDir = fileDir;
-    }
+    abstract protected byte[] encrypt(byte[] bytes);
+
+    abstract protected String getFilePath();
 
     /**
      * Documentの書き出し
      *
      * @author いっぺー
      */
-    abstract public void write();
+    public void write() {
+        byte[] plainXML = StaticXMLMethods.xmlToBytes(this.getDoc());
+        byte[] cipherXML = this.encrypt(plainXML);
+
+        String path = this.getFilePath();
+        BinFileIO fileIO = new BinFileIO(path);
+        fileIO.writeBinFile(cipherXML);
+    }
 }
