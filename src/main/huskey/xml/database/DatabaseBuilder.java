@@ -2,8 +2,6 @@ package xml.database;
 
 import org.w3c.dom.Document;
 import utility.GlobalConst;
-import utility.BinFileIO;
-import xml.StaticXMLMethods;
 import xml.XMLBuilder;
 
 import java.io.*;
@@ -63,7 +61,7 @@ public class DatabaseBuilder extends XMLBuilder<Database> {
      * @author いっぺー
      */
     public boolean exists() {
-        File file = Paths.get(this.hkdbPath()).toFile();
+        File file = Paths.get(this.getFilePath()).toFile();
         return file.exists();
     }
 
@@ -77,29 +75,18 @@ public class DatabaseBuilder extends XMLBuilder<Database> {
         this.masterKey = newKey;
     }
 
-    /**
-     * Databaseインスタンスの構築
-     *
-     * @return Database
-     * @author いっぺー
-     */
-    public Database build() {
-        BinFileIO fileIO = new BinFileIO(this.hkdbPath());
-        byte[] bytes = fileIO.readBinFile();
-
-        // （復号処理）
-
-        Document doc = StaticXMLMethods.bytesToDoc(bytes);
-        return new Database(doc, this.masterKey, this.dbDir);
+    @Override
+    protected byte[] decrypt(byte[] bytes) {
+        return bytes;
     }
 
-    /**
-     * データベースファイルのパスを取得
-     *
-     * @return String
-     * @author いっぺー
-     */
-    private String hkdbPath() {
+    @Override
+    protected String getFilePath() {
         return this.dbDir + ".hkdb";
+    }
+
+    @Override
+    protected Database returnNewInstance(Document doc) {
+        return new Database(doc, this.masterKey, this.dbDir);
     }
 }

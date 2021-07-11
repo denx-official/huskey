@@ -1,7 +1,5 @@
 package xml.config;
 
-import utility.BinFileIO;
-import xml.StaticXMLMethods;
 import xml.XMLBuilder;
 import org.w3c.dom.Document;
 import utility.GlobalConst;
@@ -23,18 +21,18 @@ public class ConfigBuilder extends XMLBuilder<Config> {
         this.huskeyDir = huskeyDir;
     }
 
-    /**
-     * Configインスタンスの構築
-     *
-     * @return Config
-     * @author いっぺー
-     */
-    public Config build() {
-        String path = this.huskeyDir + "config.xml";
-        BinFileIO fileIO = new BinFileIO(path);
-        byte[] bytes = fileIO.readBinFile();
+    @Override
+    protected byte[] decrypt(byte[] bytes) {
+        return bytes;
+    }
 
-        Document doc = StaticXMLMethods.bytesToDoc(bytes);
+    @Override
+    protected String getFilePath() {
+        return this.huskeyDir + "config.xml";
+    }
+
+    @Override
+    protected Config returnNewInstance(Document doc) {
         return new Config(doc, this.huskeyDir);
     }
 }
