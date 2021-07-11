@@ -4,6 +4,7 @@ import org.w3c.dom.Document;
 import utility.GlobalConst;
 import xml.AbsXML;
 import utility.BinFileIO;
+import xml.StaticXMLMethods;
 
 import java.io.File;
 
@@ -83,7 +84,7 @@ public class Database extends AbsXML {
      */
     public boolean nodeExist(String expression) {
         try {
-            this.searchNodeList(expression);
+            StaticXMLMethods.searchNodeList(this.doc, expression);
         } catch (IllegalArgumentException _e) {
             return false;
         }
@@ -98,7 +99,7 @@ public class Database extends AbsXML {
      */
     public void write() {
         String path = this.fileDir + ".hkdb";
-        byte[] byteDB = this.xmlToBytes();
+        byte[] byteDB = StaticXMLMethods.xmlToBytes(this.doc);
 
         // （データベースの暗号化処理）
         // （masterKeyのハッシュ値を書き出す処理）

@@ -1,6 +1,7 @@
 package xml.config;
 
 import utility.BinFileIO;
+import xml.StaticXMLMethods;
 import xml.XMLBuilder;
 import org.w3c.dom.Document;
 import utility.GlobalConst;
@@ -33,7 +34,7 @@ public class ConfigBuilder extends XMLBuilder<Config> {
         BinFileIO fileIO = new BinFileIO(path);
         byte[] bytes = fileIO.readBinFile();
 
-        Document doc = this.bytesToDoc(bytes);
+        Document doc = StaticXMLMethods.bytesToDoc(bytes);
         return new Config(doc, this.huskeyDir);
     }
 }

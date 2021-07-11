@@ -2,6 +2,7 @@ package xml.config;
 
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Node;
+import xml.StaticXMLMethods;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,7 +16,7 @@ class ConfigTest {
         builder = new ConfigBuilder(huskeyDir);
         conf = builder.build();
 
-        Node node = conf.searchNodeList("//defaultDB").item(0);
+        Node node = StaticXMLMethods.searchNodeList(conf.doc, "//defaultDB").item(0);
         String result = node.getTextContent();
         assertEquals("SampleDB", result);
     }

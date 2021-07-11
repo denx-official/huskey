@@ -3,6 +3,7 @@ package xml.database;
 import org.w3c.dom.Document;
 import utility.GlobalConst;
 import utility.BinFileIO;
+import xml.StaticXMLMethods;
 import xml.XMLBuilder;
 
 import java.io.*;
@@ -88,7 +89,7 @@ public class DatabaseBuilder extends XMLBuilder<Database> {
 
         // （復号処理）
 
-        Document doc = this.bytesToDoc(bytes);
+        Document doc = StaticXMLMethods.bytesToDoc(bytes);
         return new Database(doc, this.masterKey, this.dbDir);
     }
 

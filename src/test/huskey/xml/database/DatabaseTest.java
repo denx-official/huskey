@@ -3,7 +3,6 @@ package xml.database;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.w3c.dom.Node;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -38,11 +37,6 @@ class DatabaseTest {
         assertEquals(expect, db._getMasterKey());
     }
 
-    @Test
-    void ノードの検索() {
-        Node _node = db.searchNodeList("/database").item(0);
-    }
-
     @Nested
     class nodeExist {
         @Test
@@ -68,20 +62,6 @@ class DatabaseTest {
             assertNotEquals(before.toString(), after.toString());
         } catch (Exception e) {
             e.printStackTrace();
-            fail();
-        }
-    }
-
-    @Nested
-    class 異常系 {
-        @Test
-        void 検索したノードが見つからなかった場合() {
-            try {
-                db.searchNodeList("/hoge");
-            } catch (IllegalArgumentException _e) {
-                return;
-            }
-
             fail();
         }
     }
