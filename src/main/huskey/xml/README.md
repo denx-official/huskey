@@ -8,16 +8,15 @@ XML 形式のファイルを操作するための抽象クラスを定義した�
 - database
     - データベースの操作や書き出しに関連したパッケージ。
 
-## AbsXML
+## XMLWriter
 
-Document の保持やファイルの書き出し機能を定義した抽象クラス。  
-XPath 構文を用いて Document から特定の Node を取得する `searchNodeList` メソッドを実装している。  
-また、Document からバイナリファイルを書き出すための `write` メソッドの実装を継承先に強制する。
+XMLファイルの情報を出力する機能を持った抽象クラス。  
+`write` メソッドは Template Method パターンで実装しており、継承先で `getDoc` `encrypt` `getFilePath` メソッドをオーバーライドすることで機能するようになる。
 
 ## XMLBuilder
 
 AbsXML のサブクラスのインスタンスを構築するAPIの抽象クラス。  
-インスタンスを構築するための `build` メソッドの実装を継承先に強制する。
+こちらも `build` コマンドを Template Method パターンを採用し、`decrypt` `getFilePath` `returnNewInstance` メソッドのオーバーライドによって機能する。
 
 ## 前提知識
 
