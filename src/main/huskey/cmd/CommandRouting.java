@@ -11,6 +11,7 @@ import cmd.removeCmd.RemoveCmd;
 import cmd.searchCmd.SearchCmd;
 import cmd.setCmd.SetCmd;
 import cmd.switchCmd.SwitchCmd;
+import utility.GlobalConst;
 import utility.HuskeyException;
 
 /**
@@ -20,9 +21,15 @@ import utility.HuskeyException;
  *
  * @author いっぺー
  */
-public class CommandRouting extends Cmd {
+public class CommandRouting implements Cmd {
+    private final String command;
+    private final String[] values;
+    private final String[] options;
+
     public CommandRouting(String command, String[] values, String[] options) {
-        super(command, values, options);
+        this.command = command;
+        this.values = values;
+        this.options = options;
     }
 
     /**
@@ -45,47 +52,47 @@ public class CommandRouting extends Cmd {
 
         switch (this.command) {
             case "help":
-                cmd = new HelpCmd(this.command, this.values, this.options);
+                cmd = new HelpCmd(GlobalConst.HUSKEY_DIR);
                 break;
 
             case "init":
-                cmd = new InitCmd(this.command, this.values, this.options);
+                cmd = new InitCmd(GlobalConst.HUSKEY_DIR);
                 break;
 
             case "change":
-                cmd = new ChangeCmd(this.command, this.values, this.options);
+                cmd = new ChangeCmd(GlobalConst.HUSKEY_DIR);
                 break;
 
             case "database":
-                cmd = new DatabaseCmd(this.command, this.values, this.options);
+                cmd = new DatabaseCmd(GlobalConst.HUSKEY_DIR);
                 break;
 
             case "switch":
-                cmd = new SwitchCmd(this.command, this.values, this.options);
+                cmd = new SwitchCmd(GlobalConst.HUSKEY_DIR);
                 break;
 
             case "merge":
-                cmd = new MergeCmd(this.command, this.values, this.options);
+                cmd = new MergeCmd(GlobalConst.HUSKEY_DIR);
                 break;
 
             case "list":
-                cmd = new ListCmd(this.command, this.values, this.options);
+                cmd = new ListCmd(GlobalConst.HUSKEY_DIR);
                 break;
 
             case "search":
-                cmd = new SearchCmd(this.command, this.values, this.options);
+                cmd = new SearchCmd(GlobalConst.HUSKEY_DIR);
                 break;
 
             case "get":
-                cmd = new GetCmd(this.command, this.values, this.options);
+                cmd = new GetCmd(GlobalConst.HUSKEY_DIR);
                 break;
 
             case "set":
-                cmd = new SetCmd(this.command, this.values, this.options);
+                cmd = new SetCmd(GlobalConst.HUSKEY_DIR);
                 break;
 
             case "remove":
-                cmd = new RemoveCmd(this.command, this.values, this.options);
+                cmd = new RemoveCmd(GlobalConst.HUSKEY_DIR);
                 break;
 
             default:
