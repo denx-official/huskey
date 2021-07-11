@@ -10,16 +10,6 @@ package cmd;
  *
  * @author いっぺー
  */
-public abstract class Cmd {
-    protected final String command;
-    protected final String[] values;
-    protected final String[] options;
-
-    public Cmd(String command, String[] values, String[] options) {
-        this.command = command;
-        this.values = values;
-        this.options = options;
-    }
-
-    abstract public void run();
+public interface Cmd {
+    void run();
 }
