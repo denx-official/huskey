@@ -89,7 +89,7 @@ public class HkTime {
      * @return int
      * @author いっぺー
      */
-    private int get(String target) {
+    public int get(String target) {
         switch (target) {
             case "year":
                 return this.year;
@@ -114,7 +114,7 @@ public class HkTime {
      * @return String[]
      * @author いっぺー
      */
-    private static String[] iterator() {
+    public static String[] iterator() {
         return new String[]{"year", "month", "date", "hours", "minutes", "seconds"};
     }
 }
