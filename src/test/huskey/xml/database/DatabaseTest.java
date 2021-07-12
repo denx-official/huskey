@@ -1,7 +1,6 @@
 package xml.database;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.nio.file.Files;
@@ -35,19 +34,6 @@ class DatabaseTest {
         String expect = "sample2";
         db.setMasterKey(expect);
         assertEquals(expect, db._getMasterKey());
-    }
-
-    @Nested
-    class nodeExist {
-        @Test
-        void ノードが存在するか否か_true() {
-            assertTrue(db.nodeExist("/database"));
-        }
-
-        @Test
-        void ノードが存在するか否か_false() {
-            assertFalse(db.nodeExist("/hoge"));
-        }
     }
 
     @Test
