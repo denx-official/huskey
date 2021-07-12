@@ -1,7 +1,10 @@
 package xml;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import xml.database.HkTime;
 
 import javax.xml.xpath.*;
 
@@ -10,6 +13,61 @@ public class XMLOperator {
 
     public XMLOperator(Document doc) {
         this.doc = doc;
+    }
+
+    /**
+     * 対象のノードが存在するか否か
+     *
+     * <p>XPathを用いてDocumentを検索し、その条件に一致したノードが存在するかを判定する。
+     *
+     * @param expression 対象のノード（XPath構文）
+     * @return boolean
+     * @author いっぺー
+     */
+    public boolean exists(String expression) {
+        try {
+            this.searchNodeList(expression);
+        } catch (IllegalArgumentException _e) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * 対象のDataのupdatedを更新
+     *
+     * @param target 対象のDataのタイトル
+     * @author いっぺー
+     */
+    public void setUpdatedTime(String target) {
+        String dataExpr = "//data[@title = '" + target + "']";
+        String updatedExpr = dataExpr + "/updated";
+
+        Node data = this.searchNode(dataExpr);
+        Node updated = this.searchNode(updatedExpr);
+        Element newUpdated = HkTime.now().toElement(this.doc, "updated");
+
+        data.removeChild(updated);
+        data.appendChild(newUpdated);
+    }
+
+    /**
+     * ノードの検索
+     *
+     * <p>XPathを用いてDocumentを検索し、条件に一致したノードを取得する。
+     *
+     * @param expression 検索条件
+     * @return NodeList
+     * @author いっぺー
+     */
+    public Node searchNode(String expression) {
+        NodeList nodeList = this.searchNodeList(expression);
+
+        if (1 < nodeList.getLength()) {
+            throw new IllegalArgumentException("検索条件 " + expression + " に一致したノードが複数存在します。");
+        }
+
+        return nodeList.item(0);
     }
 
     /**
@@ -35,21 +93,5 @@ public class XMLOperator {
         } catch (XPathExpressionException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    /**
-     * 対象のノードが存在するか否か
-     *
-     * @return boolean
-     * @author いっぺー
-     */
-    public boolean nodeExist(String expression) {
-        try {
-            this.searchNodeList(expression);
-        } catch (IllegalArgumentException _e) {
-            return false;
-        }
-
-        return true;
     }
 }
