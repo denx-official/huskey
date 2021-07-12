@@ -10,10 +10,32 @@ import utility.BinFileIO;
  * @see XMLBuilder
  */
 public abstract class XMLBuilder<T extends XMLWriter> {
+    /**
+     * XML文章の復号
+     *
+     * <p>復号の必要が無ければ、受け取った引数をそのまま返すのみの処理でOK。
+     *
+     * @param bytes 暗号化されたXML文章
+     * @return byte[]
+     * @author いっぺー
+     */
     abstract protected byte[] decrypt(byte[] bytes);
 
+    /**
+     * 読み込むXMLファイルのパスを返すメソッド
+     *
+     * @return String
+     * @author いっぺー
+     */
     abstract protected String getFilePath();
 
+    /**
+     * XMLWriterのサブクラスのインスタンスを返すメソッド
+     *
+     * @param doc XML文章
+     * @return T (extends XMLWriter)
+     * @author いっぺー
+     */
     abstract protected T returnNewInstance(Document doc);
 
     /**

@@ -19,6 +19,11 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * byte[] 型の XML 文章と Document 型の変換を行うクラス
+ *
+ * @author いっぺー
+ */
 public class XMLParser {
     /**
      * XML文章をbyte[]に変換

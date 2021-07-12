@@ -28,6 +28,13 @@ public class HkTime {
         this.seconds = seconds;
     }
 
+    /**
+     * Element 型の時間情報から HKTime のインスタンスを生成
+     *
+     * @param element Element 型の時間情報
+     * @return HkTime
+     * @author いっぺー
+     */
     public static HkTime newInstanceByElement(Element element) {
         return new HkTime(
                 Integer.parseInt(element.getAttribute("year")),

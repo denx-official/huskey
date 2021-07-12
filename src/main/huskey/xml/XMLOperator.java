@@ -8,6 +8,15 @@ import xml.database.HkTime;
 
 import javax.xml.xpath.*;
 
+/**
+ * Document の検索や更新を行うクラス
+ *
+ * <p>Database や Config クラスに委譲して使用する。
+ *
+ * @author いっぺー
+ * @see xml.database.Database
+ * @see xml.config.Config
+ */
 public class XMLOperator {
     private final Document doc;
 

@@ -82,22 +82,61 @@ public class Database extends XMLWriter {
         return this.masterKey;
     }
 
+    /**
+     * 対象のノードが存在するか否か
+     *
+     * <p>XPathを用いてDocumentを検索し、その条件に一致したノードが存在するかを判定する。
+     *
+     * @param expression 対象のノード（XPath構文）
+     * @return boolean
+     * @author いっぺー
+     */
     public boolean exists(String expression) {
         return this.operator.exists(expression);
     }
 
+    /**
+     * 対象のDataのupdatedを更新
+     *
+     * @param target 対象のDataのタイトル
+     * @author いっぺー
+     */
     public void updateTime(String target) {
         this.operator.updateTime(target);
     }
 
+    /**
+     * ノードの検索
+     *
+     * <p>XPathを用いてDocumentを検索し、条件に一致したノードを取得する。
+     *
+     * @param expression 検索条件
+     * @return NodeList
+     * @author いっぺー
+     */
     public Node searchNode(String expression) {
         return this.operator.searchNode(expression);
     }
 
+    /**
+     * ノードの検索
+     *
+     * <p>XPathを用いてDocumentを検索し、条件に一致したノードをNodeListで取得する。
+     *
+     * @param expression 検索条件
+     * @return NodeList
+     * @author いっぺー
+     */
     public NodeList searchNodeList(String expression) {
         return this.operator.searchNodeList(expression);
     }
 
+    /**
+     * XML文章の取得
+     *
+     * @return Document
+     * @author いっぺー
+     */
     @Override
     public Document getDoc() {
         return this.doc;
