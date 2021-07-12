@@ -1,5 +1,7 @@
 package xml.config;
 
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import xml.XMLOperator;
 import xml.XMLWriter;
 import org.w3c.dom.Document;
@@ -19,6 +21,18 @@ public class Config extends XMLWriter {
         this.doc = doc;
         this.fileDir = fileDir;
         this.operator = new XMLOperator(doc);
+    }
+
+    public boolean exists(String expression) {
+        return this.operator.exists(expression);
+    }
+
+    public Node searchNode(String expression) {
+        return this.operator.searchNode(expression);
+    }
+
+    public NodeList searchNodeList(String expression) {
+        return this.operator.searchNodeList(expression);
     }
 
     @Override

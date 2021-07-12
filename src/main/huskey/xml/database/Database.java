@@ -1,6 +1,8 @@
 package xml.database;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import utility.GlobalConst;
 import xml.XMLOperator;
 import xml.XMLWriter;
@@ -78,6 +80,22 @@ public class Database extends XMLWriter {
      */
     String _getMasterKey() {
         return this.masterKey;
+    }
+
+    public boolean exists(String expression) {
+        return this.operator.exists(expression);
+    }
+
+    public void setUpdatedTime(String target) {
+        this.operator.updateTime(target);
+    }
+
+    public Node searchNode(String expression) {
+        return this.operator.searchNode(expression);
+    }
+
+    public NodeList searchNodeList(String expression) {
+        return this.operator.searchNodeList(expression);
     }
 
     @Override
