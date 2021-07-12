@@ -3,8 +3,13 @@ package xml;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import xml.database.Database;
 import xml.database.DatabaseBuilder;
+import xml.database.HkTime;
+
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,14 +29,30 @@ class XMLOperatorTest {
 
     @Test
     void ノードの取得() {
-    }
-
-    @Test
-    void ノードの更新() {
+        Node node = db.searchNode("/database");
+        if (node != null) return;
+        fail("ノードを取得できませんでした");
     }
 
     @Test
     void updatedの更新() {
+        String expr = "//data[@title = 'Google']/updated";
+
+        Element beforeElem = (Element) db.searchNode(expr);
+        db.setUpdatedTime("Google");
+        Element afterElem = (Element) db.searchNode(expr);
+
+        String[] iter = HkTime.iterator();
+        String[] before = new String[iter.length];
+        String[] after = new String[iter.length];
+
+        for (int i = 0; i < iter.length; i++) {
+            before[i] = beforeElem.getAttribute(iter[i]);
+            after[i] = afterElem.getAttribute(iter[i]);
+        }
+
+        if (!Arrays.equals(before, after)) return;
+        fail("updated の値が更新されていません。");
     }
 
     @Nested
