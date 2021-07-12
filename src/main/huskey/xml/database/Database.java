@@ -86,7 +86,7 @@ public class Database extends XMLWriter {
         return this.operator.exists(expression);
     }
 
-    public void setUpdatedTime(String target) {
+    public void updateTime(String target) {
         this.operator.updateTime(target);
     }
 

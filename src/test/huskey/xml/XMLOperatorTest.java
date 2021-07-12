@@ -39,7 +39,7 @@ class XMLOperatorTest {
         String expr = "//data[@title = 'Google']/updated";
 
         Element beforeElem = (Element) db.searchNode(expr);
-        db.setUpdatedTime("Google");
+        db.updateTime("Google");
         Element afterElem = (Element) db.searchNode(expr);
 
         String[] iter = HkTime.iterator();
