@@ -80,7 +80,7 @@ db.write();
 // ==============================
 
 // データベース名のリストを取得
-String[] dbList = Database.getDBList();
+String[] dbList = Database.getDBList(huskeyDir);
 ```
 
 ### Data

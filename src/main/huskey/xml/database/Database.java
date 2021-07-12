@@ -34,21 +34,11 @@ public class Database extends XMLWriter {
     /**
      * 全データベースの名前を一覧で取得
      *
-     * @return String[]
-     * @author いっぺー
-     */
-    public static String[] getDBList() {
-        return Database.getDBList(GlobalConst.HUSKEY_DIR);
-    }
-
-    /**
-     * 全データベースの名前を一覧で取得
-     *
      * @param huskeyDir ドットフォルダーのディレクトリ
      * @return String[]
      * @author いっぺー
      */
-    static String[] getDBList(String huskeyDir) {
+    public static String[] getDBList(String huskeyDir) {
         File[] dbFiles = new File(huskeyDir + "database/").listFiles();
         if (dbFiles == null) {
             return new String[]{""};
