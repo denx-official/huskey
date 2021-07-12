@@ -51,8 +51,4 @@ class DatabaseTest {
             fail();
         }
     }
-
-    @Test
-    void データベースのマージ() {
-    } // 優先度_低
 }
