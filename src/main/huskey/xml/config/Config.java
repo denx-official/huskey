@@ -1,7 +1,6 @@
 package xml.config;
 
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import xml.XMLOperator;
 import xml.XMLWriter;
 import org.w3c.dom.Document;
