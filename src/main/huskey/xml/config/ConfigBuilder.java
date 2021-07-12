@@ -2,7 +2,6 @@ package xml.config;
 
 import xml.XMLBuilder;
 import org.w3c.dom.Document;
-import utility.GlobalConst;
 
 /**
  * Configインスタンスを取得するためのAPI
@@ -13,11 +12,7 @@ import utility.GlobalConst;
 public class ConfigBuilder extends XMLBuilder<Config> {
     private final String huskeyDir;
 
-    public ConfigBuilder() {
-        this.huskeyDir = GlobalConst.HUSKEY_DIR;
-    }
-
-    ConfigBuilder(String huskeyDir) {
+    public ConfigBuilder(String huskeyDir) {
         this.huskeyDir = huskeyDir;
     }
 

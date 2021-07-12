@@ -1,7 +1,6 @@
 package xml.database;
 
 import org.w3c.dom.Document;
-import utility.GlobalConst;
 import xml.XMLBuilder;
 
 import java.io.*;
@@ -17,12 +16,7 @@ public class DatabaseBuilder extends XMLBuilder<Database> {
     private String masterKey;
     private final String dbDir;
 
-    public DatabaseBuilder(String dbName, String masterKey) {
-        this.masterKey = masterKey;
-        this.dbDir = GlobalConst.HUSKEY_DIR + "/database/" + dbName + "/";
-    }
-
-    DatabaseBuilder(String dbName, String masterKey, String huskeyDir) {
+    public DatabaseBuilder(String dbName, String masterKey, String huskeyDir) {
         this.masterKey = masterKey;
         this.dbDir = huskeyDir + "/database/" + dbName + "/";
     }
