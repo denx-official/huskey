@@ -29,7 +29,7 @@ public abstract class XMLBuilder<T extends XMLWriter> {
         byte[] cipherXML = fileIO.readBinFile();
         byte[] plainXML = this.decrypt(cipherXML);
 
-        Document doc = StaticXMLMethods.bytesToDoc(plainXML);
+        Document doc = XMLParser.bytesToDoc(plainXML);
         return this.returnNewInstance(doc);
     }
 }

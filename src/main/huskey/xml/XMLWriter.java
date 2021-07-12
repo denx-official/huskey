@@ -23,7 +23,7 @@ public abstract class XMLWriter {
      * @author いっぺー
      */
     public void write() {
-        byte[] plainXML = StaticXMLMethods.xmlToBytes(this.getDoc());
+        byte[] plainXML = XMLParser.xmlToBytes(this.getDoc());
         byte[] cipherXML = this.encrypt(plainXML);
 
         String path = this.getFilePath();

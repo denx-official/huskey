@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 
-public class StaticXMLMethods {
+public class XMLParser {
     /**
      * XML文章をbyte[]に変換
      *
