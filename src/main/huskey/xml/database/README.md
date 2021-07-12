@@ -35,7 +35,7 @@ Database インスタンスを取得するためのクラス。
 masterKey の照合、データベースの読み込み/復号を行う。
 
 ```java
-DatabaseBuilder builder = new DatabaseBuilder(dbName, masterKey);
+DatabaseBuilder builder = new DatabaseBuilder(dbName, masterKey, huskeyDir);
 
 if (!builder.exists()) {
     // データベースが存在しないときの処理
@@ -59,16 +59,20 @@ Database db = builder.build();
 Database db = builder.build();
 
 String path = "//data[@title = 'Google']";
-if (!db.nodeExist(path)) {
+if (!db.exists(path)) {
     // 対象の Node が存在しないときの処理
 }
 
-// ノードの検索
-Node node = db.searchNode(path).item(0);
+// ノードの取得
+Node node = db.searchNode(path);
+NodeList nodeList = db.searchNodeList(path); // 複数のノードを取得する場合はこっち
 
-// masterKeyの更新
+// masterKey の更新
 String newKey = "boZzfgstKkwCKClO60PM";
 db.setMasterKey(newKey);
+
+// updated (データの更新日時) の更新
+db.updateTime("title");
 
 // データベースの書き出し
 db.write();
@@ -106,8 +110,15 @@ Data インスタンス内で保持する時間情報を定義したクラス。
 // 現在時刻の取得
 HkTime hkTime = HkTime.now();
 
-// HkTime 型を、タグが "updated" の Element に変換
-Element elem = hkTime.toElement(db.doc, "updated");
+// 値の取得
+int year = hkTime.get("year");
+int month = hkTime.month;
+
+// 取得できる変数のリストを取得（year, month, date, hours, minutes, seconds）
+for (String iter : HkTime.iterator()) {
+    int num = hkTime.get(iter);
+    // 各処理
+}
 ```
 
 ## データベースの操作について
@@ -117,8 +128,9 @@ Element elem = hkTime.toElement(db.doc, "updated");
 
 ### Node/Element の取得
 
-huskey では XPath 構文を用いて Node を簡単に取得できるよう、 Database クラスに `searchNodeList` メソッドを用意している。  
-このメソッドは、引数に XPath 構文を入力することで検索結果に該当した全ての Node を NodeList 型として取得できる。
+huskey では XPath 構文を用いて Node を簡単に取得できるよう、 Database クラスに `searchNode` および `searchNodeList` メソッドを用意している。  
+これらのメソッドは、引数に XPath 構文を入力し、検索結果に該当した Node を取得できる。  
+該当する Node が１つの場合は前者、複数個の場合は後者を用いること。
 
 ```java
 Database db = builder.build();
@@ -128,7 +140,7 @@ NodeList dataList = db.searchNodeList("//data");
 Node firstData = dataList.item(0); // 先頭の Node を取得
 ```
 
-また、Node ではなく Element で取得したい場合は、型をキャスト（型変換）することで可能となる。
+また、Node ではなく Element (要素) で取得したい場合は、型をキャスト（型変換）することで可能となる。
 
 ```java
 NodeList nodeList = db.searchNodeList("//data");
@@ -143,7 +155,7 @@ Element 型では属性へのアクセスが簡単にできるため、こうし
 
 ### データベースの更新
 
-データベースの内容を更新する際は、先ほどの `searchNodeList` メソッドなどから Node/Element を取得し、それらから提供されるメソッドを用いることで可能となる。
+データベースの内容を更新する際は、先ほどの `searchNode` メソッドなどから Node/Element を取得し、それらから提供されるメソッドを用いることで可能となる。
 
 ```java
 Element data = (Element) db.searchNode("//data[@title = 'Google']");
@@ -156,10 +168,7 @@ passNode.setTextContent("MJ0fQstGuhzYA5BaHqL0"); // password 要素内の Text �
 **データを更新した際は、updated 要素の更新も忘れずに行うこと！**
 
 ```java
-Node updated = data.getElementsByTagName("updated").item(0);
-Element newUpdated = HkTime.now().toElement(db.doc, "updated");
-data.removeChild(updated);
-data.appendChild(newUpdated);
+db.updateTime("Google"); // これで "//data[@title = 'Google']/updated" が更新される
 ```
 
 ### データの新規追加
@@ -177,6 +186,6 @@ Data data = new Data(
 );
 Element dataElem = data.toElement(db.doc); // Data 型を Element 型に変換
 
-Node dataset = db.searchNodeList("//dataset").item(0);
+Node dataset = db.searchNode("//dataset");
 dataset.appendChild(dataElem); // データセットに新規データを追加
 ```

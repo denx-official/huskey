@@ -7,7 +7,7 @@ huskey 全体で用いられる設定ファイル（_~/.huskey/config.xml_）に
 Config インスタンスを取得するためのクラス。
 
 ```java
-ConfigBuilder builder = new ConfigBuilder();
+ConfigBuilder builder = new ConfigBuilder(huskeyDir);
 Config config = builder.build();
 ```
 
@@ -19,12 +19,16 @@ Config config = builder.build();
 // config の構築
 Config config = builder.build();
 
-// ノードの検索
 String path = "//passLength";
-Node node = config.searchNode(path).item(0);
+if (!config.exists(path)) {
+    // 対象の Node が存在しないときの処理
+}
+
+// ノードの検索
+Node node = config.searchNode(path);
 
 // コンフィグの書き出し
 config.write();
 ```
 
-DOM 操作等については database パッケージ内の README で解説しているため省略する。
+DOM 操作等については Database クラスと同様であるため詳細は割愛する（詳しくは database パッケージの README を参照）。

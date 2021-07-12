@@ -15,8 +15,17 @@ XMLファイルの情報を出力する機能を持った抽象クラス。
 
 ## XMLBuilder
 
-AbsXML のサブクラスのインスタンスを構築するAPIの抽象クラス。  
+XMLWriter のサブクラスのインスタンスを構築するAPIの抽象クラス。  
 こちらも `build` コマンドを Template Method パターンを採用し、`decrypt` `getFilePath` `returnNewInstance` メソッドのオーバーライドによって機能する。
+
+## XMLOperator
+
+Document の検索や更新を行うクラス。  
+Database や Config クラスに委譲して使用する。
+
+## XMLParser
+
+byte[] 型の XML 文章と Document 型の変換を行うクラス。
 
 ## 前提知識
 
