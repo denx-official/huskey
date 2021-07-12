@@ -31,10 +31,6 @@ public class Config extends XMLWriter {
         return this.operator.searchNode(expression);
     }
 
-    public NodeList searchNodeList(String expression) {
-        return this.operator.searchNodeList(expression);
-    }
-
     @Override
     public Document getDoc() {
         return this.doc;
