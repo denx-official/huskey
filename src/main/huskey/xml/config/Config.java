@@ -1,5 +1,6 @@
 package xml.config;
 
+import xml.XMLOperator;
 import xml.XMLWriter;
 import org.w3c.dom.Document;
 
@@ -12,10 +13,12 @@ import org.w3c.dom.Document;
 public class Config extends XMLWriter {
     private final Document doc;
     private final String fileDir;
+    private final XMLOperator operator;
 
     public Config(Document doc, String fileDir) {
         this.doc = doc;
         this.fileDir = fileDir;
+        this.operator = new XMLOperator(doc);
     }
 
     @Override

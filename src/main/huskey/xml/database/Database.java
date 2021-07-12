@@ -2,8 +2,8 @@ package xml.database;
 
 import org.w3c.dom.Document;
 import utility.GlobalConst;
+import xml.XMLOperator;
 import xml.XMLWriter;
-import xml.StaticXMLMethods;
 
 import java.io.File;
 
@@ -20,11 +20,13 @@ public class Database extends XMLWriter {
     private final Document doc;
     private String masterKey;
     private final String fileDir;
+    private final XMLOperator operator;
 
     public Database(Document doc, String masterKey, String fileDir) {
         this.doc = doc;
         this.masterKey = masterKey;
         this.fileDir = fileDir;
+        this.operator = new XMLOperator(doc);
     }
 
     /**
@@ -76,22 +78,6 @@ public class Database extends XMLWriter {
      */
     String _getMasterKey() {
         return this.masterKey;
-    }
-
-    /**
-     * 対象のノードが存在するか否か
-     *
-     * @return boolean
-     * @author いっぺー
-     */
-    public boolean nodeExist(String expression) {
-        try {
-            StaticXMLMethods.searchNodeList(this.doc, expression);
-        } catch (IllegalArgumentException _e) {
-            return false;
-        }
-
-        return true;
     }
 
     @Override

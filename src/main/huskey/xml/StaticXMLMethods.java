@@ -21,31 +21,6 @@ import java.nio.charset.StandardCharsets;
 
 public class StaticXMLMethods {
     /**
-     * ノードの検索
-     *
-     * <p>XPathを用いてDocumentを検索し、条件に一致したノードをNodeListで取得する。
-     *
-     * @param expression 検索条件
-     * @return NodeList
-     * @author いっぺー
-     */
-    public static NodeList searchNodeList(Document doc, String expression) {
-        XPath xpath = XPathFactory.newInstance().newXPath();
-        try {
-            XPathExpression expr = xpath.compile(expression);
-            NodeList nodeList = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
-
-            if (nodeList.getLength() == 0) {
-                throw new IllegalArgumentException("該当するノードが存在しません。");
-            }
-
-            return nodeList;
-        } catch (XPathExpressionException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    /**
      * XML文章をbyte[]に変換
      *
      * @return byte[]
