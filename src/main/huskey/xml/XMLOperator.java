@@ -39,7 +39,7 @@ public class XMLOperator {
      * @param target 対象のDataのタイトル
      * @author いっぺー
      */
-    public void setUpdatedTime(String target) {
+    public void updateTime(String target) {
         String dataExpr = "//data[@title = '" + target + "']";
         String updatedExpr = dataExpr + "/updated";
 
