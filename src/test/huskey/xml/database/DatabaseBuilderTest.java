@@ -45,12 +45,9 @@ class DatabaseBuilderTest {
     @Test
     void データベースの構築() {
         builder = new DatabaseBuilder(dbName, masterKey, huskeyDir);
-        try {
-            Database _db = builder.build();
-        } catch (Exception e) {
-            e.printStackTrace();
-            fail();
-        }
+        Database db = builder.build();
+        if (db != null) return;
+        fail("データベースの構築に失敗しました。");
     }
 
     @Nested
