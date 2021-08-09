@@ -1,11 +1,11 @@
 package xml.database;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.w3c.dom.Document;
 import xml.XMLBuilder;
 
 import java.io.*;
 import java.nio.file.Paths;
-import java.util.Objects;
 
 /**
  * Databaseインスタンスを取得するAPI
@@ -43,9 +43,9 @@ public class DatabaseBuilder extends XMLBuilder<Database> {
             throw new UncheckedIOException(e);
         }
 
-        // （masterKeyをハッシュ化する処理）
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-        return Objects.equals(this.masterKey, hash.toString());
+        return encoder.matches(this.masterKey, hash.toString());
     }
 
     /**
