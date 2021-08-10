@@ -2,6 +2,7 @@ package xml.database;
 
 import org.junit.jupiter.api.*;
 import utility.StrFileIO;
+import xml.SampleDB;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,9 +13,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DatabaseTest {
     private Database db;
-    private final String dbName = "SampleDB";
-    private final String masterKey = "sample";
-    private final String huskeyDir = "./target/test-classes/resources/";
 
     private static final String hashPath = "./target/test-classes/resources/database/SampleDB/hash";
     private static final String beforeHash = new StrFileIO(hashPath).readStrFile();
@@ -27,14 +25,14 @@ class DatabaseTest {
 
     @BeforeEach
     void setup() {
-        DatabaseBuilder builder = new DatabaseBuilder(dbName, masterKey, huskeyDir);
+        DatabaseBuilder builder = new DatabaseBuilder(SampleDB.dbName, SampleDB.masterKey, SampleDB.huskeyDir);
         db = builder.build();
     }
 
     @Test
     void データベース名のリストを取得() {
-        String[] dbList = Database.getDBList(huskeyDir);
-        String[] expect = {dbName};
+        String[] dbList = Database.getDBList(SampleDB.huskeyDir);
+        String[] expect = {SampleDB.dbName};
         assertArrayEquals(expect, dbList);
     }
 
@@ -47,7 +45,7 @@ class DatabaseTest {
 
     @Test
     void データベースの書き出し() {
-        Path path = Paths.get(huskeyDir + "database/SampleDB/.hkdb");
+        Path path = Paths.get(SampleDB.huskeyDir + "database/SampleDB/.hkdb");
 
         try {
             FileTime before = Files.getLastModifiedTime(path);

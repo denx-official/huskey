@@ -16,10 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class XMLOperatorTest {
     private XMLOperator operator;
 
-    String dbName = "SampleDB";
-    String masterKey = "sample";
-    String huskeyDir = "./target/test-classes/resources/";
-    DatabaseBuilder builder = new DatabaseBuilder(dbName, masterKey, huskeyDir);
+    DatabaseBuilder builder = new DatabaseBuilder(SampleDB.dbName, SampleDB.masterKey, SampleDB.huskeyDir);
     Database db = builder.build();
 
     @BeforeEach
