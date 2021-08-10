@@ -1,7 +1,5 @@
 package utility;
 
-import xml.database.Database;
-
 import java.io.*;
 import java.nio.file.Paths;
 
@@ -9,7 +7,6 @@ import java.nio.file.Paths;
  * バイナリファイルの入出力を行うクラス
  *
  * @author いっぺー
- * @see Database
  */
 public class BinFileIO {
     private final String path;
