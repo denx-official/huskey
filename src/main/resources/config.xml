@@ -4,10 +4,9 @@
     <!ELEMENT config (defaultDB, initialSettings)>
     <!ELEMENT defaultDB (#PCDATA)>
 
-    <!ELEMENT initialSettings (passLength, charSet, trials)>
+    <!ELEMENT initialSettings (passLength, charSet)>
     <!ELEMENT passLength (#PCDATA)>
     <!ELEMENT charSet (#PCDATA)>
-    <!ELEMENT trials (#PCDATA)>
     <!ATTLIST charSet
         lowerCase CDATA #REQUIRED
         upperCase CDATA #REQUIRED
@@ -36,8 +35,5 @@
         <charSet lowerCase="true" upperCase="true" number="true" space="false">
             <!-- 例: !#$%@_(){}[] -->
         </charSet>
-
-        <!-- パスワード入力の試行回数 -->
-        <trials>2</trials>
     </initialSettings>
 </config>

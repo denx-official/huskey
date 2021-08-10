@@ -3,10 +3,9 @@
 <!DOCTYPE database [
     <!ELEMENT database (settings, dataset)>
 
-    <!ELEMENT settings (passLength, charSet, trials)>
+    <!ELEMENT settings (passLength, charSet)>
     <!ELEMENT passLength (#PCDATA)>
     <!ELEMENT charSet (#PCDATA)>
-    <!ELEMENT trials (#PCDATA)>
     <!ATTLIST charSet
         lowerCase CDATA #REQUIRED
         upperCase CDATA #REQUIRED
@@ -44,7 +43,6 @@
     <settings>
         <passLength>16</passLength>
         <charSet lowerCase="true" upperCase="true" number="true" space="false" />
-        <trials>2</trials>
     </settings>
     <dataset>
         <data title="Google">
