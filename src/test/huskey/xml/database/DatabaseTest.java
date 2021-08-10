@@ -1,7 +1,7 @@
 package xml.database;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+import utility.StrFileIO;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -15,6 +15,15 @@ class DatabaseTest {
     private final String dbName = "SampleDB";
     private final String masterKey = "sample";
     private final String huskeyDir = "./target/test-classes/resources/";
+
+    private static final String hashPath = "./target/test-classes/resources/database/SampleDB/hash";
+    private static final String beforeHash = new StrFileIO(hashPath).readStrFile();
+
+    @AfterAll
+    static void cleanUpAll() {
+        StrFileIO io = new StrFileIO(hashPath);
+        io.writeStrFile(beforeHash);
+    }
 
     @BeforeEach
     void setup() {
