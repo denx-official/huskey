@@ -5,6 +5,7 @@ import crypt.SHA256;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.w3c.dom.Document;
 import utility.BinFileIO;
+import utility.StrFileIO;
 import xml.XMLBuilder;
 
 import javax.crypto.Cipher;
@@ -33,23 +34,12 @@ public class DatabaseBuilder extends XMLBuilder<Database> {
      */
     public boolean isKeyMatched() {
         String path = this.dbDir + "hash";
-        File file = Paths.get(path).toFile();
 
-        StringBuilder hash = new StringBuilder();
-        try {
-            int ch;
-            FileReader reader = new FileReader(file);
-            while ((ch = reader.read()) != -1) {
-                hash.append((char) ch);
-            }
-            reader.close();
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
-        }
+        StrFileIO io = new StrFileIO(path);
+        String hash = io.readStrFile();
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-
-        return encoder.matches(this.masterKey, hash.toString());
+        return encoder.matches(this.masterKey, hash);
     }
 
     /**
