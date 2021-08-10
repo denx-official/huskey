@@ -24,13 +24,13 @@ import java.io.File;
 public class Database extends XMLWriter {
     private final Document doc;
     private String masterKey;
-    private final String fileDir;
+    private final String dbDir;
     private final XMLOperator operator;
 
-    public Database(Document doc, String masterKey, String fileDir) {
+    public Database(Document doc, String masterKey, String dbDir) {
         this.doc = doc;
         this.masterKey = masterKey;
-        this.fileDir = fileDir;
+        this.dbDir = dbDir;
         this.operator = new XMLOperator(doc);
     }
 
@@ -125,7 +125,7 @@ public class Database extends XMLWriter {
     }
 
     private byte[] iv() {
-        String ivPath = this.fileDir + "iv";
+        String ivPath = this.dbDir + "iv";
         BinFileIO fileIO = new BinFileIO(ivPath);
         return fileIO.readBinFile();
     }
@@ -149,6 +149,6 @@ public class Database extends XMLWriter {
 
     @Override
     protected String getFilePath() {
-        return this.fileDir + ".hkdb";
+        return this.dbDir + ".hkdb";
     }
 }
