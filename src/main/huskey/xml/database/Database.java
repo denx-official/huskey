@@ -1,11 +1,15 @@
 package xml.database;
 
+import crypt.AES;
+import crypt.SHA256;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import utility.BinFileIO;
 import xml.XMLOperator;
 import xml.XMLWriter;
 
+import javax.crypto.Cipher;
 import java.io.File;
 
 /**
@@ -120,6 +124,12 @@ public class Database extends XMLWriter {
         return this.operator.searchNodeList(expression);
     }
 
+    private byte[] iv() {
+        String ivPath = this.fileDir + "iv";
+        BinFileIO fileIO = new BinFileIO(ivPath);
+        return fileIO.readBinFile();
+    }
+
     /**
      * XML文章の取得
      *
@@ -133,7 +143,8 @@ public class Database extends XMLWriter {
 
     @Override
     protected byte[] encrypt(byte[] bytes) {
-        return bytes;
+        byte[] bytesKey = SHA256.hashText(this.masterKey);
+        return AES.EnDeCrypt(Cipher.ENCRYPT_MODE, bytes, bytesKey, this.iv());
     }
 
     @Override

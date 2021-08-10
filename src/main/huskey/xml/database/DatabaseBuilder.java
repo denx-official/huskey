@@ -1,9 +1,13 @@
 package xml.database;
 
+import crypt.AES;
+import crypt.SHA256;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.w3c.dom.Document;
+import utility.BinFileIO;
 import xml.XMLBuilder;
 
+import javax.crypto.Cipher;
 import java.io.*;
 import java.nio.file.Paths;
 
@@ -69,9 +73,16 @@ public class DatabaseBuilder extends XMLBuilder<Database> {
         this.masterKey = newKey;
     }
 
+    private byte[] iv() {
+        String ivPath = this.dbDir + "iv";
+        BinFileIO fileIO = new BinFileIO(ivPath);
+        return fileIO.readBinFile();
+    }
+
     @Override
     protected byte[] decrypt(byte[] bytes) {
-        return bytes;
+        byte[] bytesKey = SHA256.hashText(this.masterKey);
+        return AES.EnDeCrypt(Cipher.DECRYPT_MODE, bytes, bytesKey, this.iv());
     }
 
     @Override
