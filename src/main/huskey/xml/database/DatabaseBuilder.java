@@ -73,6 +73,12 @@ public class DatabaseBuilder extends XMLBuilder<Database> {
         this.masterKey = newKey;
     }
 
+    /**
+     * データベースから初期化ベクトルの読み込み
+     *
+     * @return byte[] 初期化ベクトル
+     * @author いっぺー
+     */
     private byte[] iv() {
         String ivPath = this.dbDir + "iv";
         BinFileIO fileIO = new BinFileIO(ivPath);

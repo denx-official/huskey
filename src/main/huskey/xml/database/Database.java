@@ -124,6 +124,12 @@ public class Database extends XMLWriter {
         return this.operator.searchNodeList(expression);
     }
 
+    /**
+     * データベースから初期化ベクトルの読み込み
+     *
+     * @return byte[] 初期化ベクトル
+     * @author いっぺー
+     */
     private byte[] iv() {
         String ivPath = this.dbDir + "iv";
         BinFileIO fileIO = new BinFileIO(ivPath);
