@@ -2,10 +2,12 @@ package xml.database;
 
 import crypt.AES;
 import crypt.SHA256;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import utility.BinFileIO;
+import utility.StrFileIO;
 import xml.XMLOperator;
 import xml.XMLWriter;
 
@@ -58,11 +60,20 @@ public class Database extends XMLWriter {
     /**
      * データベースの暗号化に使用するmasterKeyの更新
      *
+     * <p>masterKey更新時に、そのハッシュ値も更新し保存する。
+     *
      * @param newKey 新しいmasterKey
      * @author いっぺー
      */
     public void setMasterKey(String newKey) {
         this.masterKey = newKey;
+
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String hash = encoder.encode(newKey);
+
+        String path = this.dbDir + "hash";
+        StrFileIO io = new StrFileIO(path);
+        io.writeStrFile(hash);
     }
 
     /**
