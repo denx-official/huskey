@@ -33,12 +33,12 @@
     <build>
         <resources>
             <resource>
-                <directory>./src/main/</directory>
+                <directory>./src/main/resources</directory>
             </resource>
         </resources>
         <testResources>
             <testResource>
-                <directory>./src/test/huskey/</directory>
+                <directory>./src/test/huskey/resources</directory>
             </testResource>
         </testResources>
         <sourceDirectory>./src/main/huskey/</sourceDirectory>
