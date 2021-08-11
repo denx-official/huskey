@@ -3,6 +3,7 @@ package utility;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import xml.SampleDB;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,7 +12,7 @@ class StrFileIOTest {
 
     @BeforeEach
     void setup() {
-        fileIO = new StrFileIO("./target/test-classes/resources/testFile");
+        fileIO = new StrFileIO(SampleDB.huskeyDir + "testFile");
     }
 
     @AfterEach

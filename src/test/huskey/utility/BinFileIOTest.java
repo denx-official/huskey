@@ -3,6 +3,7 @@ package utility;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import xml.SampleDB;
 
 import java.nio.charset.StandardCharsets;
 
@@ -13,7 +14,7 @@ class BinFileIOTest {
 
     @BeforeEach
     void setup() {
-        fileIO = new BinFileIO("./target/test-classes/resources/testFile");
+        fileIO = new BinFileIO(SampleDB.huskeyDir + "testFile");
     }
 
     @AfterEach

@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class DatabaseTest {
     private Database db;
 
-    private static final String hashPath = "./target/test-classes/resources/database/SampleDB/hash";
+    private static final String hashPath = SampleDB.huskeyDir + "database/SampleDB/hash";
     private static final String beforeHash = new StrFileIO(hashPath).readStrFile();
 
     @AfterAll
