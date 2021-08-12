@@ -75,8 +75,6 @@ Node にはいくつかの種類があり、上で挙げた **Element** や **At
 
 詳しい使い方については database パッケージ内の README を参照されたし。
 
-今回のプロジェクトにおいてはひとまずこれだけ理解できればなんとかなる、はず。
-
 参考
 
 - [DOM、Node、Elementの違いとそれぞれの使い分け | Black Everyday Company](https://kuroeveryday.blogspot.com/2018/11/difference-between-dom-and-node-and-element.html)

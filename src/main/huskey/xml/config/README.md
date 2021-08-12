@@ -19,7 +19,7 @@ Config config = builder.build();
 // config の構築
 Config config = builder.build();
 
-String path = "//passLength";
+String path = "//defaultDB";
 if (!config.exists(path)) {
     // 対象の Node が存在しないときの処理
 }
