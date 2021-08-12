@@ -1,6 +1,7 @@
 package cmd;
 
 import cmd.changeCmd.ChangeCmd;
+import cmd.configCmd.ConfigCmd;
 import cmd.databaseCmd.DatabaseCmd;
 import cmd.getCmd.GetCmd;
 import cmd.helpCmd.HelpCmd;
@@ -51,6 +52,10 @@ public class CommandRouting implements Cmd {
         switch (this.command) {
             case "help":
                 cmd = new HelpCmd(GlobalConst.HUSKEY_DIR);
+                break;
+
+            case "config":
+                cmd = new ConfigCmd(GlobalConst.HUSKEY_DIR);
                 break;
 
             case "init":
