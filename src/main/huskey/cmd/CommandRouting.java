@@ -8,9 +8,7 @@ import cmd.initCmd.InitCmd;
 import cmd.listCmd.ListCmd;
 import cmd.mergeCmd.MergeCmd;
 import cmd.removeCmd.RemoveCmd;
-import cmd.searchCmd.SearchCmd;
 import cmd.setCmd.SetCmd;
-import cmd.switchCmd.SwitchCmd;
 import utility.GlobalConst;
 import utility.HuskeyException;
 
@@ -67,20 +65,12 @@ public class CommandRouting implements Cmd {
                 cmd = new DatabaseCmd(GlobalConst.HUSKEY_DIR);
                 break;
 
-            case "switch":
-                cmd = new SwitchCmd(GlobalConst.HUSKEY_DIR);
-                break;
-
             case "merge":
                 cmd = new MergeCmd(GlobalConst.HUSKEY_DIR);
                 break;
 
             case "list":
                 cmd = new ListCmd(GlobalConst.HUSKEY_DIR);
-                break;
-
-            case "search":
-                cmd = new SearchCmd(GlobalConst.HUSKEY_DIR);
                 break;
 
             case "get":
