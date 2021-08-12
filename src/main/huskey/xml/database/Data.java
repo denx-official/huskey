@@ -15,12 +15,12 @@ import org.w3c.dom.Element;
 public class Data {
     public final String _title;
     public final String _userName;
-    public final String _password;
+    public final Password _password;
     public final String _message;
     public final HkTime _created;
     public final HkTime _updated;
 
-    public Data(String title, String userName, String password, String message, HkTime created, HkTime updated) {
+    public Data(String title, String userName, Password password, String message, HkTime created, HkTime updated) {
         this._title = title;
         this._userName = userName;
         this._password = password;
@@ -51,6 +51,9 @@ public class Data {
             dataElem.appendChild(elem);
         }
 
+        Element password = this._password.toElement(doc);
+        dataElem.appendChild(password);
+
         return dataElem;
     }
 
@@ -69,8 +72,6 @@ public class Data {
                 return this._title;
             case "userName":
                 return this._userName;
-            case "password":
-                return this._password;
             case "message":
                 return this._message;
             default:
@@ -105,7 +106,7 @@ public class Data {
      * @author いっぺー
      */
     private static String[] textIterator() {
-        return new String[]{"userName", "password", "message"};
+        return new String[]{"userName", "message"};
     }
 
     /**
