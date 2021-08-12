@@ -50,23 +50,29 @@ cr.run();
 
 #### 引数について
 
-現状、各クラスの初期化には `huskeyDir` という huskey のドットフォルダーが存在するディレクトリを示す引数のみを設定している。  
+現状、各クラスの初期化には huskeyDir（後述）という引数のみを設定している。  
 コマンド実装の際に values や options が必要になった場合は、それに応じて適宜コードを修正すること。  
 （修正する箇所は、自クラスのメンバ変数とコンストラクター、および CommandRouting クラスで初期化する際の引数）
 
-#### テストについて
+#### huskeyDirについて
 
-テストコードは src/test/cmd/○○Cmd/ ディレクトリに作成すること。
+引数 huskeyDir には、huskey のドットフォルダーが存在するディレクトリを入力する。  
+テストを行う際には、この値を `GlobalConst.huskeyDir` に設定すると、テスト用のディレクトリを参照するようになる。
 
-また、先の `huskeyDir` は、テスト時に参照するドットファイルのディレクトリを指定するために用意している。  
-テストをする際は、このディレクトリを _./target/test-classes/resources/_ にするとテスト用のファイルを参照することができる。
+#### 例外送出
 
-また、 **データベースや config 等を書き換えるテストをする場合は、テスト終了後にファイルが元の状態に戻るようにすること。**  
-方法は任せるが、私は
+huskey 実行時にユーザー側の不正な操作（例：コマンドライン引数が不正、masterKey の照合失敗など）によって処理を停止せざるを得なくなった場合は、`utility.HuskeyException` を使って例外を送出し処理を止めること。
 
-- ファイルの内容は変えずに書き出しを行い、そのファイルの更新日を見る（変わっていれば書き出し成功）
-    - 参考: _./src/test/huskey/xml/database/databaseTest.java_
-- 実際のデータを書き出して、全テスト終了後に元のファイルを書き出して元に戻す
-    - 参考: _./src/test/huskey/utility/BinFileIOTest.java_
+メッセージ内容は、なぜ処理が止まったのかの理由を簡潔に記述すること。
 
-といった方法を取った。
+例
+
+```java
+void doSomething() {
+    DatabaseBuilder builder = new DatabaseBuilder(dbName, masterKey, huskeyDir);
+
+    if (!builder.isKeyMatched()) {
+        throw new HuskeyException("データベース " + dbName + " のパスワードが正しくありません。");
+    }
+}
+```

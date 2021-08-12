@@ -198,3 +198,13 @@ Element dataElem = data.toElement(db.doc); // Data 型を Element 型に変換
 Node dataset = db.searchNode("//dataset");
 dataset.appendChild(dataElem); // データセットに新規データを追加
 ```
+
+### データの削除
+
+特定のデータを削除する場合は、データセットを Node で取得し、`removeChild` メソッドを用いて削除する。
+
+```java
+Node data = db.searchNode("//data[@title = 'Google']");
+Node dataset = db.searchNode("//dataset");
+dataset.removeChild(data);
+```
