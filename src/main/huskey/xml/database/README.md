@@ -11,14 +11,17 @@ huskey では、複数の独立したデータベースによってパスワー�
 - Database
     - masterKey: データベースを暗号化/復号するための共通鍵
     - Settings: データベースの設定
+        - defaultUserName: デフォルトのユーザー名
         - passLength: 自動生成するパスワードの長さ
         - charSet: パスワードの自動生成に使用する文字/記号
-        - trials: パスワード入力の試行回数
     - Dataset: 複数の Data の集合
         - Data
             - title: データの名前
             - userName: ユーザー名
-            - password: パスワード
+            - password:
+                - value: パスワードの値
+                - passLength: 上記のパスワードの長さ
+                - charSet: 上記のパスワード生成の際に使用した文字/記号
             - message: メッセージ
             - created: データの作成日時
             - updated: データの更新日時
@@ -101,7 +104,7 @@ String[] dbList = Database.getDBList(huskeyDir);
 Data data = new Data(
         "huskey", // title
         "jonh", // userName
-        "8lQEANKe600DUNmo0XZb", // password
+        password, // password 型
         "", // message
         HkTime.now(), // created
         HkTime.now() // updated
@@ -185,10 +188,13 @@ db.updateTime("Google"); // これで "//data[@title = 'Google']/updated" が更
 データセットに新たなデータを作成する場合は、Data クラスを通して取得できる Element を追加することで実現できる。
 
 ```java
+CharSet charSet = new CharSet("true", "true", "true", "false", "false", "");
+Password password = new Password("8lQEANKe600DUNmo0XZb", "20", charSet);
+
 Data data = new Data(
         "huskey", // title
         "jonh", // userName
-        "8lQEANKe600DUNmo0XZb", // password
+        password, // password
         "", // message
         HkTime.now(), // created
         HkTime.now() // updated
