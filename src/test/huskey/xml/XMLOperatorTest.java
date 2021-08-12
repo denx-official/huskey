@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import testUtil.GlobalConst;
 import xml.database.Database;
 import xml.database.DatabaseBuilder;
 import xml.database.HkTime;
@@ -16,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class XMLOperatorTest {
     private XMLOperator operator;
 
-    DatabaseBuilder builder = new DatabaseBuilder(SampleDB.dbName, SampleDB.masterKey, SampleDB.huskeyDir);
+    DatabaseBuilder builder = new DatabaseBuilder(GlobalConst.dbName, GlobalConst.masterKey, GlobalConst.huskeyDir);
     Database db = builder.build();
 
     @BeforeEach

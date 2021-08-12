@@ -2,7 +2,7 @@ package xml.database;
 
 import org.junit.jupiter.api.*;
 import utility.StrFileIO;
-import xml.SampleDB;
+import testUtil.GlobalConst;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class DatabaseTest {
     private Database db;
 
-    private static final String hashPath = SampleDB.huskeyDir + "database/SampleDB/hash";
+    private static final String hashPath = GlobalConst.huskeyDir + "database/SampleDB/hash";
     private static final String beforeHash = new StrFileIO(hashPath).readStrFile();
 
     @AfterAll
@@ -25,14 +25,14 @@ class DatabaseTest {
 
     @BeforeEach
     void setup() {
-        DatabaseBuilder builder = new DatabaseBuilder(SampleDB.dbName, SampleDB.masterKey, SampleDB.huskeyDir);
+        DatabaseBuilder builder = new DatabaseBuilder(GlobalConst.dbName, GlobalConst.masterKey, GlobalConst.huskeyDir);
         db = builder.build();
     }
 
     @Test
     void データベース名のリストを取得() {
-        String[] dbList = Database.getDBList(SampleDB.huskeyDir);
-        String[] expect = {SampleDB.dbName};
+        String[] dbList = Database.getDBList(GlobalConst.huskeyDir);
+        String[] expect = {GlobalConst.dbName};
         assertArrayEquals(expect, dbList);
     }
 
@@ -45,7 +45,7 @@ class DatabaseTest {
 
     @Test
     void データベースの書き出し() {
-        Path path = Paths.get(SampleDB.huskeyDir + "database/SampleDB/.hkdb");
+        Path path = Paths.get(GlobalConst.huskeyDir + "database/SampleDB/.hkdb");
 
         try {
             FileTime before = Files.getLastModifiedTime(path);

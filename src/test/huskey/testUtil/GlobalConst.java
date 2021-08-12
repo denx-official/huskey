@@ -1,6 +1,6 @@
-package xml;
+package testUtil;
 
-public class SampleDB {
+public class GlobalConst {
     public static final String dbName = "SampleDB";
     public static final String masterKey = "sample";
     public static final String huskeyDir = "./target/test-classes/";

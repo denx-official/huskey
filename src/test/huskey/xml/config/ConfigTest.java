@@ -2,7 +2,7 @@ package xml.config;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import xml.SampleDB;
+import testUtil.GlobalConst;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ConfigTest {
     private Config conf;
-    private final String huskeyDir = SampleDB.huskeyDir;
+    private final String huskeyDir = GlobalConst.huskeyDir;
 
     @BeforeEach
     void setup() {
