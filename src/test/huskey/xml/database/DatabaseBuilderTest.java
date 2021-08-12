@@ -43,9 +43,7 @@ class DatabaseBuilderTest {
     @Test
     void データベースの構築() {
         builder = new DatabaseBuilder(GlobalConst.dbName, GlobalConst.masterKey, GlobalConst.huskeyDir);
-        Database db = builder.build();
-        if (db != null) return;
-        fail("データベースの構築に失敗しました。");
+        Database _db = builder.build();
     }
 
     @Nested
