@@ -14,15 +14,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class DatabaseTest {
     private Database db;
 
-    private static final String hashPath = GlobalConst.huskeyDir + "database/SampleDB/hash";
-    private static final String beforeHash = new StrFileIO(hashPath).readStrFile();
-
-    @AfterAll
-    static void cleanUpAll() {
-        StrFileIO io = new StrFileIO(hashPath);
-        io.writeStrFile(beforeHash);
-    }
-
     @BeforeEach
     void setup() {
         DatabaseBuilder builder = new DatabaseBuilder(GlobalConst.dbName, GlobalConst.masterKey, GlobalConst.huskeyDir);
@@ -36,11 +27,26 @@ class DatabaseTest {
         assertArrayEquals(expect, dbList);
     }
 
-    @Test
-    void masterKeyの更新() {
-        String expect = "sample2";
-        db.setMasterKey(expect);
-        assertEquals(expect, db._getMasterKey());
+    @Nested
+    class setMasterKey {
+        private final String hashPath = GlobalConst.huskeyDir + "database/SampleDB/hash";
+        private final String beforeHash = new StrFileIO(hashPath).readStrFile();
+
+        @AfterEach
+        void cleanUp() {
+            StrFileIO io = new StrFileIO(hashPath);
+            io.writeStrFile(beforeHash);
+        }
+
+        @Test
+        void masterKeyの更新() {
+            String expect = "sample2";
+            db.setMasterKey(expect);
+            assertEquals(expect, db._getMasterKey());
+
+            String afterHash = new StrFileIO(hashPath).readStrFile();
+            assertNotEquals(beforeHash, afterHash);
+        }
     }
 
     @Test
