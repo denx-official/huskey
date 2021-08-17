@@ -12,12 +12,33 @@ import org.w3c.dom.Element;
 public class Password {
     private final String passLength;
     private final CharSet charSet;
-    private final String value;
+    private String value;
 
     public Password(String passLength, CharSet charSet, String value) {
         this.passLength = passLength;
         this.charSet = charSet;
         this.value = value;
+    }
+
+    /**
+     * パスワードの更新
+     *
+     * <p>メンバ変数valueの値をランダムに生成したパスワードで更新する。
+     *
+     * @author いっぺー
+     */
+    public void updatePassword() {}
+
+    /**
+     * パスワードの更新
+     *
+     * <p>メンバ変数valueの値を新しいパスワードで更新する。
+     *
+     * @param newPassword 新しいパスワード
+     * @author いっぺー
+     */
+    public void updatePassword(String newPassword) {
+        this.value = newPassword;
     }
 
     /**
