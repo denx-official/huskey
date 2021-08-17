@@ -15,13 +15,14 @@
         number CDATA #REQUIRED
         symbols CDATA #REQUIRED
         space CDATA #REQUIRED
+        custom CDATA #REQUIRED
     >
 
     <!ELEMENT dataset (data+)>
     <!ELEMENT data (userName, password, message, created, updated)>
     <!ATTLIST data title ID #REQUIRED>
     <!ELEMENT userName (#PCDATA)>
-    <!ELEMENT password (value, passLength, charSet)>
+    <!ELEMENT password (value, charSet)>
     <!ELEMENT message (#PCDATA)>
     <!ELEMENT created (#PCDATA)>
     <!ELEMENT updated (#PCDATA)>
@@ -58,17 +59,14 @@
             charSet要素内に任意の文字/記号を入力すると、それらをパスワード生成に使用する。
             （アルファベット、数字、空白、改行、および重複する文字は無視される）
         -->
-        <charSet lowerCase="true" upperCase="true" number="true" symbols="false" space="false">
-            <!-- 例: !#$%@_(){}[] -->
-        </charSet>
+        <charSet lowerCase="true" upperCase="true" number="true" symbols="false" space="false" custom=""/>
     </settings>
     <dataset>
         <data title="Google">
             <userName>sample@sample.com</userName>
             <password>
                 <value>sXw3BLNrSUx4OOU6jZOy</value>
-                <passLength>20</passLength>
-                <charSet lowerCase="true" upperCase="true" number="true" symbols="false" space="false"/>
+                <charSet lowerCase="true" upperCase="true" number="true" symbols="false" space="false" custom=""/>
             </password>
             <message>something</message>
             <created year="2021" month="1" date="1" hours="0" minutes="0" seconds="0" />
@@ -78,8 +76,7 @@
             <userName>sample@sample.com</userName>
             <password>
                 <value>ECiK1GDGULKTUPFVqp9x</value>
-                <passLength>20</passLength>
-                <charSet lowerCase="true" upperCase="true" number="true" symbols="false" space="false"/>
+                <charSet lowerCase="true" upperCase="true" number="true" symbols="false" space="false" custom=""/>
             </password>
             <message>something</message>
             <created year="2021" month="2" date="1" hours="0" minutes="0" seconds="0" />
@@ -89,8 +86,7 @@
             <userName>hogehogeman1234</userName>
             <password>
                 <value>r79airSs4VG7WrailN8p</value>
-                <passLength>20</passLength>
-                <charSet lowerCase="true" upperCase="true" number="true" symbols="false" space="false"/>
+                <charSet lowerCase="true" upperCase="true" number="true" symbols="false" space="false" custom=""/>
             </password>
             <message>something</message>
             <created year="2021" month="2" date="2" hours="0" minutes="0" seconds="0" />
@@ -100,8 +96,7 @@
             <userName>hogehogeman1234</userName>
             <password>
                 <value>MYfAGIKIP8Co91KQJi7i</value>
-                <passLength>20</passLength>
-                <charSet lowerCase="true" upperCase="true" number="true" symbols="false" space="false"/>
+                <charSet lowerCase="true" upperCase="true" number="true" symbols="false" space="false" custom=""/>
             </password>
             <message>something</message>
             <created year="2020" month="2" date="2" hours="1" minutes="0" seconds="0" />
@@ -111,8 +106,7 @@
             <userName>hogehogeman1234</userName>
             <password>
                 <value>fOsAPh9ktqoOQ1Bjgmz4</value>
-                <passLength>20</passLength>
-                <charSet lowerCase="true" upperCase="true" number="true" symbols="false" space="false"/>
+                <charSet lowerCase="true" upperCase="true" number="true" symbols="false" space="false" custom=""/>
             </password>
             <message>something</message>
             <created year="2021" month="2" date="2" hours="1" minutes="1" seconds="0" />
@@ -122,8 +116,7 @@
             <userName>hogehogeman1234</userName>
             <password>
                 <value>U4GZAmUVG2sfrdmxiAbE</value>
-                <passLength>20</passLength>
-                <charSet lowerCase="true" upperCase="true" number="true" symbols="false" space="false"/>
+                <charSet lowerCase="true" upperCase="true" number="true" symbols="false" space="false" custom=""/>
             </password>
             <message>something</message>
             <created year="2021" month="2" date="2" hours="1" minutes="1" seconds="10" />
