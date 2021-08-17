@@ -37,22 +37,22 @@ public class CharSet {
         ArrayList<String> arrStr = new ArrayList<>();
 
         if (this.lowerCase.equals("true")) {
-            arrStr.addAll(UTF8.getStringsInRange(97, 122));
+            arrStr.addAll(UTF8.getStringsInRange(97, 122)); // a-z
         }
 
         if (this.upperCase.equals("true")) {
-            arrStr.addAll(UTF8.getStringsInRange(65, 90));
+            arrStr.addAll(UTF8.getStringsInRange(65, 90)); //A-Z
         }
 
         if (this.number.equals("true")) {
-            arrStr.addAll(UTF8.getStringsInRange(48, 57));
+            arrStr.addAll(UTF8.getStringsInRange(48, 57)); // 0-9
         }
 
         if (this.symbols.equals("true")) {
-            arrStr.addAll(UTF8.getStringsInRange(33, 47));
-            arrStr.addAll(UTF8.getStringsInRange(58, 64));
-            arrStr.addAll(UTF8.getStringsInRange(91, 96));
-            arrStr.addAll(UTF8.getStringsInRange(123, 126));
+            arrStr.addAll(UTF8.getStringsInRange(33, 47));   // !"#$%&'()*+,-./
+            arrStr.addAll(UTF8.getStringsInRange(58, 64));   // :;<=>?@
+            arrStr.addAll(UTF8.getStringsInRange(91, 96));   // [\]^_`
+            arrStr.addAll(UTF8.getStringsInRange(123, 126)); // {|}~
         }
 
         if (this.space.equals("true")) {
@@ -61,8 +61,7 @@ public class CharSet {
 
         if (this.custom.length() != 0) {
             String[] chars = this.custom.split("");
-            ArrayList<String> a = new ArrayList<>(Arrays.asList(chars));
-            arrStr.addAll(a);
+            arrStr.addAll(new ArrayList<>(Arrays.asList(chars)));
         }
 
         // 文字の重複を削除する処理
