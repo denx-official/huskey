@@ -79,17 +79,17 @@ public class CharSet {
     private String get(String target) {
         switch (target) {
             case "lowerCase":
-                return String.valueOf(this.lowerCase);
+                return this.lowerCase;
             case "upperCase":
-                return String.valueOf(this.upperCase);
+                return this.upperCase;
             case "number":
-                return String.valueOf(this.number);
+                return this.number;
             case "symbols":
-                return String.valueOf(this.symbols);
+                return this.symbols;
             case "space":
-                return String.valueOf(this.space);
-            case "customChar":
-                return this.customChar;
+                return this.space;
+            case "custom":
+                return this.custom;
             default:
                 throw new IllegalArgumentException("target " + target + " getTimeでは取得できません。");
         }
