@@ -2,6 +2,10 @@ package xml.database;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import utility.UTF8;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class CharSet {
     private final String lowerCase;
@@ -9,15 +13,15 @@ public class CharSet {
     private final String number;
     private final String symbols;
     private final String space;
-    private final String customChar;
+    private final String custom;
 
-    public CharSet(String lowerCase, String upperCase, String number, String symbols, String space, String customChar) {
+    public CharSet(String lowerCase, String upperCase, String number, String symbols, String space, String custom) {
         this.lowerCase = lowerCase;
         this.upperCase = upperCase;
         this.number = number;
         this.symbols = symbols;
         this.space = space;
-        this.customChar = customChar;
+        this.custom = custom;
     }
 
     public Element toElement(Document doc) {
@@ -26,9 +30,50 @@ public class CharSet {
             charSet.setAttribute(name, this.get(name));
         }
 
-        charSet.appendChild(doc.createTextNode(this.get("customChar")));
-
         return charSet;
+    }
+
+    public String[] toStrings() {
+        ArrayList<String> arrStr = new ArrayList<>();
+
+        if (this.lowerCase.equals("true")) {
+            arrStr.addAll(UTF8.getStringsInRange(97, 122));
+        }
+
+        if (this.upperCase.equals("true")) {
+            arrStr.addAll(UTF8.getStringsInRange(65, 90));
+        }
+
+        if (this.number.equals("true")) {
+            arrStr.addAll(UTF8.getStringsInRange(48, 57));
+        }
+
+        if (this.symbols.equals("true")) {
+            arrStr.addAll(UTF8.getStringsInRange(33, 47));
+            arrStr.addAll(UTF8.getStringsInRange(58, 64));
+            arrStr.addAll(UTF8.getStringsInRange(91, 96));
+            arrStr.addAll(UTF8.getStringsInRange(123, 126));
+        }
+
+        if (this.space.equals("true")) {
+            arrStr.addAll(UTF8.getStringsInRange(32, 32));
+        }
+
+        if (this.custom.length() != 0) {
+            String[] chars = this.custom.split("");
+            ArrayList<String> a = new ArrayList<>(Arrays.asList(chars));
+            arrStr.addAll(a);
+        }
+
+        // 文字の重複を削除する処理
+        ArrayList<String> result = new ArrayList<>();
+        for (String str : arrStr.toArray(new String[0])) {
+            if (!result.contains(str)) {
+                result.add(str);
+            }
+        }
+
+        return result.toArray(new String[0]);
     }
 
     private String get(String target) {
@@ -51,6 +96,6 @@ public class CharSet {
     }
 
     private static String[] attrIterator() {
-        return new String[]{"lowerCase", "upperCase", "number", "symbols", "space"};
+        return new String[]{"lowerCase", "upperCase", "number", "symbols", "space", "custom"};
     }
 }
