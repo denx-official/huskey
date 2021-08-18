@@ -4,9 +4,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import utility.UTF8;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class CharSet {
     private final String lowerCase;
     private final String upperCase;
@@ -33,46 +30,42 @@ public class CharSet {
         return charSet;
     }
 
-    public String[] toStrings() {
-        ArrayList<String> arrStr = new ArrayList<>();
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
 
         if (this.lowerCase.equals("true")) {
-            arrStr.addAll(UTF8.getStringsInRange(97, 122)); // a-z
+            sb.append(UTF8.getStringsInRange(97, 122)); // a-z
         }
 
         if (this.upperCase.equals("true")) {
-            arrStr.addAll(UTF8.getStringsInRange(65, 90)); //A-Z
+            sb.append(UTF8.getStringsInRange(65, 90)); //A-Z
         }
 
         if (this.number.equals("true")) {
-            arrStr.addAll(UTF8.getStringsInRange(48, 57)); // 0-9
+            sb.append(UTF8.getStringsInRange(48, 57)); // 0-9
         }
 
         if (this.symbols.equals("true")) {
-            arrStr.addAll(UTF8.getStringsInRange(33, 47));   // !"#$%&'()*+,-./
-            arrStr.addAll(UTF8.getStringsInRange(58, 64));   // :;<=>?@
-            arrStr.addAll(UTF8.getStringsInRange(91, 96));   // [\]^_`
-            arrStr.addAll(UTF8.getStringsInRange(123, 126)); // {|}~
+            sb.append(UTF8.getStringsInRange(33, 47));   // !"#$%&'()*+,-./
+            sb.append(UTF8.getStringsInRange(58, 64));   // :;<=>?@
+            sb.append(UTF8.getStringsInRange(91, 96));   // [\]^_`
+            sb.append(UTF8.getStringsInRange(123, 126)); // {|}~
         }
 
         if (this.space.equals("true")) {
-            arrStr.addAll(UTF8.getStringsInRange(32, 32));
+            sb.append(UTF8.getStringsInRange(32, 32));
         }
 
         if (this.custom.length() != 0) {
-            String[] chars = this.custom.split("");
-            arrStr.addAll(new ArrayList<>(Arrays.asList(chars)));
+            sb.append(this.custom);
         }
 
         // 文字の重複を削除する処理
-        ArrayList<String> result = new ArrayList<>();
-        for (String str : arrStr.toArray(new String[0])) {
-            if (!result.contains(str)) {
-                result.add(str);
-            }
-        }
+        StringBuilder result = new StringBuilder();
+        sb.toString().chars().distinct().forEach(c -> result.append((char) c));
 
-        return result.toArray(new String[0]);
+        return result.toString();
     }
 
     private String get(String target) {

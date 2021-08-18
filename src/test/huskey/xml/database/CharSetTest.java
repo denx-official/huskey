@@ -21,8 +21,7 @@ class CharSetTest {
                 "false",
                 ""
         );
-        String[] expected = lowercase.split("");
-        assertArrayEquals(expected, charSet.toStrings());
+        assertEquals(lowercase, charSet.toString());
     }
 
     @Test
@@ -35,8 +34,7 @@ class CharSetTest {
                 "false",
                 ""
         );
-        String[] expected = uppercase.split("");
-        assertArrayEquals(expected, charSet.toStrings());
+        assertEquals(uppercase, charSet.toString());
     }
 
     @Test
@@ -49,8 +47,7 @@ class CharSetTest {
                 "false",
                 ""
         );
-        String[] expected = numbers.split("");
-        assertArrayEquals(expected, charSet.toStrings());
+        assertEquals(numbers, charSet.toString());
     }
 
     @Test
@@ -63,8 +60,7 @@ class CharSetTest {
                 "false",
                 ""
         );
-        String[] expected = symbols.split("");
-        assertArrayEquals(expected, charSet.toStrings());
+        assertEquals(symbols, charSet.toString());
     }
 
     @Test
@@ -77,8 +73,7 @@ class CharSetTest {
                 "true",
                 ""
         );
-        String[] expected = new String[]{" "};
-        assertArrayEquals(expected, charSet.toStrings());
+        assertEquals(" ", charSet.toString());
     }
 
     @Test
@@ -91,9 +86,8 @@ class CharSetTest {
                 "true",
                 ""
         );
-        String all = lowercase + uppercase + numbers + symbols + " ";
-        String[] expected = all.split("");
-        assertArrayEquals(expected, charSet.toStrings());
+        String expected = lowercase + uppercase + numbers + symbols + " ";
+        assertEquals(expected, charSet.toString());
     }
 
     @Test
@@ -106,7 +100,7 @@ class CharSetTest {
                 "true",
                 "41 "
         );
-        String[] expected = new String[]{"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", " "};
-        assertArrayEquals(expected, charSet.toStrings());
+        String expected = numbers + " ";
+        assertEquals(expected, charSet.toString());
     }
 }
