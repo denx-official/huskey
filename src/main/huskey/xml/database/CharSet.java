@@ -68,7 +68,7 @@ public class CharSet {
         return result.toString();
     }
 
-    public String get(String target) {
+    private String get(String target) {
         switch (target) {
             case "lowerCase":
                 return this.lowerCase;

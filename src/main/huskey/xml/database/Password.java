@@ -73,7 +73,7 @@ public class Password {
      * @return String
      * @author いっぺー
      */
-    public String get(String target) {
+    private String get(String target) {
         switch (target) {
             case "value":
                 return this.value;
