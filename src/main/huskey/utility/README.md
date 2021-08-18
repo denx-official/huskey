@@ -4,11 +4,17 @@ huskey で汎用的に用いるパッケージ。
 
 ## BinFileIO
 
-バイナリファイル（データベースや xml ファイル）の入出力を行うクラス（詳細は割愛）。
+バイナリ形式でのファイルの入出力を行うクラス。
+
+```java
+BinFileIO io = new BinFileIO("path/to/file");
+byte[] result = io.readBinFile();
+io.writeBinFile("something");
+```
 
 ## StrFileIO
 
-BinFileIO のテキストファイル版。
+BinFileIO の文字列版（割愛）。
 
 ## GlobalConst
 
@@ -44,4 +50,14 @@ SeparateArgs sepArgs = new SeparateArgs(args);
 String command = sepArgs.getCommand();
 String[] values = sepArgs.getValues();
 String[] options = sepArgs.getOptions();
+```
+
+## UTF8
+
+UTF8 に関連したメソッド群。  
+文字コードは [このサイト](https://utf8-chartable.de/unicode-utf8-table.pl?utf8=dec) を参考に。
+
+```java
+// 文字コード (decimal) を範囲指定し、対象の文字を配列で取得する
+ArrayList<String> result = UTF8.getStringsInRange(97, 122); // a-z
 ```

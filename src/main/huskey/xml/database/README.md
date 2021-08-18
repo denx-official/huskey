@@ -20,7 +20,6 @@ huskey では、複数の独立したデータベースによってパスワー�
             - userName: ユーザー名
             - password:
                 - value: パスワードの値
-                - passLength: 上記のパスワードの長さ
                 - charSet: 上記のパスワード生成の際に使用した文字/記号
             - message: メッセージ
             - created: データの作成日時
@@ -104,14 +103,54 @@ String[] dbList = Database.getDBList(huskeyDir);
 Data data = new Data(
         "huskey", // title
         "jonh", // userName
-        password, // password 型
+        password, // password (Password 型)
         "", // message
-        HkTime.now(), // created
-        HkTime.now() // updated
+        HkTime.now(), // created (HkTime 型)
+        HkTime.now() // updated (HkTime 型)
 );
 
 // Data 型を Element 型に変換
 Element elem = data.toElement(db.doc);
+```
+
+#### Password
+
+パスワードに関連した情報を保持するクラス。
+
+```java
+Password password = new Password(
+        "", // value (パスワードの値)
+        "20", // passLength (パスワード長)
+        charSet // charSet (パスワード生成に使用する文字、CharSet 型)
+);
+
+// value を更新する
+password.update(); // charSet を使用して自動生成
+password.update("fSRb157bWeu6bDmzcGed"); // 任意の値で更新
+
+// Password 型を Element 型に変換
+Element elem = charSet.toElement(db.doc);
+```
+
+#### CharSet
+
+パスワード生成に使用する文字を保持するクラス。
+
+```java
+CharSet charSet = new CharSet(
+        "true", // lowerCase (小文字, a-z)
+        "true", // upperCase (大文字, A-Z)
+        "true", // number (数字, 0-9)
+        "false", // symbols (記号, !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~)
+        "false", // space (空白)
+        "" // custom (任意文字)
+);
+
+// 対象の文字をすべて結合して取得
+String strings = charSet.toString();
+
+// CharSet 型を Element 型に変換
+Element elem = charSet.toElement(db.doc);
 ```
 
 #### HkTime
@@ -122,13 +161,11 @@ Data インスタンス内で保持する時間情報を定義したクラス。
 // 現在時刻の取得
 HkTime hkTime = HkTime.now();
 
-// 値の取得
-int year = hkTime.get("year");
-int month = hkTime.month;
+// 取得できる変数のリストを取得 (year, month, date, hours, minutes, seconds)
+for (String name : HkTime.iterator()) {
+    // get メソッドから各値にアクセス
+    int num = hkTime.get(name);
 
-// 取得できる変数のリストを取得（year, month, date, hours, minutes, seconds）
-for (String iter : HkTime.iterator()) {
-    int num = hkTime.get(iter);
     // 各処理
 }
 ```
@@ -188,8 +225,16 @@ db.updateTime("Google"); // これで "//data[@title = 'Google']/updated" が更
 データセットに新たなデータを作成する場合は、Data クラスを通して取得できる Element を追加することで実現できる。
 
 ```java
-CharSet charSet = new CharSet("true", "true", "true", "false", "false", "");
-Password password = new Password("8lQEANKe600DUNmo0XZb", "20", charSet);
+CharSet charSet = new CharSet(
+        "true", // lowercase
+        "true", // uppercase
+        "true", // number
+        "false", // symbols
+        "false", // space
+        "" // custom
+);
+Password password = new Password("", "20", charSet);
+password.update();
 
 Data data = new Data(
         "huskey", // title
