@@ -4,6 +4,12 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import utility.UTF8;
 
+/**
+ * パスワード生成に使用する文字を保持するクラス
+ *
+ * @author いっぺー
+ * @see Password
+ */
 public class CharSet {
     private final String lowerCase;
     private final String upperCase;
@@ -21,6 +27,13 @@ public class CharSet {
         this.custom = custom;
     }
 
+    /**
+     * CharSet型をElement型に変換
+     *
+     * @param doc データベースにアクセスするためのDocumentインスタンス
+     * @return Element
+     * @author いっぺー
+     */
     public Element toElement(Document doc) {
         Element charSet = doc.createElement("charSet");
         for (String name : CharSet.attrIterator()) {
@@ -68,6 +81,15 @@ public class CharSet {
         return result.toString();
     }
 
+    /**
+     * メンバ変数の取得
+     *
+     * <p>引数 target で指定した情報をString型で取得する。
+     *
+     * @param target (lowerCase, UpperCase, number, symbols, space, custom)
+     * @return String
+     * @author いっぺー
+     */
     private String get(String target) {
         switch (target) {
             case "lowerCase":
@@ -87,6 +109,12 @@ public class CharSet {
         }
     }
 
+    /**
+     * CharSetのメンバ変数名イテレーター
+     *
+     * @return String[]
+     * @author いっぺー
+     */
     private static String[] attrIterator() {
         return new String[]{"lowerCase", "upperCase", "number", "symbols", "space", "custom"};
     }

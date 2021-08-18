@@ -44,8 +44,6 @@ public class Password {
     /**
      * Password型をElement型に変換
      *
-     * <p>引数 tag で指定したタグ名でPassword型をElement型に変換する。
-     *
      * @param doc データベースにアクセスするためのDocumentインスタンス
      * @return Element
      * @author いっぺー
