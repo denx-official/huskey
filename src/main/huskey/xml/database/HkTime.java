@@ -29,24 +29,6 @@ public class HkTime {
     }
 
     /**
-     * Element 型の時間情報から HKTime のインスタンスを生成
-     *
-     * @param element Element 型の時間情報
-     * @return HkTime
-     * @author いっぺー
-     */
-    public static HkTime newInstanceByElement(Element element) {
-        return new HkTime(
-                Integer.parseInt(element.getAttribute("year")),
-                Integer.parseInt(element.getAttribute("month")),
-                Integer.parseInt(element.getAttribute("date")),
-                Integer.parseInt(element.getAttribute("hours")),
-                Integer.parseInt(element.getAttribute("minutes")),
-                Integer.parseInt(element.getAttribute("seconds"))
-        );
-    }
-
-    /**
      * 現在時刻をHkTime型で取得
      *
      * @return String[]
