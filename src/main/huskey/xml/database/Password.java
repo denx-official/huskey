@@ -27,7 +27,7 @@ public class Password {
      *
      * @author いっぺー
      */
-    public void updatePassword() {}
+    public void update() {}
 
     /**
      * パスワードの更新
@@ -37,7 +37,7 @@ public class Password {
      * @param newPassword 新しいパスワード
      * @author いっぺー
      */
-    public void updatePassword(String newPassword) {
+    public void update(String newPassword) {
         this.value = newPassword;
     }
 
