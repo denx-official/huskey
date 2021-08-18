@@ -12,12 +12,12 @@ import java.time.LocalDateTime;
  * @see Data
  */
 public class HkTime {
-    public final int year;
-    public final int month;
-    public final int date;
-    public final int hours;
-    public final int minutes;
-    public final int seconds;
+    private final int year;
+    private final int month;
+    private final int date;
+    private final int hours;
+    private final int minutes;
+    private final int seconds;
 
     private HkTime(int year, int month, int date, int hours, int minutes, int seconds) {
         this.year = year;
