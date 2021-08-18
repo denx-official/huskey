@@ -83,7 +83,7 @@ public class CharSet {
             case "custom":
                 return this.custom;
             default:
-                throw new IllegalArgumentException("target " + target + " getTimeでは取得できません。");
+                throw new IllegalArgumentException("target " + target + " はメンバ変数に含まれていません。");
         }
     }
 
