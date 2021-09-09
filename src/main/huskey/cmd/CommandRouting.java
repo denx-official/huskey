@@ -13,6 +13,8 @@ import cmd.setCmd.SetCmd;
 import utility.GlobalConst;
 import utility.HuskeyException;
 import xml.database.Database;
+import xml.database.DatabaseBuilder;
+import xml.database.DatabaseFactory;
 
 /**
  * コマンドルーティング
@@ -25,13 +27,11 @@ public class CommandRouting {
     private final String command;
     private final String[] values;
     private final String[] options;
-    private final Database db;
 
-    public CommandRouting(String command, String[] values, String[] options, Database db) {
+    public CommandRouting(String command, String[] values, String[] options) {
         this.command = command;
         this.values = values;
         this.options = options;
-        this.db = db;
     }
 
     /**
@@ -98,5 +98,27 @@ public class CommandRouting {
         }
 
         cmd.run();
+    }
+
+    Database useDB() {
+        DatabaseFactory factory = new DatabaseFactory(
+                this.command,
+                this.values,
+                this.options,
+                GlobalConst.HUSKEY_DIR
+        );
+        DatabaseBuilder builder = factory.build();
+
+        if (!builder.exists()) {
+            System.err.println("huskey: データベース '" + builder.dbName + "' は存在しません。");
+            System.exit(1);
+        }
+
+        if (!builder.isKeyMatched()) {
+            System.err.println("huskey: データベース '" + builder.dbName + "' の masterKey が不正です。");
+            System.exit(1);
+        }
+
+        return builder.build();
     }
 }

@@ -11,8 +11,7 @@ class CommandRoutingTest {
         CommandRouting cr = new CommandRouting(
                 "hoge",
                 new String[]{""},
-                new String[]{""},
-                null
+                new String[]{""}
         );
         assertThrows(HuskeyException.class, cr::_run);
     }
