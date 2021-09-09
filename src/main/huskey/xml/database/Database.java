@@ -77,16 +77,6 @@ public class Database extends XMLWriter {
     }
 
     /**
-     * masterKeyの取得（テスト用）
-     *
-     * @return String
-     * @author いっぺー
-     */
-    String _getMasterKey() {
-        return this.masterKey;
-    }
-
-    /**
      * 対象のノードが存在するか否か
      *
      * <p>XPathを用いてDocumentを検索し、その条件に一致したノードが存在するかを判定する。

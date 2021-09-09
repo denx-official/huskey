@@ -39,10 +39,8 @@ class DatabaseTest {
         }
 
         @Test
-        void masterKeyの更新() {
-            String expect = "sample2";
-            db.setMasterKey(expect);
-            assertEquals(expect, db._getMasterKey());
+        void masterKey更新時にそのハッシュ値が変更されるか() {
+            db.setMasterKey("sample2");
 
             String afterHash = new StrFileIO(hashPath).readStrFile();
             assertNotEquals(beforeHash, afterHash);
