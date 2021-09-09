@@ -18,7 +18,7 @@ import java.nio.file.Paths;
  * @author いっぺー
  */
 public class DatabaseBuilder extends XMLBuilder<Database> {
-    private String masterKey;
+    private final String masterKey;
     private final String dbDir;
 
     public DatabaseBuilder(String dbName, String masterKey, String huskeyDir) {
@@ -51,16 +51,6 @@ public class DatabaseBuilder extends XMLBuilder<Database> {
     public boolean exists() {
         File file = Paths.get(this.getFilePath()).toFile();
         return file.exists();
-    }
-
-    /**
-     * データベースの復号に使用するmasterKeyの更新
-     *
-     * @param newKey 新しいmasterKey
-     * @author いっぺー
-     */
-    public void setMasterKey(String newKey) {
-        this.masterKey = newKey;
     }
 
     /**

@@ -47,15 +47,11 @@ if (!builder.isKeyMatched()) {
     // 不正なパスワードが入力されたときの処理
 }
 
-// masterKey の更新
-builder.setMasterKey("newPassword");
-
 // データベースの読み込み
 Database db = builder.build();
 ```
 
-masterKey の照合には BCrypt を用いている。  
-`setMasterKey` によって masterKey 更新する際に、そのハッシュ値も自動的に更新される。
+masterKey の照合には BCrypt を用いている。
 
 また、データベースの読み込みを行う際、裏ではその復号処理を行っている。
 
@@ -91,6 +87,8 @@ db.write();
 // データベース名のリストを取得
 String[] dbList = Database.getDBList(huskeyDir);
 ```
+
+`setMasterKey` によって masterKey を更新する際は、そのハッシュ値も自動的に更新される。
 
 `write` メソッド時にデータベースは自動的に暗号化された状態で保存されるようプログラムしている。
 
