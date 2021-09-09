@@ -7,10 +7,11 @@ huskey プロジェクトに興味をお持ちいただき本当にありがと�
 
 PR (Pull request) を送る前に、まずはその更新を行ってよいのかを Issue で報告しよう。
 
-Issue を発行するする際、タグに "feat", "release", "hotfix" のどれか１つを必ず付けること（それぞれの意味は次の章で説明）。  
+Issue を発行するする際、ラベルに "feat", "release", "hotfix" のどれか１つを必ず付けること（それぞれの意味は次の章で説明）。  
 何が問題で、どんな変更を加えたいのか、どんなことを実装する必要があるのかなどを明確に説明しよう。
 
-既に Issue があり、Assignees (その Issue の担当者) が設定されていない場合は、担当したい旨をコメントで報告しよう。
+既に Issue があり、Assignees (その Issue の担当者) が設定されていない場合は、担当したい旨をコメントで報告しよう。  
+（プログラミング初心者でもできる優しめの Issue については "good first issue" ラベルが付いている）
 
 ## 2. 開発する
 
@@ -40,7 +41,7 @@ huskey では、git-flow モデル ([日本語](https://keijinsonyaban.blogspot.
     - main ブランチから派生し、main/developブランチにマージされる。
 
 ブランチを切る例として、[Issue #2 の「getコマンドの実装」](https://github.com/denx-official/huskey/issues/2) を考えてみよう。  
-この Issue には "feat" タグが付いているため、ブランチ名を **"feat/#2_get"** といったようなものにして、develop ブランチから派生させればOK、ということ。
+この Issue のラベルには "feat" が付いているため、ブランチ名を **"feat/#2_get"** といったようなものにして、develop ブランチから派生させればOK、ということ。
 
 あとは切ったブランチ上で開発を進めよう。こまめに push することも忘れずに！  
 Issue が解決するところまで開発が終わったら、PR で報告しよう。
