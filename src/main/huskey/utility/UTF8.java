@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
  */
 public class UTF8 {
     /**
-     * 文字コード (decimal) を範囲指定し、対象の文字を配列で取得する
+     * 文字コード (decimal) を範囲指定し、対象の文字を文字列で取得する
      *
      * <p>始端と終端を共に含む文字列を返す。
      * 例えば、"head = 97 (UTF-8における'a'), tail = 122 (UTF-8における'z')" とすると、

@@ -102,7 +102,7 @@ String[] dbList = Database.getDBList(huskeyDir);
 // データの新規作成
 Data data = new Data(
         "huskey", // title
-        "jonh", // userName
+        "john", // userName
         password, // password (Password 型)
         "", // message
         HkTime.now(), // created (HkTime 型)
