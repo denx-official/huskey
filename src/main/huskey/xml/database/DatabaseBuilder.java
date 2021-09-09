@@ -18,10 +18,12 @@ import java.nio.file.Paths;
  * @author いっぺー
  */
 public class DatabaseBuilder extends XMLBuilder<Database> {
+    public final String dbName;
     private final String masterKey;
     private final String dbDir;
 
     public DatabaseBuilder(String dbName, String masterKey, String huskeyDir) {
+        this.dbName = dbName;
         this.masterKey = masterKey;
         this.dbDir = huskeyDir + "/database/" + dbName + "/";
     }
