@@ -1,5 +1,6 @@
 package cmd;
 
+import args.HkArgs;
 import cmd.changeCmd.ChangeCmd;
 import cmd.configCmd.ConfigCmd;
 import cmd.databaseCmd.DatabaseCmd;
@@ -20,14 +21,10 @@ import utility.HuskeyRuntimeException;
  * @author いっぺー
  */
 public class CommandRunner {
-    private final String command;
-    private final String[] values;
-    private final String[] options;
+    private final HkArgs hkArgs;
 
-    public CommandRunner(String command, String[] values, String[] options) {
-        this.command = command;
-        this.values = values;
-        this.options = options;
+    public CommandRunner(HkArgs hkArgs) {
+        this.hkArgs = hkArgs;
     }
 
     /**
@@ -55,7 +52,7 @@ public class CommandRunner {
     void _run() {
         Cmd cmd;
 
-        switch (this.command) {
+        switch (this.hkArgs.command) {
             case "help":
                 cmd = new HelpCmd();
                 break;
@@ -97,7 +94,7 @@ public class CommandRunner {
                 break;
 
             default:
-                throw new HuskeyRuntimeException("huskey: コマンド '" + this.command + "' は存在しません。コマンドの一覧は、'huskey help' によって確認できます。");
+                throw new HuskeyRuntimeException("huskey: コマンド '" + this.hkArgs.command + "' は存在しません。コマンドの一覧は、'huskey help' によって確認できます。");
         }
 
         cmd.run();

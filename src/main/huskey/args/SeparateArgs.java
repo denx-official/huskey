@@ -1,4 +1,4 @@
-package utility;
+package args;
 
 /**
  * コマンドライン引数の分解
@@ -14,6 +14,14 @@ public class SeparateArgs {
         this.args = args;
     }
 
+    public HkArgs genHkArgs() {
+        return new HkArgs(
+                this.getCommand(),
+                this.getValues(),
+                this.getOptions()
+        );
+    }
+
     /**
      * commandの取得
      *
@@ -22,7 +30,7 @@ public class SeparateArgs {
      * @return String
      * @author いっぺー
      */
-    public String getCommand() {
+    String getCommand() {
         if (this.args[0].equals("")) {
             return "help";
         }
@@ -37,7 +45,7 @@ public class SeparateArgs {
      * @return String[]
      * @author いっぺー
      */
-    public String[] getValues() {
+    String[] getValues() {
         int cutPoint = this.getCutPoint();
 
         if (cutPoint == -1) {
@@ -55,7 +63,7 @@ public class SeparateArgs {
      * @return String[]
      * @author いっぺー
      */
-    public String[] getOptions() {
+    String[] getOptions() {
         int cutPoint = this.getCutPoint();
 
         if (cutPoint == -1) {
