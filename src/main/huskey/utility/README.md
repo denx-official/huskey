@@ -27,12 +27,22 @@ String hkDir = GlobalConst.HUSKEY_DIR;
 
 ## HiddenInput
 
-標準入力の値をコンソール上に表示せずに取得するクラス。
+標準入力の値をコンソール上に表示せずに取得するクラス。  
+**使用する場合は、フィールドにインスタンスを作成して使うように！**  
+（HiddenInput が含まれたクラスをテストする際、この機能をモック化する（別の機能に差し替える）ため）
 
 ```java
-String msg = "データベース SampleDB のパスワード: ";
-String masterKey = HiddenInput.read(msg);
-// -> データベース SampleDB のパスワード: 
+import utility.HiddenInput;
+
+class Sample {
+    HiddenInput input = new HiddenInput();
+    
+    void doSomething() {
+        String msg = "データベース SampleDB のパスワード: ";
+        String masterKey = this.input.read(msg);
+        // "データベース SampleDB のパスワード: " と表示され、標準入力を受け付ける
+    }
+}
 ```
 
 ## HuskeyRuntimeException

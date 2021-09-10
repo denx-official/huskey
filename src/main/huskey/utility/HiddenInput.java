@@ -8,6 +8,9 @@ import java.io.Console;
  * @author いっぺー
  */
 public class HiddenInput {
+    public HiddenInput() {
+    }
+
     /**
      * <p>標準入力の値をコンソール上に表示せずに取得する。
      *
@@ -20,7 +23,7 @@ public class HiddenInput {
      * @param msg 文字を入力する際に表示されるメッセージ
      * @author いっぺー
      */
-    public static String read(String msg) {
+    public String read(String msg) {
         Console console = System.console();
         char[] input = console.readPassword(msg);
 
