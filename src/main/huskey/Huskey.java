@@ -1,4 +1,4 @@
-import cmd.CommandRouting;
+import cmd.CommandRunner;
 import utility.SeparateArgs;
 
 /**
@@ -9,7 +9,7 @@ import utility.SeparateArgs;
 public class Huskey {
     public static void main(String[] args) {
         SeparateArgs sepArgs = new SeparateArgs(args);
-        CommandRouting cr = new CommandRouting(
+        CommandRunner cr = new CommandRunner(
                 sepArgs.getCommand(),
                 sepArgs.getValues(),
                 sepArgs.getOptions()

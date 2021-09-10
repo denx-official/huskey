@@ -5,10 +5,10 @@ import utility.HuskeyRuntimeException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CommandRoutingTest {
+class CommandRunnerTest {
     @Test
     void 適切なコマンドが与えられなかった場合() {
-        CommandRouting cr = new CommandRouting(
+        CommandRunner cr = new CommandRunner(
                 "hoge",
                 new String[]{""},
                 new String[]{""}

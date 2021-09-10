@@ -6,7 +6,7 @@
 
 コマンドに最低限実装して欲しい項目を定義したインターフェース。
 
-## CommandRouting
+## CommandRunner
 
 コマンドライン引数からコマンドを決定・実行するクラス。
 
@@ -15,7 +15,7 @@ String command = "help";
 String[] values = {""};
 String[] options = {""};
 
-CommandRouting cr = new CommandRouting(command, values, options);
+CommandRunner cr = new CommandRunner(command, values, options);
 cr.run();
 ```
 
@@ -52,7 +52,7 @@ cr.run();
 
 現状、各クラスの初期化には huskeyDir（後述）という引数のみを設定している。  
 コマンド実装の際に values や options が必要になった場合は、それに応じて適宜コードを修正すること。  
-（修正する箇所は、自クラスのメンバ変数とコンストラクター、および CommandRouting クラスで初期化する際の引数）
+（修正する箇所は、自クラスのメンバ変数とコンストラクター、および CommandRunner クラスで初期化する際の引数）
 
 #### huskeyDirについて
 

@@ -14,27 +14,27 @@ import utility.GlobalConst;
 import utility.HuskeyRuntimeException;
 
 /**
- * コマンドルーティング
+ * 指定されたコマンドを実行するクラス
  *
- * <p>与えられた引数から条件分岐によってコマンドを決定し実行するルーティングシステム。
+ * <p>与えられた引数から条件分岐によってコマンドを決定し実行する。
  *
  * @author いっぺー
  */
-public class CommandRouting {
+public class CommandRunner {
     private final String command;
     private final String[] values;
     private final String[] options;
 
-    public CommandRouting(String command, String[] values, String[] options) {
+    public CommandRunner(String command, String[] values, String[] options) {
         this.command = command;
         this.values = values;
         this.options = options;
     }
 
     /**
-     * 実行するコマンドの決定
+     * コマンドの実行
      *
-     * <p>commandの値によってコマンドを決定・実行する。
+     * <p>huskeyで補足できる実行時エラーは、HuskeyRuntimeExceptionで補足される。
      *
      * @author いっぺー
      */
@@ -46,6 +46,13 @@ public class CommandRouting {
         }
     }
 
+    /**
+     * コマンドの決定->実行
+     *
+     * <p>commandの値によってコマンドを決定・実行する。
+     *
+     * @author いっぺー
+     */
     void _run() {
         Cmd cmd;
 
