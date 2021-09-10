@@ -3,7 +3,7 @@ package args;
 /**
  * コマンドライン引数の分解
  *
- * <p>コマンドライン引数を分解し、command, values, optionsをそれぞれのgetメソッドから取得する。
+ * <p>コマンドライン引数を分解し、HkArgsインスタンスを生成する。
  *
  * @author いっぺー
  */
@@ -14,6 +14,12 @@ public class SeparateArgs {
         this.args = args;
     }
 
+    /**
+     * HkArgsインスタンスの生成
+     *
+     * @return HkArgs
+     * @author いっぺー
+     */
     public HkArgs genHkArgs() {
         return new HkArgs(
                 this.getCommand(),
