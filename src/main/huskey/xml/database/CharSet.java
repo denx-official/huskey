@@ -90,7 +90,7 @@ public class CharSet {
      * @return String
      * @author いっぺー
      */
-    private String get(String target) {
+    public String get(String target) {
         switch (target) {
             case "lowerCase":
                 return this.lowerCase;
@@ -115,7 +115,7 @@ public class CharSet {
      * @return String[]
      * @author いっぺー
      */
-    private static String[] attrIterator() {
+    public static String[] attrIterator() {
         return new String[]{"lowerCase", "upperCase", "number", "symbols", "space", "custom"};
     }
 }

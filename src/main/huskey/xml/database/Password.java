@@ -10,8 +10,8 @@ import org.w3c.dom.Element;
  * @see Data
  */
 public class Password {
-    private final String passLength;
-    private final CharSet charSet;
+    public final String passLength;
+    public final CharSet charSet;
     private String value;
 
     public Password(String passLength, CharSet charSet, String value) {
