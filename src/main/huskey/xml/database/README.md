@@ -19,6 +19,7 @@ huskey では、複数の独立したデータベースによってパスワー�
             - title: データの名前
             - userName: ユーザー名
             - password:
+                - input: 手動でパスワードを入力したか否か
                 - value: パスワードの値
                 - charSet: 上記のパスワード生成の際に使用した文字/記号
             - message: メッセージ

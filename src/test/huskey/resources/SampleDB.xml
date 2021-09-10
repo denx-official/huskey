@@ -27,6 +27,9 @@
     <!ELEMENT created (#PCDATA)>
     <!ELEMENT updated (#PCDATA)>
     <!ELEMENT value (#PCDATA)>
+    <!ATTLIST password
+        input CDATA #REQUIRED
+    >
     <!ATTLIST created
         year CDATA #REQUIRED
         month CDATA #REQUIRED
@@ -64,7 +67,7 @@
     <dataset>
         <data title="Google">
             <userName>sample@sample.com</userName>
-            <password>
+            <password input="true">
                 <value>sXw3BLNrSUx4OOU6jZOy</value>
                 <charSet lowerCase="true" upperCase="true" number="true" symbols="false" space="false" custom=""/>
             </password>
@@ -74,7 +77,7 @@
         </data>
         <data title="Discord">
             <userName>sample@sample.com</userName>
-            <password>
+            <password input="false">
                 <value>ECiK1GDGULKTUPFVqp9x</value>
                 <charSet lowerCase="true" upperCase="true" number="true" symbols="false" space="false" custom=""/>
             </password>
@@ -84,7 +87,7 @@
         </data>
         <data title="Twitter">
             <userName>hogehogeman1234</userName>
-            <password>
+            <password input="false">
                 <value>r79airSs4VG7WrailN8p</value>
                 <charSet lowerCase="true" upperCase="true" number="true" symbols="false" space="false" custom=""/>
             </password>
@@ -94,7 +97,7 @@
         </data>
         <data title="GitHub">
             <userName>hogehogeman1234</userName>
-            <password>
+            <password input="false">
                 <value>MYfAGIKIP8Co91KQJi7i</value>
                 <charSet lowerCase="true" upperCase="true" number="true" symbols="false" space="false" custom=""/>
             </password>
@@ -104,7 +107,7 @@
         </data>
         <data title="GitLab">
             <userName>hogehogeman1234</userName>
-            <password>
+            <password input="false">
                 <value>fOsAPh9ktqoOQ1Bjgmz4</value>
                 <charSet lowerCase="true" upperCase="true" number="true" symbols="false" space="false" custom=""/>
             </password>
@@ -114,7 +117,7 @@
         </data>
         <data title="GitBucket">
             <userName>hogehogeman1234</userName>
-            <password>
+            <password input="false">
                 <value>U4GZAmUVG2sfrdmxiAbE</value>
                 <charSet lowerCase="true" upperCase="true" number="true" symbols="false" space="false" custom=""/>
             </password>
