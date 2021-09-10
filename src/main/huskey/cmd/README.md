@@ -61,7 +61,7 @@ cr.run();
 
 #### 例外送出
 
-huskey 実行時にユーザー側の不正な操作（例：コマンドライン引数が不正、masterKey の照合失敗など）によって処理を停止せざるを得なくなった場合は、`utility.HuskeyException` を使って例外を送出し処理を止めること。
+huskey 実行時にユーザー側の不正な操作（例：コマンドライン引数が不正、masterKey の照合失敗など）によって処理を停止せざるを得なくなった場合は、`utility.HuskeyRuntimeException` を使って例外を送出し処理を止めること。
 
 メッセージ内容は、なぜ処理が止まったのかの理由を簡潔に記述すること。
 
@@ -72,7 +72,7 @@ void doSomething() {
     DatabaseBuilder builder = new DatabaseBuilder(dbName, masterKey, huskeyDir);
 
     if (!builder.isKeyMatched()) {
-        throw new HuskeyException("データベース " + dbName + " のパスワードが正しくありません。");
+        throw new HuskeyRuntimeException("データベース " + dbName + " のパスワードが正しくありません。");
     }
 }
 ```

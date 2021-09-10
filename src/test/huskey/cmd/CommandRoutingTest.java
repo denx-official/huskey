@@ -1,7 +1,7 @@
 package cmd;
 
 import org.junit.jupiter.api.Test;
-import utility.HuskeyException;
+import utility.HuskeyRuntimeException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,6 +13,6 @@ class CommandRoutingTest {
                 new String[]{""},
                 new String[]{""}
         );
-        assertThrows(HuskeyException.class, cr::_run);
+        assertThrows(HuskeyRuntimeException.class, cr::_run);
     }
 }

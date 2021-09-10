@@ -11,7 +11,7 @@ import cmd.mergeCmd.MergeCmd;
 import cmd.removeCmd.RemoveCmd;
 import cmd.setCmd.SetCmd;
 import utility.GlobalConst;
-import utility.HuskeyException;
+import utility.HuskeyRuntimeException;
 import xml.database.Database;
 import xml.database.DatabaseBuilder;
 import xml.database.DatabaseFactory;
@@ -44,7 +44,7 @@ public class CommandRouting {
     public void run() {
         try {
             this._run();
-        } catch (HuskeyException e) {
+        } catch (HuskeyRuntimeException e) {
             System.err.println(e.getMessage());
         }
     }
@@ -94,7 +94,7 @@ public class CommandRouting {
                 break;
 
             default:
-                throw new HuskeyException("huskey: コマンド '" + this.command + "' は存在しません。コマンドの一覧は、'huskey help' によって確認できます。");
+                throw new HuskeyRuntimeException("huskey: コマンド '" + this.command + "' は存在しません。コマンドの一覧は、'huskey help' によって確認できます。");
         }
 
         cmd.run();

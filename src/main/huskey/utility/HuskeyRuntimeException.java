@@ -8,8 +8,8 @@ package utility;
  * @author いっぺー
  * @see cmd.CommandRouting
  */
-public class HuskeyException extends RuntimeException {
-    public HuskeyException(String message) {
+public class HuskeyRuntimeException extends RuntimeException {
+    public HuskeyRuntimeException(String message) {
         super(message);
     }
 }
