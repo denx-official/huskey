@@ -12,9 +12,6 @@ import cmd.removeCmd.RemoveCmd;
 import cmd.setCmd.SetCmd;
 import utility.GlobalConst;
 import utility.HuskeyRuntimeException;
-import xml.database.Database;
-import xml.database.DatabaseBuilder;
-import xml.database.DatabaseFactory;
 
 /**
  * コマンドルーティング
@@ -98,27 +95,5 @@ public class CommandRouting {
         }
 
         cmd.run();
-    }
-
-    Database useDB() {
-        DatabaseFactory factory = new DatabaseFactory(
-                this.command,
-                this.values,
-                this.options,
-                GlobalConst.HUSKEY_DIR
-        );
-        DatabaseBuilder builder = factory.build();
-
-        if (!builder.exists()) {
-            System.err.println("huskey: データベース '" + builder.dbName + "' は存在しません。");
-            System.exit(1);
-        }
-
-        if (!builder.isKeyMatched()) {
-            System.err.println("huskey: データベース '" + builder.dbName + "' の masterKey が不正です。");
-            System.exit(1);
-        }
-
-        return builder.build();
     }
 }
