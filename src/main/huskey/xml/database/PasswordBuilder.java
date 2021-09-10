@@ -78,7 +78,7 @@ public class PasswordBuilder {
             return lenNode.getTextContent();
         }
 
-        Node lenNode = this.db.searchNode("//data[@title='" + this.settingsTarget + "']/password");
+        Node lenNode = this.db.searchNode("//data[@title='" + this.settingsTarget + "']/password/value");
         int len = lenNode.getTextContent().length();
         return String.valueOf(len);
     }
@@ -88,7 +88,7 @@ public class PasswordBuilder {
         if (this.settingsTarget.equals("settings")) {
             expr = "//settings/charSet";
         } else {
-            expr = "//data[@title='" + this.settingsTarget + "']/charSet";
+            expr = "//data[@title='" + this.settingsTarget + "']/password/charSet";
         }
 
         Element charSetElem = (Element) this.db.searchNode(expr);
