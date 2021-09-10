@@ -2,16 +2,19 @@ package cmd.setCmd;
 
 import args.HkArgs;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.*;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.w3c.dom.Element;
 import testUtil.GlobalConst;
-import xml.database.Database;
-import xml.database.DatabaseBuilder;
+import xml.database.*;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Matchers.anyObject;
 
+@ExtendWith(MockitoExtension.class)
 class SetCmdTest {
-    SetCmd setCmd;
-
     static Database _db = new DatabaseBuilder(
             GlobalConst.dbName,
             GlobalConst.masterKey,
@@ -43,23 +46,23 @@ class SetCmdTest {
      * これは更新時にも適用される。
      */
 
-    // TODO: masterKeyを標準入力から取得するメソッドのモック化
-    // TODO: Passwordインスタンスを生成するメソッドのモック化
-
     @Nested
     class 新規作成 {
         @Nested
         class パスワードを自動生成 {
             String target = "huskey1";
+            HkArgs hkArgs = new HkArgs(
+                    "set",
+                    new String[]{"huskey1"},
+                    new String[]{""}
+            );
+
+            @Spy
+            SetCmd setCmd = new SetCmd(hkArgs, GlobalConst.huskeyDir);
 
             @Test
             void エラーなく実行されるか() {
-                HkArgs hkArgs = new HkArgs(
-                        "set",
-                        new String[]{"huskey1"},
-                        new String[]{""}
-                );
-                setCmd = new SetCmd(hkArgs, GlobalConst.huskeyDir);
+                doReturn(GlobalConst.masterKey).when(setCmd).readMasterKey();
                 setCmd.run();
             }
 
@@ -73,15 +76,18 @@ class SetCmdTest {
         @Nested
         class データベースを指定しパスワードを自動生成 {
             String target = "huskey2";
+            HkArgs hkArgs = new HkArgs(
+                    "set",
+                    new String[]{target},
+                    new String[]{"--db=SampleDB"}
+            );
+
+            @Spy
+            SetCmd setCmd = new SetCmd(hkArgs, GlobalConst.huskeyDir);
 
             @Test
             void エラーなく実行されるか() {
-                HkArgs hkArgs = new HkArgs(
-                        "set",
-                        new String[]{target},
-                        new String[]{"--db=SampleDB"}
-                );
-                setCmd = new SetCmd(hkArgs, GlobalConst.huskeyDir);
+                doReturn(GlobalConst.masterKey).when(setCmd).readMasterKey();
                 setCmd.run();
             }
 
@@ -95,15 +101,18 @@ class SetCmdTest {
         @Nested
         class パスワードを手動で更新 {
             String target = "huskey3";
+            HkArgs hkArgs = new HkArgs(
+                    "set",
+                    new String[]{target},
+                    new String[]{"-i"}
+            );
+
+            @Spy
+            SetCmd setCmd = new SetCmd(hkArgs, GlobalConst.huskeyDir);
 
             @Test
             void エラーなく実行されるか() {
-                HkArgs hkArgs = new HkArgs(
-                        "set",
-                        new String[]{target},
-                        new String[]{"-i"}
-                );
-                setCmd = new SetCmd(hkArgs, GlobalConst.huskeyDir);
+                doReturn(GlobalConst.masterKey).when(setCmd).readMasterKey();
                 setCmd.run();
             }
 
@@ -117,18 +126,34 @@ class SetCmdTest {
         @Nested
         class パスワード生成の設定を選択して生成 {
             String target = "huskey4";
-            Database db;
+            HkArgs hkArgs = new HkArgs(
+                    "set",
+                    new String[]{target},
+                    new String[]{"-s"}
+            );
+            Password buildPasswd() {
+                CharSet charSet = new CharSet(
+                        "true",
+                        "true",
+                        "false",
+                        "false",
+                        "false",
+                        "false"
+                );
+                return new Password("20", charSet, "");
+            }
+
+            @Spy
+            SetCmd setCmd = new SetCmd(hkArgs, GlobalConst.huskeyDir);
 
             @Test
             void エラーなく実行されるか() {
-                HkArgs hkArgs = new HkArgs(
-                        "set",
-                        new String[]{target},
-                        new String[]{"-s"}
-                );
-                setCmd = new SetCmd(hkArgs, GlobalConst.huskeyDir);
+                doReturn(GlobalConst.masterKey).when(setCmd).readMasterKey();
+                doReturn(buildPasswd()).when(setCmd).buildPasswd(anyObject(), anyObject());
                 setCmd.run();
             }
+
+            Database db;
 
             @Test
             void 新しいデータが追加されているか() {
@@ -150,21 +175,19 @@ class SetCmdTest {
         @Nested
         class パスワードを自動生成で更新 {
             String target = "Discord";
+            HkArgs hkArgs = new HkArgs(
+                    "set",
+                    new String[]{target},
+                    new String[]{""}
+            );
+            Database beforeDB = useDatabase();
 
-            Database beforeDB = new DatabaseBuilder(
-                    GlobalConst.dbName,
-                    GlobalConst.masterKey,
-                    GlobalConst.huskeyDir
-            ).build();
+            @Spy
+            SetCmd setCmd = new SetCmd(hkArgs, GlobalConst.huskeyDir);
 
             @Test
             void エラーなく実行されるか() {
-                HkArgs hkArgs = new HkArgs(
-                        "set",
-                        new String[]{target},
-                        new String[]{""}
-                );
-                setCmd = new SetCmd(hkArgs, GlobalConst.huskeyDir);
+                doReturn(GlobalConst.masterKey).when(setCmd).readMasterKey();
                 setCmd.run();
             }
 
@@ -183,15 +206,18 @@ class SetCmdTest {
         @Nested
         class input属性がfalseのパスワードを手動更新 {
             String target = "Twitter";
+            HkArgs hkArgs = new HkArgs(
+                    "set",
+                    new String[]{target},
+                    new String[]{"-i"}
+            );
+
+            @Spy
+            SetCmd setCmd = new SetCmd(hkArgs, GlobalConst.huskeyDir);
 
             @Test
             void エラーなく実行されるか() {
-                HkArgs hkArgs = new HkArgs(
-                        "set",
-                        new String[]{target},
-                        new String[]{"-i"}
-                );
-                setCmd = new SetCmd(hkArgs, GlobalConst.huskeyDir);
+                doReturn(GlobalConst.masterKey).when(setCmd).readMasterKey();
                 setCmd.run();
             }
 
@@ -206,15 +232,18 @@ class SetCmdTest {
         @Nested
         class input属性がtrueのパスワードを自動生成で更新 {
             String target = "Google";
+            HkArgs hkArgs = new HkArgs(
+                    "set",
+                    new String[]{target},
+                    new String[]{""}
+            );
+
+            @Spy
+            SetCmd setCmd = new SetCmd(hkArgs, GlobalConst.huskeyDir);
 
             @Test
             void エラーなく実行されるか() {
-                HkArgs hkArgs = new HkArgs(
-                        "set",
-                        new String[]{target},
-                        new String[]{""}
-                );
-                setCmd = new SetCmd(hkArgs, GlobalConst.huskeyDir);
+                doReturn(GlobalConst.masterKey).when(setCmd).readMasterKey();
                 setCmd.run();
             }
 
