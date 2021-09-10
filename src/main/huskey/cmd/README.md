@@ -8,15 +8,20 @@
 
 ## CommandRunner
 
-コマンドライン引数からコマンドを決定・実行するクラス。
+HkArgs（分解されたコマンドライン引数）からコマンドを決定・実行するクラス。
 
 ```java
-String command = "help";
-String[] values = {""};
-String[] options = {""};
-
-CommandRunner cr = new CommandRunner(command, values, options);
+CommandRunner cr = new CommandRunner(hkArgs);
 cr.run();
+```
+
+### UseDatabase
+
+データベースの取得を行うクラス。  
+masterKey の取得 -> 照合をする処理や、データベースの存在確認といった、各コマンドで共通するフローをまとめた static method `UseDatabase.useDB` を使用することで、簡単にデータベースを取得することができる。
+
+```java
+Database db = UseDatabase.useDB(dbName, huskeyDir);
 ```
 
 ## コマンド一覧

@@ -35,22 +35,10 @@ String masterKey = HiddenInput.read(msg);
 // -> データベース SampleDB のパスワード: 
 ```
 
-## HuskeyException
+## HuskeyRuntimeException
 
 huskey 実行時にユーザー側の不正な操作（例：コマンドライン引数が不正、masterKey の照合失敗など）が発生した時の例外クラス。  
 この例外は cmd.CommandRunner クラスの run メソッドで捕捉され、与えられたメッセージが標準エラーとして表示される。
-
-## SeparateArgs
-
-コマンドライン引数を command, values, options に分解するクラス。
-
-```java
-SeparateArgs sepArgs = new SeparateArgs(args);
-
-String command = sepArgs.getCommand();
-String[] values = sepArgs.getValues();
-String[] options = sepArgs.getOptions();
-```
 
 ## UTF8
 
