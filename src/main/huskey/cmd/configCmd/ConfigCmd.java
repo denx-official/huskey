@@ -3,10 +3,7 @@ package cmd.configCmd;
 import cmd.Cmd;
 
 public class ConfigCmd implements Cmd {
-    private final String huskeyDir;
-
-    public ConfigCmd(String huskeyDir) {
-        this.huskeyDir = huskeyDir;
+    public ConfigCmd() {
     }
 
     public void run() {

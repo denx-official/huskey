@@ -3,10 +3,7 @@ package cmd.helpCmd;
 import cmd.Cmd;
 
 public class HelpCmd implements Cmd {
-    private final String huskeyDir;
-
-    public HelpCmd(String huskeyDir) {
-        this.huskeyDir = huskeyDir;
+    public HelpCmd() {
     }
 
     public void run() {

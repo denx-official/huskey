@@ -10,7 +10,6 @@ import cmd.listCmd.ListCmd;
 import cmd.mergeCmd.MergeCmd;
 import cmd.removeCmd.RemoveCmd;
 import cmd.setCmd.SetCmd;
-import utility.GlobalConst;
 import utility.HuskeyRuntimeException;
 
 /**
@@ -58,43 +57,43 @@ public class CommandRunner {
 
         switch (this.command) {
             case "help":
-                cmd = new HelpCmd(GlobalConst.HUSKEY_DIR);
+                cmd = new HelpCmd();
                 break;
 
             case "config":
-                cmd = new ConfigCmd(GlobalConst.HUSKEY_DIR);
+                cmd = new ConfigCmd();
                 break;
 
             case "init":
-                cmd = new InitCmd(GlobalConst.HUSKEY_DIR);
+                cmd = new InitCmd();
                 break;
 
             case "change":
-                cmd = new ChangeCmd(GlobalConst.HUSKEY_DIR);
+                cmd = new ChangeCmd();
                 break;
 
             case "database":
-                cmd = new DatabaseCmd(GlobalConst.HUSKEY_DIR);
+                cmd = new DatabaseCmd();
                 break;
 
             case "merge":
-                cmd = new MergeCmd(GlobalConst.HUSKEY_DIR);
+                cmd = new MergeCmd();
                 break;
 
             case "list":
-                cmd = new ListCmd(GlobalConst.HUSKEY_DIR);
+                cmd = new ListCmd();
                 break;
 
             case "get":
-                cmd = new GetCmd(GlobalConst.HUSKEY_DIR);
+                cmd = new GetCmd();
                 break;
 
             case "set":
-                cmd = new SetCmd(GlobalConst.HUSKEY_DIR);
+                cmd = new SetCmd();
                 break;
 
             case "remove":
-                cmd = new RemoveCmd(GlobalConst.HUSKEY_DIR);
+                cmd = new RemoveCmd();
                 break;
 
             default:

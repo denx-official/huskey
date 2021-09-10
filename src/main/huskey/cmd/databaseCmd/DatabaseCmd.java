@@ -3,10 +3,7 @@ package cmd.databaseCmd;
 import cmd.Cmd;
 
 public class DatabaseCmd implements Cmd {
-    private final String huskeyDir;
-
-    public DatabaseCmd(String huskeyDir) {
-        this.huskeyDir = huskeyDir;
+    public DatabaseCmd() {
     }
 
     public void run() {

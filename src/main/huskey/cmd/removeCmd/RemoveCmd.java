@@ -3,10 +3,7 @@ package cmd.removeCmd;
 import cmd.Cmd;
 
 public class RemoveCmd implements Cmd {
-    private final String huskeyDir;
-
-    public RemoveCmd(String huskeyDir) {
-        this.huskeyDir = huskeyDir;
+    public RemoveCmd() {
     }
 
     public void run() {

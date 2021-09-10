@@ -3,10 +3,7 @@ package cmd.listCmd;
 import cmd.Cmd;
 
 public class ListCmd implements Cmd {
-    private final String huskeyDir;
-
-    public ListCmd(String huskeyDir) {
-        this.huskeyDir = huskeyDir;
+    public ListCmd() {
     }
 
     public void run() {

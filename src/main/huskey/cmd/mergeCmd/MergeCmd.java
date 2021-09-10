@@ -3,10 +3,7 @@ package cmd.mergeCmd;
 import cmd.Cmd;
 
 public class MergeCmd implements Cmd {
-    private final String huskeyDir;
-
-    public MergeCmd(String huskeyDir) {
-        this.huskeyDir = huskeyDir;
+    public MergeCmd() {
     }
 
     public void run() {

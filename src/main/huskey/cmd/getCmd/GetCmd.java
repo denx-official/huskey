@@ -3,10 +3,7 @@ package cmd.getCmd;
 import cmd.Cmd;
 
 public class GetCmd implements Cmd {
-    private final String huskeyDir;
-
-    public GetCmd(String huskeyDir) {
-        this.huskeyDir = huskeyDir;
+    public GetCmd() {
     }
 
     public void run() {
