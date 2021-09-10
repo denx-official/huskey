@@ -1,4 +1,4 @@
-package xml.database;
+package args;
 
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -6,8 +6,8 @@ import testUtil.GlobalConst;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DatabaseFactoryTest {
-    DatabaseFactory factory;
+class HkArgsTest {
+    HkArgs hkArgs;
 
     @Nested
     class argsからデータベース名を取得する {
@@ -17,8 +17,8 @@ class DatabaseFactoryTest {
             String[] values = {"foo"};
             String[] options = {""};
 
-            factory = new DatabaseFactory(cmd, values, options, GlobalConst.huskeyDir);
-            assertEquals("SampleDB", factory.getDBName());
+            hkArgs = new HkArgs(cmd, values, options);
+            assertEquals("SampleDB", hkArgs.dbName(GlobalConst.huskeyDir));
         }
 
         @Nested
@@ -29,8 +29,8 @@ class DatabaseFactoryTest {
                 String[] values = {"foo"};
                 String[] options = {"--db=SampleDB2"};
 
-                factory = new DatabaseFactory(cmd, values, options, GlobalConst.huskeyDir);
-                assertEquals("SampleDB2", factory.getDBName());
+                hkArgs = new HkArgs(cmd, values, options);
+                assertEquals("SampleDB2", hkArgs.dbName(GlobalConst.huskeyDir));
             }
 
             @Test
@@ -39,8 +39,8 @@ class DatabaseFactoryTest {
                 String[] values = {"SampleDB2", "SampleDB3"};
                 String[] options = {""};
 
-                factory = new DatabaseFactory(cmd, values, options, GlobalConst.huskeyDir);
-                assertEquals("SampleDB2", factory.getDBName());
+                hkArgs = new HkArgs(cmd, values, options);
+                assertEquals("SampleDB2", hkArgs.dbName(GlobalConst.huskeyDir));
             }
         }
     }

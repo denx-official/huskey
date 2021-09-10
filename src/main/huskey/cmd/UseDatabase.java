@@ -1,14 +1,17 @@
 package cmd;
 
+import args.HkArgs;
+import utility.HiddenInput;
 import utility.HuskeyRuntimeException;
 import xml.database.Database;
 import xml.database.DatabaseBuilder;
-import xml.database.DatabaseFactory;
 
 public class UseDatabase {
-    public static Database useDB(String command, String[] values, String[] options, String huskeyDir) {
-        DatabaseFactory factory = new DatabaseFactory(command, values, options, huskeyDir);
-        DatabaseBuilder builder = factory.build();
+    public static Database useDB(HkArgs hkArgs, String huskeyDir) {
+        String dbName = hkArgs.dbName(huskeyDir);
+        String masterKey = HiddenInput.read("データベース " + dbName + " のパスワード: ");
+
+        DatabaseBuilder builder = new DatabaseBuilder(dbName, masterKey, huskeyDir);
 
         if (!builder.exists()) {
             throw new HuskeyRuntimeException("huskey: データベース '" + builder.dbName + "' は存在しません。");
