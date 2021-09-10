@@ -1,6 +1,5 @@
 package cmd;
 
-import utility.HiddenInput;
 import utility.HuskeyRuntimeException;
 import xml.database.Database;
 import xml.database.DatabaseBuilder;
@@ -14,15 +13,14 @@ public class UseDatabase {
     /**
      * データベースの取得
      *
-     * <p>masterKey の取得 -> 照合をする処理や、データベースの存在確認といった、
+     * <p>masterKeyを照合する処理や、データベースの存在確認といった、
      * 各コマンドで共通するフローをまとめた static method。
      *
      * @param dbName データベース名
      * @param huskeyDir ドットフォルダーのディレクトリ
      * @return Database
      */
-    public static Database useDB(String dbName, String huskeyDir) {
-        String masterKey = HiddenInput.read("データベース " + dbName + " のパスワード: ");
+    public static Database useDB(String dbName, String masterKey, String huskeyDir) {
         DatabaseBuilder builder = new DatabaseBuilder(dbName, masterKey, huskeyDir);
 
         if (!builder.exists()) {

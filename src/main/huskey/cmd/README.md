@@ -18,10 +18,10 @@ cr.run();
 ### UseDatabase
 
 データベースの取得を行うクラス。  
-masterKey の取得 -> 照合をする処理や、データベースの存在確認といった、各コマンドで共通するフローをまとめた static method `UseDatabase.useDB` を使用することで、簡単にデータベースを取得することができる。
+masterKey を照合する処理や、データベースの存在確認といった、各コマンドで共通するフローをまとめた static method `UseDatabase.useDB` を使用することで、簡単にデータベースを取得することができる。
 
 ```java
-Database db = UseDatabase.useDB(dbName, huskeyDir);
+Database db = UseDatabase.useDB(dbName, masterKey, huskeyDir);
 ```
 
 ## コマンド一覧
