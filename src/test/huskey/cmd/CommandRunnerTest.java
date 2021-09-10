@@ -15,6 +15,6 @@ class CommandRunnerTest {
                 new String[]{""}
         );
         CommandRunner cr = new CommandRunner(hkArgs);
-        assertThrows(HuskeyRuntimeException.class, cr::_run);
+        assertThrows(HuskeyRuntimeException.class, cr::decideCmd);
     }
 }
