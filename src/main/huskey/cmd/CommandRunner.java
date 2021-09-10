@@ -11,6 +11,7 @@ import cmd.listCmd.ListCmd;
 import cmd.mergeCmd.MergeCmd;
 import cmd.removeCmd.RemoveCmd;
 import cmd.setCmd.SetCmd;
+import utility.GlobalConst;
 import utility.HuskeyRuntimeException;
 
 /**
@@ -35,21 +36,22 @@ public class CommandRunner {
      * @author いっぺー
      */
     public void run() {
+        Cmd cmd = this.decideCmd();
         try {
-            this._run();
+            cmd.run();
         } catch (HuskeyRuntimeException e) {
             System.err.println(e.getMessage());
         }
     }
 
     /**
-     * コマンドの決定->実行
+     * コマンドの決定
      *
-     * <p>commandの値によってコマンドを決定・実行する。
+     * <p>commandの値によってコマンドを決定する。
      *
      * @author いっぺー
      */
-    void _run() {
+    Cmd decideCmd() {
         Cmd cmd;
 
         switch (this.hkArgs.command) {
@@ -97,6 +99,6 @@ public class CommandRunner {
                 throw new HuskeyRuntimeException("huskey: コマンド '" + this.hkArgs.command + "' は存在しません。コマンドの一覧は、'huskey help' によって確認できます。");
         }
 
-        cmd.run();
+        return cmd;
     }
 }
